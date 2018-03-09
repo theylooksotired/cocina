@@ -49,13 +49,21 @@ class Navigation_Controller extends Controller{
 						$this->titlePage = 'Listado de recetas de '.strtolower($item->getBasicInfo());
 						$this->breadCrumbs = array(url('recetas')=>'Recetas', $item->url()=>$item->getBasicInfo());
 						$this->metaDescription = $this->titlePage;
-						$this->content = $item->showUi('Complete');
+						$items = new ListObjects('Recipe', array('where'=>'idCategory="'.$item->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
+						$this->header = $items->metaNavigation();
+						$this->content = '<div class="listAll">
+											'.$items->pager().'
+											'.Adsense::top().'
+											'.$items->showList(array('function'=>'Public','middle'=>Adsense::top(), 'middleRepetitions'=>2)).'
+											'.$items->pager().'
+										</div>';
 					} else {
 						$this->metaUrl = url($this->action);
 						$this->titlePage = 'Listado de recetas';
 						$this->metaDescription = $this->titlePage;
 						$this->breadCrumbs = array(url('recetas')=>'Recetas');
 						$items = new ListObjects('Recipe', array('order'=>'nameUrl', 'results'=>'12'));
+						$this->header = $items->metaNavigation();
 						$this->content = '<div class="listAll">
 											'.$items->pager().'
 											'.Adsense::top().'
@@ -83,8 +91,14 @@ class Navigation_Controller extends Controller{
 					$this->titlePage = 'Listado de artículos';
 					$this->metaDescription = $this->titlePage;
 					$this->breadCrumbs = array(url('articulos')=>'Artículos');
-					$post = new Post();
-					$this->content = $post->showUi('CompletePosts');
+					$items = new ListObjects('Post', array('order'=>'publishDate DESC', 'results'=>'12'));
+					$this->header = $items->metaNavigation();
+					$this->content = '<div class="listAllSimple">
+										'.$items->pager().'
+										'.Adsense::top().'
+										'.$items->showList(array('function'=>'Public','middle'=>Adsense::top(), 'middleRepetitions'=>2)).'
+										'.$items->pager().'
+									</div>';
 				}
 				return $this->ui->render();
 			break;

@@ -146,8 +146,8 @@ class ListObjects {
                             $listFrom = $page - $midDelta;
                             $listTo = $page + $midDelta;
                             $listStart = true;
-                            $listEnd = true;                        
-                        }                    
+                            $listEnd = true;
+                        }
                     }
                 }
                 $html = '';
@@ -203,6 +203,32 @@ class ListObjects {
                     </div>
                     '.$pagerBottom.'
                 </div>';
+    }
+
+    /**
+    * Returns actual page
+    */
+    public function page() {
+        $pageUrl = (__('pageUrl')!='pageUrl') ? __('pageUrl') : PAGER_URL_STRING;
+        return (isset($_GET[$pageUrl])) ? intval($_GET[$pageUrl]) : 1;
+    }
+
+    /**
+    * Return the total number of pages
+    */
+    public function totalPages() {
+        return ceil($this->countTotal()/$this->results);
+    }
+
+    /**
+    * Return the meta tags next and previous
+    */
+    public function metaNavigation() {
+        $page = $this->page();
+        $totalPages = $this->totalPages();
+        $meta = ($page<$totalPages) ? '<link rel="next" href="'.Url::urlPage($page+1).'"/>' : '';
+        $meta .= ($page>1) ? '<link rel="prev" href="'.Url::urlPage($page-1).'"/>' : '';
+        return $meta;
     }
 
 }

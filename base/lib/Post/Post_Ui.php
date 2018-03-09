@@ -73,15 +73,5 @@ class Post_Ui extends Ui{
 		}
 	}
 
-	static public function renderCompletePosts() {
-		$items = new ListObjects('Post', array('order'=>'publishDate DESC', 'results'=>'12'));
-		return '<div class="listAllSimple">
-					'.$items->pager().'
-					'.Adsense::top().'
-					'.$items->showList(array('function'=>'Public','middle'=>Adsense::top(), 'middleRepetitions'=>2)).'
-					'.$items->pager().'
-				</div>';
-	}
-
 }
 ?>
