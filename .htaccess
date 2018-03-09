@@ -4,7 +4,7 @@
 # The .htaccess file is used to configure the Apache server.
 # It is crucial to Asterion since it uses the rewrite conditions
 # to load the proper variables of the requested URL.
-# 
+#
 # @author Leano Martinet <info@asterion-cms.com>
 # @package Asterion
 # @version 3.0.1
@@ -22,15 +22,15 @@ ErrorDocument 404 /error
 <IfModule mod_rewrite.c>
     RewriteEngine On
     ##
-    # The following two lines can be used in certain servers
+    # The following lines can be used in certain servers
     # to force the use of www in the URL
-    #
+    ##
+    RewriteCond %{HTTP_HOST} !=localhost
     RewriteCond %{HTTP_HOST} !^www\.
-    RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+    RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
-    
 </IfModule>
 Options All -Indexes
 

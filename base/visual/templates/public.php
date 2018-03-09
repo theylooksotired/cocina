@@ -23,12 +23,15 @@
 
     <?php echo Params::param('metainfo-google-analytics')?>
     <?php echo $header;?>
+
 </head>
 <body>
+
     <div id="bodyFrame" class="<?php echo Params::param('country-code');?>">
         <?php echo $content;?>
     </div>
     <?php echo Adsense::code()?>
     <?php echo Adsense::page()?>
+
 </body>
 </html>

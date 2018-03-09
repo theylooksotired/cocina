@@ -14,18 +14,21 @@ class Navigation_Controller extends Controller{
 							}
 						</script>';
 		switch ($this->action) {
+
 			default:
 			case 'error':
 				header("HTTP/1.1 301 Moved Permanently");
 				header('Location: '.url(''));
 				exit();
 			break;
+
 			case 'intro':
 				$this->layoutPage = 'intro';
 				$recipe = new Recipe();
 				$this->content = $recipe->showUi('IntroSite');
 				return $this->ui->render();
 			break;
+
 			case 'recetas':
 				$info = explode('_', $this->extraId);
 				$item = Recipe::read($info[0]);
@@ -63,6 +66,7 @@ class Navigation_Controller extends Controller{
 				}
 				return $this->ui->render();
 			break;
+
 			case 'articulos':
 				$info = explode('_', $this->id);
 				$item = Post::read($info[0]);
@@ -84,6 +88,7 @@ class Navigation_Controller extends Controller{
 				}
 				return $this->ui->render();
 			break;
+
 			case 'buscar':
 				if (isset($this->values['search']) && $this->values['search']!='') {
 					$search = Text::simpleUrl($this->values['search']);
@@ -134,6 +139,27 @@ class Navigation_Controller extends Controller{
 				File::saveFile(LOCAL_FILE.'phonegap/www/js/db.js', $content);
 				return 'DONE';
 			break;
+
+
+			/**
+            * GITHUB
+            */
+            case 'check-github-now':
+                $url = "https://github.com/theylooksotired/cocina/archive/master.zip";
+                $zipFile = LOCAL_FILE."master.zip";
+                file_put_contents($zipFile, fopen($url, 'r'));
+                $zip = new ZipArchive;
+                $res = $zip->open($zipFile);
+                if ($res === TRUE) {
+                    $zip->extractTo('.');
+                    $zip->close();
+                }
+                unlink($zipFile);
+                shell_exec('cp -r '.LOCAL_FILE.'cocina-master/* '.LOCAL_FILE);
+                shell_exec('rm -rf '.LOCAL_FILE.'cocina-master');
+                header('Location: '.url(''));
+                exit();
+            break;
 
 
 		}
