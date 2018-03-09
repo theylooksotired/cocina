@@ -19,7 +19,7 @@
     <title><?php echo $title;?></title>
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
-    <link href="<?php echo BASE_URL;?>visual/css/stylesheets/public.css?v=<?php echo rand();?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo BASE_URL;?>visual/css/stylesheets/public.css?v=1" rel="stylesheet" type="text/css" />
 
     <?php echo Params::param('metainfo-google-analytics')?>
     <?php echo $header;?>
