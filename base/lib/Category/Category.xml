@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object>
+    <name>Category</name>
+    <info>
+        <sql>
+            <primary>idCategory</primary>
+            <order>true</order>
+            <onDelete>Recipe</onDelete>
+        </sql>
+        <form>
+            <title>categories</title>
+            <orderBy>ord</orderBy>
+            <label>#name</label>
+            <viewPublic>true</viewPublic>
+            <publicUrl>@recipes / #idCategory _ #nameUrl</publicUrl>
+            <publicUrlList>@recipes</publicUrlList>
+            <templateItemAdmin>
+                <p class="accent"><strong>#name</strong></p>
+                <p class="tiny">#shortDescription</p>
+            </templateItemAdmin>
+        </form>
+    </info>
+    <attributes>
+        <attribute>
+            <name>idCategory</name>
+            <type>id-autoincrement</type>
+        </attribute>
+        <attribute>
+            <name>name</name>
+            <label>name</label>
+            <required>notEmpty</required>
+            <type>text-long</type>
+        </attribute>
+        <attribute>
+            <name>nameUrl</name>
+            <type>hidden-url</type>
+            <refAttribute>name</refAttribute>
+        </attribute>
+    </attributes>
+    <indexes>
+        <index>
+            <name>nameUrl</name>
+            <fields>nameUrl</fields>
+        </index>
+    </indexes>
+</object>

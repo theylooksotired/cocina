@@ -1,0 +1,102 @@
+.headerWrapper {
+    background: $colorAccent;
+    margin: 0;
+    padding: 0 10px;
+    position: fixed;
+    height: 40px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+}
+.header {
+    max-width: $sizeDesktop;
+    margin: auto;
+    @include clearer();
+    .logo {
+        width:204px;
+        float: left;
+        padding: 5px 0;
+        a {
+            height: 30px;
+            display:block;
+            text-indent: -100rem;
+            overflow: hidden;
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: contain;
+        }
+    }
+    .headerLeft {
+        width: 210px;
+        float: left;
+    }
+    .headerRight {
+        width: calc(100% - 220px);
+        float: right;
+    }
+}
+.bolivia .logo a {
+    background-image: url('../../img/logo_bolivia.png');
+}
+.brasil .logo a {
+    background-image: url('../../img/logo_brasil.png');
+}
+.chile .logo a {
+    background-image: url('../../img/logo_chile.png');
+}
+.colombia .logo a {
+    background-image: url('../../img/logo_colombia.png');
+}
+.cuba .logo a {
+    background-image: url('../../img/logo_cuba.png');
+}
+.ecuador .logo a {
+    background-image: url('../../img/logo_ecuador.png');
+}
+.mexico .logo a {
+    background-image: url('../../img/logo_mexico.png');
+}
+.peru .logo a {
+    background-image: url('../../img/logo_peru.png');
+}
+.uruguay .logo a {
+    background-image: url('../../img/logo_uruguay.png');
+}
+
+.searchTop {
+    padding: 5px 0 0 0;
+    float: right;
+    max-width: 300px;
+    .formField {
+        width:calc(100% - 40px);
+        float:left;
+        input {
+            width:100%;
+            border: 0;
+            height: 30px;
+            padding: 0 10px;
+            line-height: 30px;
+            background: $white;
+            border: 0;
+            color: lighten($black, 40%);
+            font-family: $fontFamily;
+            font-size: $fontSizeNormal;
+            @include borderRadius(5px);
+            @include borderBox();
+        }
+    }
+    .formSubmit {
+        background: transparent;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        width: 30px;
+        float: right;
+        @include animateHoverOpacity();
+    }
+    .iconSearch {
+        @include iconSimple("\e903", 2rem, 1.5rem);
+    }
+}

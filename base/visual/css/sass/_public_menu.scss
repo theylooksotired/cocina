@@ -1,0 +1,54 @@
+.menuWrapper {
+    height: 35px;
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+.menuAll {
+    text-align: center;
+    background: lighten($colorAccentAlt, 10%);
+    height: 35px;
+    color: $white;
+    margin: auto;
+    max-width: $sizeDesktop;
+    font-size: $fontSizeSmall;
+    ul {
+        width: 100%;
+        table-layout: fixed;
+        display: table;
+    }
+    li {
+        display: table-cell;
+        a {
+            border-right: 1px solid darken($colorAccentAlt, 5%);
+            color: rgba($black, 0.8);
+            font-weight: normal;
+            padding: 10px 3px;
+            line-height: 15px;
+            font-size: $fontSizeNormal * 8 / 10;
+            display: block;
+            font-weight: normal;
+            &:hover{
+                background: $colorAccent;
+                color: $white;
+            }
+        }
+        &:last-child {
+            a {
+                border-right: 0;
+            }
+        }
+        &.selected {
+            a {
+                border-right: 0;
+                background: $white;
+                color: $colorMain;
+            }
+        }
+        &.menuArticles {
+            background: adjust-hue($colorAccentAlt, -10deg);
+        }
+    }
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object>
+	<name>RecipeIngredient</name>
+	<info>
+		<sql>
+			<primary>idRecipeIngredient</primary>
+			<order>true</order>
+		</sql>
+		<form>
+			<hiddenAdminMenu>true</hiddenAdminMenu>
+		</form>
+	</info>
+	<attributes>
+		<attribute>
+			<name>idRecipeIngredient</name>
+			<type>id-autoincrement</type>
+		</attribute>
+		<attribute>
+			<name>idRecipe</name>
+			<type>linkid-autoincrement</type>
+		</attribute>
+		<attribute>
+			<name>label</name>
+			<label>label</label>
+			<type>text-long</type>
+		</attribute>
+	</attributes>
+</object>
