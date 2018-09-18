@@ -212,7 +212,7 @@ class Navigation_Controller extends Controller{
 
 	function checkAuthorization() {
 		$headers = apache_request_headers();
-		if (!isset($headers) && !isset($headers['Authorization']) && $headers['Authorization']!='plastic') {
+		if (!isset($headers) || !isset($headers['Authorization']) || $headers['Authorization']!='plastic') {
 			header('Location: '.url(''));
 			exit();
 		}
