@@ -16,7 +16,11 @@
 // you are using session configuration.
 // See http://kcfinder.sunhater.com/install for setting descriptions
 
-$uploadUrl = (isset($_GET['site'])) ? '../../../'.$_GET['site'].'/stock/uploaded' : '../../../uploaded';
+$_SESSION['siteUrl'] = (isset($_SESSION['siteUrl'])) ? $_SESSION['siteUrl'] : '../../../uploaded';
+$_SESSION['siteFile'] = (isset($_SESSION['siteFile'])) ? $_SESSION['siteFile'] : '../../../uploaded';
+
+$_SESSION['siteUrl'] = (isset($_GET['siteUrl'])) ? $_GET['siteUrl'].'/stock/uploaded' : $_SESSION['siteUrl'];
+$_SESSION['siteFile'] = (isset($_GET['siteFile'])) ? $_GET['siteFile'].'/stock/uploaded' : $_SESSION['siteFile'];
 
 $_CONFIG = array(
 
@@ -27,8 +31,8 @@ $_CONFIG = array(
 
     'theme' => "oxygen",
 
-    'uploadURL' => $uploadUrl,
-    'uploadDir' => "",
+    'uploadURL' => $_SESSION['siteUrl'],
+    'uploadDir' => $_SESSION['siteFile'],
 
     'dirPerms' => 0755,
     'filePerms' => 0644,

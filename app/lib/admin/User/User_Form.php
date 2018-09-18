@@ -16,7 +16,9 @@ class User_Form extends Form{
         return '<div class="simpleForm">
                     <p>'.__('loginMessage').'</p>
                     '.Form::createForm($fields, array('action'=>url('User/login', true), 'class'=>'formAdmin', 'submit'=>__('send'))).'
-                    <p><a href="'.url('User/forgot', true).'">'.__('passwordForgot').'</a></p>
+                    <div class="loginFormAction">
+                        <a href="'.url('User/forgot', true).'">'.__('passwordForgot').'</a>
+                    </div>
                 </div>';
     }
 
@@ -25,14 +27,18 @@ class User_Form extends Form{
         return '<div class="simpleForm">
                     <p>'.__('passwordForgotMessage').'</p>
                     '.Form::createForm($fields, array('action'=>url('User/forgot', true), 'class'=>'formAdmin', 'submit'=>__('send'))).'
-                    <p><a href="'.url('User/login', true).'">'.__('tryLoginAgain').'</a></p>
+                    <div class="loginFormAction">
+                        <a href="'.url('User/login', true).'">'.__('tryLoginAgain').'</a>
+                    </div>
                 </div>';
     }
 
     public function forgotSent() {
         return '<div class="simpleForm">
                     <div class="message">'.__('passwordSentMail').'</div>
-                    <p><a href="'.url('User/login', true).'">'.__('tryLoginAgain').'</a></p>
+                    <div class="loginFormAction">
+                        <a href="'.url('User/login', true).'">'.__('tryLoginAgain').'</a>
+                    </div>
                 </div>';
     }
 
@@ -59,7 +65,7 @@ class User_Form extends Form{
         $errors = array();
         if (!isset($this->values['oldPassword']) || trim($this->values['oldPassword'])=='') {
             $errors['oldPassword'] = __('oldPasswordError');
-        } else {        
+        } else {
             if ($user->get('passwordTemp')!='' && $this->values['oldPassword']!=$user->get('passwordTemp')) {
                 $errors['oldPassword'] = __('oldPasswordError');
             } else {
@@ -91,10 +97,10 @@ class User_Form extends Form{
             $error = $this->isValidField($this->object->attributeInfo($item));
             if (count($error)>0) {
                 $errors = array_merge($error, $errors);
-            }            
+            }
         }
         return $errors;
     }
-    
+
 }
 ?>

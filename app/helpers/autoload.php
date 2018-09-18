@@ -10,7 +10,7 @@
 * @package Asterion
 * @version 3.0.1
 */
-function __autoload($className) {
+spl_autoload_register(function ($className) {
     $objectName = $className;
     if (strpos($className, '_')!==false) {
         $class = explode('_', $className);
@@ -23,6 +23,8 @@ function __autoload($className) {
             return true;
         }
     }
-    throw new Exception('Error on Autoload: The file for '.$className.' does not exist');
-}
+    if (DEBUG) {
+        throw new Exception('Error on Autoload: The file for '.$className.' does not exist');
+    }
+});
 ?>

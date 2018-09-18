@@ -64,8 +64,7 @@ class ListObjects {
     * Populate the list.
     */
     public function populate() {
-        $pageUrl = (__('pageUrl')!='pageUrl') ? __('pageUrl') : PAGER_URL_STRING;
-        $page = (isset($_GET[$pageUrl])) ? intval($_GET[$pageUrl])-1 : 0;
+        $page = $this->page()-1;
         if ($this->query!='') {
             if ($this->results!='') {
                 $this->options['query'] .= ' LIMIT '.($page*$this->results).', '.$this->results;
@@ -91,16 +90,16 @@ class ListObjects {
         $middleRepetitions = (isset($options['middleRepetitions'])) ? $options['middleRepetitions'] : 2;
         $html = '';
         if ($sizeList > 0) {
-            $middleRepetitions = floor($sizeList/$middleRepetitions)-1;
+            $middleRepetitions = ceil($sizeList/$middleRepetitions);
             $counter = 0;
             foreach($this->list as $item) {
                 $itemUiName = $this->objectName.'_Ui';
                 $functionName = 'render'.ucwords($function);
                 $itemUi = new $itemUiName($item);
-                $html .= $itemUi->$functionName($params);
-                if ($middle != '' && $counter%$middleRepetitions == 0 && $sizeList > $middleRepetitions && $counter>0) {
+                if ($counter>0 && $middleRepetitions>0 && $middle!='' && $sizeList>$middleRepetitions && $counter%$middleRepetitions==0) {
                     $html .= $middle;
                 }
+                $html .= $itemUi->$functionName($params);
                 $counter++;
             }
         } else {
@@ -115,12 +114,11 @@ class ListObjects {
     public function pager($options=array()) {
         if (!isset($this->pagerHtml)) {
             $this->pagerHtml = '';
-            $pageUrl = (__('pageUrl')!='pageUrl') ? __('pageUrl') : PAGER_URL_STRING;
-            $page = (isset($_GET[$pageUrl])) ? intval($_GET[$pageUrl]) : 0;
+            $page = $this->page();
             $delta = (isset($options['delta'])) ? intval($options['delta']) : 5;
             $midDelta = ceil($delta/2);
             if ($this->results > 0 && $this->countTotal() > $this->results) {
-                $totalPages = ceil($this->countTotal()/$this->results);
+                $totalPages = $this->totalPages();
                 if ($totalPages <= $delta) {
                     //The number of pages is equal or less than delta
                     $listFrom = 0;
@@ -146,8 +144,8 @@ class ListObjects {
                             $listFrom = $page - $midDelta;
                             $listTo = $page + $midDelta;
                             $listStart = true;
-                            $listEnd = true;
-                        }
+                            $listEnd = true;                        
+                        }                    
                     }
                 }
                 $html = '';
@@ -187,21 +185,14 @@ class ListObjects {
     */
     public function showListPager($options=array(), $params=array()) {
         $pager = $this->pager($options);
-        $pagerTop = '';
-        $pagerBottom = '';
-        if ($pager != '') {
-            $pagerTop = '<div class="listPagerTop">'.$pager.'</div>';
-            $pagerBottom = '<div class="listPagerBottom">'.$pager.'</div>';
-        }
         $showResults = (isset($options['showResults'])) ? $options['showResults'] : true;
         $listResults = ($showResults) ? '<div class="listResults">'.str_replace('#RESULTS', $this->countTotal(), __('listTotal')).'</div>' : '';
         return '<div class="listWrapper">
-                    '.$pagerTop.'
                     '.$listResults.'
                     <div class="listContent">
                         '.$this->showList($options, $params).'
                     </div>
-                    '.$pagerBottom.'
+                    '.$pager.'
                 </div>';
     }
 

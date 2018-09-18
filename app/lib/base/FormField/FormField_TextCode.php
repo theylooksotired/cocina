@@ -15,16 +15,16 @@ class FormField_TextCode extends FormField_Text {
     */
     public function __construct($options) {
         parent::__construct($options);
-        $this->options['size'] = '10';
+        $this->options['size'] = '30';
     }
 
     /**
     * Render the element with an static function.
     */
     static public function create($options) {
-        $options['size'] = '10';
+        $options['size'] = '30';
         return FormField_Default::create($options);
     }
-    
+
 }
 ?>

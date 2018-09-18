@@ -24,7 +24,7 @@ class File {
             }
         }
         return false;
-    }    
+    }
 
     /**
     * Upload a file using the field name.
@@ -59,7 +59,7 @@ class File {
             fclose($fhandle);
         }
     }
-    
+
     /**
     * Copy an entire directory and its files.
     */
@@ -110,7 +110,7 @@ class File {
                 return;
             }
         }
-    } 
+    }
 
     /**
     * Change headers and force a file download.
@@ -129,7 +129,7 @@ class File {
             readfile($file);
         }
     }
-    
+
     /**
     * Get the basename of a file.
     */
@@ -149,15 +149,14 @@ class File {
     /**
     * Create a directory in the server.
     */
-    static public function createDirectory($dirname, $exception=true) {
-        if (!@is_dir($dirname)) {
-            if (!@mkdir($dirname)) {
-                if ($exception) {
+    static public function createDirectory($dirname, $exception=false) {
+        if (!is_dir($dirname)) {
+            if (!@mkdir($dirname, 0755, true)) {
+                if (DEBUG && $exception) {
                     throw new Exception('Could not create folder '.$dirname);
                 }
             }
         }
-        @chmod($dirname, 0755);
     }
 
     /**
@@ -165,16 +164,16 @@ class File {
     */
     static public function deleteDirectory($dirname) {
         if (is_dir($dirname)) {
-            $handle = opendir($dirname);    
-            if (!$handle) {                
+            $handle = opendir($dirname);
+            if (!$handle) {
                 return false;
             }
             while($file = readdir($handle)) {
                 if ($file != "." && $file != "..") {
                     if (!is_dir($dirname."/".$file)) {
                         unlink($dirname."/".$file);
-                    } else {                        
-                        File::deleteDirectory($dirname.'/'.$file);                    
+                    } else {
+                        File::deleteDirectory($dirname.'/'.$file);
                     }
                 }
             }

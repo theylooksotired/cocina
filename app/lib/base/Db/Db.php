@@ -9,45 +9,33 @@
 * @version 3.0.1
 */
 class Db {
-    
+
     /**
     * Execute a query
     */
     static public function execute($query, $values=array()) {
-        try {
-            $query = str_replace('\"', '"', $query);
-            $db = Db_Connection::getInstance();
-            $db->execute($query, $values);
-        } catch(Exception $error){
-            if (DEBUG) {
-                throw new Exception('<pre>'.$error->getMessage().'</pre>');
-            }
-        }
+        $query = str_replace('\"', '"', $query);
+        $db = Db_Connection::getInstance();
+        $db->execute($query, $values);
     }
 
     /**
     * Execute a query in a direct way
     */
     static public function executeSimple($query, $values=array()) {
-        try {
-            $db = Db_Connection::getInstance();
-            $db->execute($query, $values);
-        } catch(Exception $error){
-            if (DEBUG) {
-                throw new Exception('<pre>'.$error->getMessage().'</pre>');
-            }
-        }
+        $db = Db_Connection::getInstance();
+        $db->execute($query, $values);
     }
 
     /**
     * Return a single element
     */
-    static public function returnSingle($query) {
+    static public function returnSingle($query, $values=array()) {
         try {
             $query = str_replace('\"', '"', $query);
             $db = Db_Connection::getInstance();
             $prepare_execute = $db->getPDOStatement($query);
-            $prepare_execute->execute();
+            $prepare_execute->execute($values);
             return $prepare_execute->fetch(PDO::FETCH_ASSOC);
         } catch(Exception $error){
             if (DEBUG) {
@@ -59,12 +47,12 @@ class Db {
     /**
     * Return a list of elements
     */
-    static public function returnAll($query) {
+    static public function returnAll($query, $values=array()) {
         try {
             $query = str_replace('\"', '"', $query);
             $db = Db_Connection::getInstance();
             $prepare_execute = $db->getPDOStatement($query);
-            $prepare_execute->execute();
+            $prepare_execute->execute($values);
             return $prepare_execute->fetchAll(PDO::FETCH_ASSOC);
         } catch(Exception $error){
             if (DEBUG) {
@@ -132,6 +120,6 @@ class Db {
         }
         return implode(',',$result) ;
     }
-    
+
 }
 ?>

@@ -20,7 +20,7 @@ class Db_Object extends Db_Sql {
         $this->syncValues($values);
         $this->loadedMultiple = false;
     }
-    
+
     /**
     * Reload the object.
     */
@@ -46,6 +46,9 @@ class Db_Object extends Db_Sql {
                 }
             } else {
                 $this->values[$name] = isset($values[$name]) ? $values[$name] : '';
+                if ((string)$item->type == 'textarea-ck') {
+                    $this->values[$name] = Text::decodeText($this->values[$name]);
+                }
                 if ((string)$item->type == 'point') {
                     if (isset($values[$name]) && $values[$name]!='') {
                         $infoPoint = explode(':', $values[$name]);
@@ -92,7 +95,7 @@ class Db_Object extends Db_Sql {
                 $refObjectIns = new $refObject();
                 $order = ($refObjectIns->hasOrd()) ? 'ord' : $refObjectIns->orderBy();
                 $list = $refObjectIns->readListObject(array('where'=>Db::prefixTable($refObject).'.'.$lnkAttribute.'="'.$this->id().'"',
-                                                            'completeList'=>false, 
+                                                            'completeList'=>false,
                                                             'order'=>$order));
                 $this->set($name, $list);
             break;
@@ -101,7 +104,7 @@ class Db_Object extends Db_Sql {
             case 'multiple-autocomplete':
                 $refObject = (string)$item->refObject;
                 $refObjectIns = new $refObject();
-                if ((string)$item->lnkObject!='') {                
+                if ((string)$item->lnkObject!='') {
                     $lnkObject = (string)$item->lnkObject;
                     $repeat = (string)$item->repeat;
                     $lnkObjectIns = new $lnkObject();
@@ -297,7 +300,7 @@ class Db_Object extends Db_Sql {
             if (isset($values['value']) && is_array($values['value'])) {
                 foreach ($values['value'] as $key=>$value) {
                     $result[] = __($value);
-                }                
+                }
             }
             return $result;
         }
@@ -343,12 +346,19 @@ class Db_Object extends Db_Sql {
     }
 
     /**
-    * Reload the object
+    * Get the search query
     */
     public function infoSearchQuery() {
         return (string)$this->info->info->form->searchQuery;
     }
-    
+
+    /**
+    * Get the search query count
+    */
+    public function infoSearchQueryCount() {
+        return (string)$this->info->info->form->searchQueryCount;
+    }
+
     /**
     * Gets the value of an attribute.
     */
@@ -377,7 +387,7 @@ class Db_Object extends Db_Sql {
         }
         return $list;
     }
-    
+
     /**
     * Gets the label of an attribute, it works for attributes as selects of multiple objects.
     */
@@ -424,7 +434,7 @@ class Db_Object extends Db_Sql {
         $file = STOCK_FILE.$this->className.'Files/'.$this->get($attributeName);
         return (is_file($file)) ? $file : '';
     }
-    
+
     /**
     * Gets the HTML image that the attribute points.
     */
@@ -464,7 +474,7 @@ class Db_Object extends Db_Sql {
         $version = ($version != '') ? '_'.strtolower($version) : '';
         $file = STOCK_FILE.$this->className.'/'.$this->get($attributeName).'/'.$this->get($attributeName).$version.'.jpg';
         if (is_file($file)) {
-            return str_replace(STOCK_FILE, STOCK_URL, $file);
+            return str_replace(STOCK_FILE, STOCK_URL, $file).(($this->get('modified')!='') ? '?v='.Date::sqlInt($this->get('modified')) : '');
         }
     }
 
@@ -543,6 +553,6 @@ class Db_Object extends Db_Sql {
         $uiObject = new $uiObjectName($this);
         return $uiObject->$render($params);
     }
-    
+
 }
 ?>

@@ -16,7 +16,7 @@ class Form {
     public function __construct($values=array(), $errors=array(), $object='') {
         if (!is_object($object)) {
             $this->className = str_replace('_Form', '', get_class($this));
-            $this->object = new $this->className($values);            
+            $this->object = new $this->className($values);
         } else {
             $this->object = $object;
             $this->className = $object->className;
@@ -100,7 +100,7 @@ class Form {
             }
         }
     }
-    
+
     /**
     * Create the form fields.
     */
@@ -129,11 +129,11 @@ class Form {
         $name = (string)$item->name;
         $label = (string)$item->label;
         $type = (string)$item->type;
-        $options = array_merge($options, 
-                                array('item'=>$item, 
-                                        'values'=>$this->values, 
-                                        'errors'=>$this->errors, 
-                                        'typeField'=>$type, 
+        $options = array_merge($options,
+                                array('item'=>$item,
+                                        'values'=>$this->values,
+                                        'errors'=>$this->errors,
+                                        'typeField'=>$type,
                                         'object'=>$this->object));
         switch (Db_ObjectType::baseType($type)) {
             default:
@@ -143,6 +143,9 @@ class Form {
                 switch ($type) {
                     default:
                         return FormField::show('select', $options);
+                    break;
+                    case 'select-2':
+                        return FormField::show('select2', $options);
                     break;
                     case 'select-link':
                         return FormField::show('selectLink', $options);
@@ -169,6 +172,13 @@ class Form {
                                 '.FormField::create('hidden', array('name'=>$name.'_oldId', 'value'=>$this->object->id()));
                     break;
                 }
+            break;
+            case 'autocomplete':
+                return '<div class="autocompleteItem autocompleteItem-'.$name.'" data-url="'.url($refObject.'/autocomplete/'.$refAttribute, true).'">
+                            <div class="autocompleteItemIns">
+                                '.$autocomplete.'
+                            </div>
+                        </div>';
             break;
             case 'multiple':
                 switch($type) {
@@ -216,7 +226,7 @@ class Form {
                                             'size'=>'60',
                                             'value'=>$autocompleteItems);
                         $autocomplete = FormField_Text::create($options);
-                        return '<div class="autocompleteItem autocompleteItem-'.$name.'" rel="'.url($refObject.'/autocomplete/'.$refAttribute, true).'">
+                        return '<div class="autocompleteItem autocompleteItem-'.$name.'" data-url="'.url($refObject.'/autocomplete/'.$refAttribute, true).'">
                                     <div class="autocompleteItemIns">
                                         '.$autocomplete.'
                                     </div>
@@ -255,10 +265,12 @@ class Form {
                         $multipleOptions = array('multiple'=>true, 'nameMultiple'=>$name, 'idMultipleJs'=>'#ID_MULTIPLE#');
                         $refObjectFormIns = new $refObjectForm();
                         $label = ((string)$item->label!='') ? '<label>'.__((string)$item->label).'</label>' : '';
-                        $orderNested = ($refObjectFormIns->object->hasOrd()) ? '<div class="nestedFormFieldOrder"></div>' : '';
+                        $orderNested = ($refObjectFormIns->object->hasOrd()) ? '<div class="nestedFormFieldOrder"><i class="icon icon-move"></i></div>' : '';
                         $nestedFormFieldEmpty = '<div class="nestedFormFieldEmpty">
                                                         <div class="nestedFormFieldOptions">
-                                                            <div class="nestedFormFieldDelete"></div>
+                                                            <div class="nestedFormFieldDelete">
+                                                                <i class="icon icon-trash"></i>
+                                                            </div>
                                                             '.$orderNested.'
                                                         </div>
                                                         <div class="nestedFormFieldContent">
@@ -269,10 +281,12 @@ class Form {
                             $refObjectIns = new $refObject($itemValues);
                             $refObjectFormIns = new $refObjectForm($itemValues, array(), $refObjectIns);
                             $multipleOptionsIns = array('multiple'=>true, 'nameMultiple'=>$name);
-                            $orderNested = ($refObjectFormIns->object->hasOrd()) ? '<div class="nestedFormFieldOrder"></div>' : '';
-                            $nestedFormField .= '<div class="nestedFormFieldObject" rel="'.$refObjectIns->id().'">
+                            $orderNested = ($refObjectFormIns->object->hasOrd()) ? '<div class="nestedFormFieldOrder"><i class="icon icon-move"></i></div>' : '';
+                            $nestedFormField .= '<div class="nestedFormFieldObject" data-id="'.$refObjectIns->id().'">
                                                         <div class="nestedFormFieldOptions">
-                                                            <div class="nestedFormFieldDelete" rel="'.url($refObject.'/delete/'.$refObjectIns->id(), true).'"></div>
+                                                            <div class="nestedFormFieldDelete" data-url="'.url($refObject.'/delete/'.$refObjectIns->id(), true).'">
+                                                                <i class="icon icon-trash"></i>
+                                                            </div>
                                                             '.$orderNested.'
                                                         </div>
                                                         <div class="nestedFormFieldContent">
@@ -370,16 +384,16 @@ class Form {
                         }
                     }
                 } else {
-                    if (!isset($this->values[$name]) || strlen(trim($this->values[$name])) == 0) { 
+                    if (!isset($this->values[$name]) || strlen(trim($this->values[$name])) == 0) {
                         $error[$name] = __('notEmpty');
                     }
                 }
             break;
             case 'notEmptyPoint':
-                if (!isset($this->values[$name.'_lat']) || strlen(trim($this->values[$name.'_lat'])) == 0) { 
+                if (!isset($this->values[$name.'_lat']) || strlen(trim($this->values[$name.'_lat'])) == 0) {
                     $error[$name] = __('notEmpty');
                 }
-                if (!isset($this->values[$name.'_lng']) || strlen(trim($this->values[$name.'_lng'])) == 0) { 
+                if (!isset($this->values[$name.'_lng']) || strlen(trim($this->values[$name.'_lng'])) == 0) {
                     $error[$name] = __('notEmpty');
                 }
             break;
@@ -390,10 +404,10 @@ class Form {
                 }
             break;
             case 'password':
-                if (!isset($this->values[$name]) || strlen(trim($this->values[$name])) == 0) { 
+                if (!isset($this->values[$name]) || strlen(trim($this->values[$name])) == 0) {
                     $error[$name] = __('notEmpty');
                 } else {
-                    if (strlen($this->values[$name]) < 6) { 
+                    if (strlen($this->values[$name]) < 6) {
                         $error[$name] = __('errorPasswordSize');
                     }
                     if (preg_match('/^[a-z0-9]+$/i', $this->values[$name])==false) {
@@ -403,19 +417,18 @@ class Form {
             break;
             case 'unique':
                 $error = array_merge($error, $this->isValidField($item, 'notEmpty'));
-                if ($this->object->id()) {
-                    if ((string)$item->lang == 'true') {
-                        foreach (Lang::langs() as $lang) {
-                            $existingObject = $this->object->readFirst(array('where'=>$this->object->primary.'!="'.$this->object->id().'" AND '.$name.'_'.$lang.'="'.$this->values[$name.'_'.$lang].'"'));
-                            if ($existingObject->id()!='') {
-                                $error[$name.'_'.$lang] = __('errorExisting');
-                            }
-                        }
-                    } else {
-                        $existingObject = $this->object->readFirst(array('where'=>$this->object->primary.'!="'.$this->object->id().'" AND '.$name.'="'.$this->values[$name].'"'));
+                $whereId = ($this->object->id()!='') ? $this->object->primary.'!="'.$this->object->id().'" AND ' : '';
+                if ((string)$item->lang == 'true') {
+                    foreach (Lang::langs() as $lang) {
+                        $existingObject = $this->object->readFirst(array('where'=>$whereId.$name.'_'.$lang.'="'.$this->values[$name.'_'.$lang].'"'));
                         if ($existingObject->id()!='') {
-                            $error[$name] = __('errorExisting');
+                            $error[$name.'_'.$lang] = __('errorExisting');
                         }
+                    }
+                } else {
+                    $existingObject = $this->object->readFirst(array('where'=>$whereId.$name.'="'.$this->values[$name].'"'));
+                    if ($existingObject->id()!='') {
+                        $error[$name] = __('errorExisting');
                     }
                 }
             break;
@@ -431,7 +444,7 @@ class Form {
     * Check if a value is empty.
     */
     public function isValidEmpty($field, &$errors) {
-        if (!isset($this->values[$field]) || strlen(trim($this->values[$field])) == 0) { 
+        if (!isset($this->values[$field]) || strlen(trim($this->values[$field])) == 0) {
             $errors[$field] = __('notEmpty');
         }
     }

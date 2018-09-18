@@ -28,22 +28,23 @@ class Db_Sql {
     /**
     * Counts the number of objects in the DB (static function).
     */
-    static public function countResults($options=array()) {
+    static public function countResults($options=array(), $values=array()) {
+        $values = (isset($options['values'])) ? $options['values'] : $values;
         $table = (isset($options['table'])) ? $options['table'] : get_called_class();
         $where = (isset($options['where']) && $options['where']!='') ? $options['where'] : '1=1';
-        $query = 'SELECT COUNT(*) AS numElements 
+        $query = 'SELECT COUNT(*) AS numElements
                         FROM '.Db::prefixTable($table).'
                         WHERE '.$where;
-        $result = Db::returnSingle($query);
+        $result = Db::returnSingle($query, $values);
         return $result['numElements'];
     }
 
     /**
     * Counts the number of objects in the DB.
     */
-    public function countResultsObject($options=array()) {
+    public function countResultsObject($options=array(), $values=array()) {
         $options['table'] = (isset($options['table']) && $options['table']!='') ? $options['table'] : $this->className;
-        return Db_Sql::countResults($options);
+        return Db_Sql::countResults($options, $values);
     }
 
     /**
@@ -55,8 +56,8 @@ class Db_Sql {
         $object = new $table();
         $query = 'SELECT '.$fields.$object->fieldPoints().'
                     FROM '.Db::prefixTable($table).'
-                    WHERE '.$object->primary.'="'.$id.'"';
-        return Db::returnSingle($query);
+                    WHERE '.$object->primary.'=:idObject';
+        return Db::returnSingle($query, array('idObject' => $id));
     }
 
     /**
@@ -88,7 +89,8 @@ class Db_Sql {
     /**
     * Returns a single object (static function).
     */
-    public static function readFirst($options=array()) {
+    public static function readFirst($options=array(), $values=array()) {
+        $values = (isset($options['values'])) ? $options['values'] : $values;
         $table = (isset($options['table'])) ? $options['table'] : get_called_class();
         $fields = (isset($options['fields'])) ? $options['fields'] : '*';
         $where = (isset($options['where']) && $options['where']!='') ? $options['where'] : '1=1';
@@ -100,21 +102,22 @@ class Db_Sql {
                     WHERE '.$where.'
                     '.$order.'
                     '.$limit;
-        return new $table(Db::returnSingle($query));
+        return new $table(Db::returnSingle($query, $values));
     }
 
     /**
     * Returns a single object.
     */
-    public function readFirstObject($options=array()) {
+    public function readFirstObject($options=array(), $values=array()) {
         $options['table'] = $this->className;
-        return Db_Sql::readFirst($options);
+        return Db_Sql::readFirst($options, $values);
     }
-    
+
     /**
     * Returns a list of objects (static function).
     */
-    public static function readList($options=array()) {
+    public static function readList($options=array(), $values=array()) {
+        $values = (isset($options['values'])) ? $options['values'] : $values;
         $table = (isset($options['table'])) ? $options['table'] : get_called_class();
         $fields = (isset($options['fields'])) ? $options['fields'] : '*';
         $where = (isset($options['where']) && $options['where']!='') ? $options['where'] : '1=1';
@@ -127,7 +130,7 @@ class Db_Sql {
                     WHERE '.$where.'
                     '.$order.'
                     '.$limit;
-        $result = Db::returnAll($query);
+        $result = Db::returnAll($query, $values);
         $list = array();
         $completeList = (isset($options['completeList'])) ? $options['completeList'] : true;
         foreach ($result as $item) {
@@ -144,18 +147,18 @@ class Db_Sql {
     /**
     * Returns a list of objects.
     */
-    public function readListObject($options=array()) {
+    public function readListObject($options=array(), $values=array()) {
         $options['table'] = (isset($options['table']) && $options['table']!='') ? $options['table'] : $this->className;
-        return Db_Sql::readList($options);
+        return Db_Sql::readList($options, $values);
     }
 
     /**
     * Returns a list using a query.
     */
-    public function readListQuery($query) {
+    public function readListQuery($query, $values=array()) {
         $objectType = $this->className;
         $query = str_replace('##', DB_PREFIX, $query);
-        $result = Db::returnAll($query);
+        $result = Db::returnAll($query, $values);
         $list = array();
         foreach ($result as $name) {
             $list[] = new $objectType($name);
@@ -213,11 +216,11 @@ class Db_Sql {
                     }
                 }
             }
-        }    
+        }
     }
 
     /**
-    * Update the values of an object.
+    * Modify the values of an object.
     */
     public function modify($values, $options=array()) {
         if (count($values)>0 && $this->id()!='') {
@@ -233,7 +236,7 @@ class Db_Sql {
                 $primary = $this->primary;
                 $idItem = (isset($values[$primary.'_oldId'])) ? $values[$primary.'_oldId'] : $this->id();
                 $query = 'UPDATE '.$this->tableName.'
-                            SET 
+                            SET
                             '.$queryModified.'
                             '.$createSet['query'].'
                             WHERE '.$this->primary.'="'.$idItem.'"';
@@ -249,12 +252,20 @@ class Db_Sql {
     }
 
     /**
-    * Update a single attribute.
+    * Update the values of an object.
+    */
+    public function update($values, $options=array()) {
+        $options['complete'] = false;
+        return $this->modify($values, $options);
+    }
+
+    /**
+    * Modify a single attribute.
     */
     public function modifySimple($attribute, $value) {
         Db::execute('UPDATE '.$this->tableName.'
                         SET '.$attribute.' = :'.$attribute.'
-                        WHERE '.$this->primary.' = :'.$this->primary, 
+                        WHERE '.$this->primary.' = :'.$this->primary,
                     array($attribute=>$value, $this->primary=>$this->id()));
     }
 
@@ -326,7 +337,7 @@ class Db_Sql {
                                 if ($lnkObjectIns->get($this->primary)=='') {
                                     $lnkObjectIns->insert(array($this->primary=>$this->id(),
                                                                 $refObjectIns->primary=>$autocompleteObject->id()),
-                                                                array('simpleQuery'=>true));                                        
+                                                                array('simpleQuery'=>true));
                                 }
                             }
                         }
@@ -351,7 +362,7 @@ class Db_Sql {
                                     if ($objectExists->get($this->primary)=='') {
                                         $lnkObjectIns->insert(array($this->primary=>$this->id(),
                                                                 $refObjectIns->primary=>$itemMultiple->id()),
-                                                                array('simpleQuery'=>true));                                        
+                                                                array('simpleQuery'=>true));
                                     }
                                 } else if (is_array($itemMultiple)) {
                                     //If it's an array
@@ -433,7 +444,7 @@ class Db_Sql {
         }
         return $fields;
     }
-    
+
     /**
     * Update the order of a list of objects.
     */
@@ -488,7 +499,7 @@ class Db_Sql {
     * Creates the table indexes defined in the class XML file.
     */
     public function createTableIndexes($rewrite=false) {
-        if (isset($this->info->indexes)) {        
+        if (isset($this->info->indexes)) {
             foreach($this->info->indexes->index as $item) {
                 $name = (string)$item->name;
                 $type = (string)$item->type;
@@ -503,7 +514,7 @@ class Db_Sql {
                             Db::execute($query);
                         }
                     }
-                } else {                
+                } else {
                     $query = 'SHOW INDEX FROM '.$this->tableName.' WHERE KEY_NAME="'.$name.'"';
                     if (count(Db::returnAll($query))==0) {
                         $query = 'CREATE '.$type.' INDEX `'.$name.'` ON '.$this->tableName.' ('.$fields.')';
@@ -561,12 +572,12 @@ class Db_Sql {
                 break;
                 case 'password':
                     if (isset($values[$name])) {
-                        $password = md5($values[$name]);            
+                        $password = md5($values[$name]);
                         $setValues[$name] = $password;
                         $query .= '`'.$name.'` = :'.$name.', ';
                     }
                     if (isset($values[$name.'_new']) && $values[$name.'_new']!='') {
-                        $password = md5($values[$name.'_new']);            
+                        $password = md5($values[$name.'_new']);
                         $setValues[$name] = $password;
                         $query .= '`'.$name.'` = :'.$name.'", ';
                     }
@@ -666,7 +677,7 @@ class Db_Sql {
                     }
                 break;
                 case 'checkbox':
-                    if ($complete) {                    
+                    if ($complete) {
                         $values[$name] = (isset($values[$name])) ? $values[$name] : 0;
                         $values[$name] = ($values[$name]==="on") ? 1 : $values[$name];
                         $query .= isset($values[$name]) ? '`'.$name.'`="'.$values[$name].'", ' : '`'.$name.'`=NULL, ';
@@ -680,6 +691,11 @@ class Db_Sql {
                         $query .= ($values[$nameCheckbox]=='1' && isset($values[$name])) ? '`'.$name.'`="'.$values[$name].'", ' : '`'.$name.'`=NULL, ';
                     }
                 break;
+                case 'select-2':
+                    $multiple = (string)$item->multiple;
+                    $setValues[$name] = ($multiple == 'true') ? json_encode($values[$name]) : $values[$name];
+                    $query .= '`'.$name.'` = :'.$name.', ';
+                break;
                 case 'id-autoincrement':
                 case 'file':
                 case 'multiple-object':
@@ -692,7 +708,7 @@ class Db_Sql {
         $query = ($query!='') ? substr($query, 0, -2) : $query;
         return array('query'=>$query, 'setValues'=>$setValues);
     }
-    
+
     /**
     * Upload the files of an object according the its attributes.
     */
@@ -724,7 +740,41 @@ class Db_Sql {
             }
             // Case single
             if (isset($_FILES[$fieldName]) && isset($_FILES[$fieldName]['tmp_name']) && $_FILES[$fieldName]['tmp_name']!='') {
-                if ((string)$field->mode == 'adaptable') {
+                if (is_array($_FILES[$fieldName]['tmp_name'])) {
+                    // Multiple files
+                    $filesArray = [];
+                    for ($i=0; $i<count($_FILES[$fieldName]['tmp_name']); $i++) {
+                        $filesArray[] = array('name'=>(isset($_FILES[$fieldName]['name'][$i]) ? $_FILES[$fieldName]['name'][$i] : ''),
+                                                'tmp_name'=>(isset($_FILES[$fieldName]['tmp_name'][$i]) ? $_FILES[$fieldName]['tmp_name'][$i] : ''),
+                                                'type'=>(isset($_FILES[$fieldName]['type'][$i]) ? $_FILES[$fieldName]['type'][$i] : ''),
+                                                'error'=>(isset($_FILES[$fieldName]['error'][$i]) ? $_FILES[$fieldName]['error'][$i] : ''),
+                                                'size'=>(isset($_FILES[$fieldName]['size'][$i]) ? $_FILES[$fieldName]['size'][$i] : ''));
+                    }
+                    $filesSaved = array();
+                    foreach ($filesArray as $key=>$fileItem) {
+                        $fileTmp = $fileItem['tmp_name'];
+                        $fileName = $fileItem['name'];
+                        switch (File::fileExtension($fileName)) {
+                            default:
+                                $fileSave = $this->id().'_'.Text::simpleUrlFile($_FILES[$fieldName]['name']).'-'.$key;
+                                if (File::uploadUrl($fileTmp, $this->className, $fileSave)) {
+                                    $filesSaved[] = $fileSave;
+                                }
+                            break;
+                            case 'jpg':
+                            case 'jpeg':
+                            case 'png':
+                            case 'gif':
+                                $fileSave = Text::simpleUrlFileBase($this->id().'_'.$fieldName).'-'.$key;
+                                if (Image_File::saveImageUrl($fileTmp, $this->className, $fileSave)) {
+                                    $filesSaved[] = $fileSave;
+                                }
+                            break;
+                        }
+                    }
+                    if (count($filesSaved) > 0) $this->modifySimple($fieldName, implode(':', $filesSaved));
+                    unset($_FILES[$fieldName]);
+                } elseif ((string)$field->mode == 'adaptable') {
                     // Image and file
                     $fileTmp = $_FILES[$fieldName]['tmp_name'];
                     $fileName = $_FILES[$fieldName]['name'];

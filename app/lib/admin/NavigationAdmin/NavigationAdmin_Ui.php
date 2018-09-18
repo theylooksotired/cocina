@@ -107,26 +107,34 @@ class NavigationAdmin_Ui extends Ui{
             $objectNames = File::scanDirectoryObjectsApp();
             $menuItems .= $this->renderMenuObjects($objectNames, 'menuSideItemApp');
             if ($this->userType->get('managesPermissions')=='1') {
-                $menuItems .= '
-                                <div class="menuSideItem menuSideItem-langs">
-                                    <a href="'.url('Lang', true).'">'.__('langs').'</a>
+                $menuItems .= '<div class="menuSideItem menuSideItemAdmin">
+                                    <a href="'.url('Permission', true).'">
+                                        <i class="icon icon-users"></i>
+                                        <span>'.__('permissions').'</span>
+                                    </a>
                                 </div>
-                                <div class="menuSideItem menuSideItem-permissions">
-                                    <a href="'.url('Permission', true).'">'.__('permissions').'</a>
+                                <div class="menuSideItem menuSideItemAdmin">
+                                    <a href="'.url('NavigationAdmin/backup', true).'">
+                                        <i class="icon icon-download"></i>
+                                        <span>'.__('backup').'</span>
+                                    </a>
                                 </div>
-                                <div class="menuSideItem menuSideItem-backup">
-                                    <a href="'.url('NavigationAdmin/backup', true).'">'.__('backup').'</a>
-                                </div>
-                                <div class="menuSideItem menuSideItem-cache">
-                                    <a href="'.url('NavigationAdmin/cache', true).'">'.__('cache').'</a>
+                                <div class="menuSideItem menuSideItemAdmin">
+                                    <a href="'.url('NavigationAdmin/cache', true).'">
+                                        <i class="icon icon-download"></i>
+                                        <span>'.__('cache').'</span>
+                                    </a>
                                 </div>';
             }
             $menuList = new ListObjects('UserTypeMenu', array('where'=>'idUserType="'.$this->userType->id().'"', 'order'=>'ord'));
             return '<nav class="menuSide">
                         '.$menuList->showList(array('function'=>'Menu')).'
                         '.$menuItems.'
-                        <div class="menuSideItem menuSideItem-logout">
-                            <a href="'.url('User/logout', true).'">'.__('logout').'</a>
+                        <div class="menuSideItem menuSideItemLogout">
+                            <a href="'.url('User/logout', true).'">
+                                <i class="icon icon-power-button"></i>
+                                <span>'.__('logout').'</span>
+                            </a>
                         </div>
                     </nav>';
         }
@@ -136,28 +144,49 @@ class NavigationAdmin_Ui extends Ui{
     * Render the menu for a list of objects.
     */
     public function renderMenuObjects($objectNames, $class) {
-        $menuItems = '';
+        $html = '';
+        $menuItems = array();
         foreach ($objectNames as $objectName) {
             $object = new $objectName();
-            $objectName = (string)$object->info->name;
-            $objectTitle = (string)$object->info->info->form->title;
             $objectHidden = (string)$object->info->info->form->hiddenAdminMenu;
+            $objectGroupMenu = (string)$object->info->info->form->groupMenu;
+            $objectGroupMenu = ($objectGroupMenu!='') ? $objectGroupMenu : '';
             if ($objectHidden != 'true') {
+                if (!isset($menuItems[$objectGroupMenu])) {
+                    $menuItems[$objectGroupMenu] = array();
+                }
+                array_push($menuItems[$objectGroupMenu], array('name'=>(string)$object->info->name, 'title'=>__((string)$object->info->info->form->title)));
+            }
+        }
+        ksort($menuItems);
+        foreach ($menuItems as $menuItemGroupKey=>$menuItemGroup) {
+            $htmlGroup = '';
+            foreach ($menuItemGroup as $menuItem) {
                 if ($this->userType->get('managesPermissions')=='1') {
-                    $menuItems .= '<div class="menuSideItem menuSideItem-'.$objectName.' '.$class.'">
-                                        <a href="'.url($objectName, true).'">'.__($objectTitle).'</a>
+                    $htmlGroup .= '<div class="menuSideItem menuSideItem-'.$menuItem['name'].' '.$class.'">
+                                        <a href="'.url($menuItem['name'], true).'">
+                                            <i class="icon icon-arrow-right"></i>
+                                            <span>'.__($menuItem['title']).'</span>
+                                        </a>
                                     </div>';
                 } else {
-                    $permission = Permission::readFirst(array('where'=>'objectName="'.$objectName.'" AND idUserType="'.$this->userType->id().'"'));
+                    $permission = Permission::readFirst(array('where'=>'objectName="'.$menuItem['name'].'" AND idUserType="'.$this->userType->id().'"'));
                     if ($permission->get('permissionListAdmin')=='1') {
-                        $menuItems .= '<div class="menuSideItem menuSideItem-'.$objectName.' '.$class.'">
-                                            <a href="'.url($objectName, true).'">'.__($objectTitle).'</a>
+                        $htmlGroup .= '<div class="menuSideItem menuSideItem-'.$menuItem['name'].' '.$class.'">
+                                            <a href="'.url($menuItem['name'], true).'">
+                                                <i class="icon icon-arrow-right"></i>
+                                                <span>'.__($menuItem['title']).'</span>
+                                            </a>
                                         </div>';
                     }
                 }
             }
+            $html .= ($htmlGroup!='' && $menuItemGroupKey!='') ? '<div class="menuSideWrapper">
+                                                                        <div class="menuSideTitle">'.__($menuItemGroupKey).'</div>
+                                                                        '.$htmlGroup.'
+                                                                    </div>' : $htmlGroup;
         }
-        return $menuItems;
+        return $html;
     }
 
 }
