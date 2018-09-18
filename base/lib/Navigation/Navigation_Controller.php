@@ -135,6 +135,10 @@ class Navigation_Controller extends Controller{
 			//JSON
 			case 'json-phonegap':
 				$this->mode = 'ajax';
+				$headers = apache_request_headers();
+				print_r($headers);
+				exit();
+				
 				$info = array('categories'=>array(),
 								'recipes'=>array());
 				$items = Category::readList(array('order'=>'ord'));
