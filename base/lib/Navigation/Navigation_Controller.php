@@ -136,7 +136,13 @@ class Navigation_Controller extends Controller{
 			case 'json-phonegap':
 				$this->mode = 'ajax';
 				$this->checkAuthorization();
-				$info = array('categories'=>array(),
+				$info = array('site'=>array('title'=>Params::param('metainfo-titlePage'),
+											'titleGeneric'=>Params::param('titleGeneric'),
+											'titleCountry'=>Params::param('titleCountry'),
+											'url'=>url(''),
+											'admobBanner'=>Params::param('admobBanner'),
+											'admobIntersitial'=>Params::param('admobIntersitial')),
+								'categories'=>array(),
 								'recipes'=>array());
 				$items = Category::readList(array('order'=>'ord'));
 				foreach($items as $item) {
