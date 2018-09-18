@@ -147,7 +147,7 @@ class Navigation_Controller extends Controller{
 					$infoIns = (array)$item;
 					$info['recipes'][] = $infoIns;
 				}
-				$content = json_encode($info);
+				$content = json_encode($info, JSON_PRETTY_PRINT);
 				$content = str_replace(LOCAL_URL,PROD_URL,$content);
 				return $content;
 			break;
