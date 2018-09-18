@@ -139,12 +139,12 @@ class Navigation_Controller extends Controller{
 								'recipes'=>array());
 				$items = Category::readList(array('order'=>'ord'));
 				foreach($items as $item) {
-					$infoIns = $item->toArray();
+					$infoIns = $item->getValues();
 					$info['categories'][] = $infoIns;
 				}
 				$items = Recipe::readList(array('order'=>'nameUrl'));
 				foreach($items as $item) {
-					$infoIns = $item->toArray();
+					$infoIns = $item->getValues();
 					$info['recipes'][] = $infoIns;
 				}
 				$content = json_encode($info);
