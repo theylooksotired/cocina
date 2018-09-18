@@ -152,12 +152,12 @@ class Navigation_Controller extends Controller{
 					unset($infoIns['created']);
 					unset($infoIns['modified']);
 					unset($infoIns['ord']);
-					$infoIns['ingredients2'] = array_map(function($item) {return $item['label'];}, (array)$infoIns['ingredients']);
-					print_r($infoIns['ingredients2']);
+					$infoIns['ingredients'] = array_map(function($item) {return $item['label'];}, (array)$infoIns['ingredients']);
+					print_r($infoIns['ingredients']);
 					$info['recipes'][] = $infoIns;
 				}
 				$content = json_encode($info, JSON_PRETTY_PRINT);
-				//return $content;
+				return $content;
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
