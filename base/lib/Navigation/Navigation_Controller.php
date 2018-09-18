@@ -153,7 +153,7 @@ class Navigation_Controller extends Controller{
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
-				Db::execute('ALTER TABLE coc_Recipe ADD "preparationTime" TEXT NULL;');
+				Db::execute('ALTER TABLE '.Db::prefixTable('Recipe').' ADD "preparationTime" TEXT NULL;');
 				$items = Category::readList();
 				foreach($items as $item) {
 					$item->modify(array('name'=>html_entity_decode($item->get('name'))));
