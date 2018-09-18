@@ -140,11 +140,18 @@ class Navigation_Controller extends Controller{
 				$items = Category::readList(array('order'=>'ord'));
 				foreach($items as $item) {
 					$infoIns = (array)$item->values;
+					unset($infoIns['created']);
+					unset($infoIns['modified']);
+					unset($infoIns['ord']);
 					$info['categories'][] = $infoIns['values'];
 				}
 				$items = Recipe::readList(array('order'=>'nameUrl'));
 				foreach($items as $item) {
+					$item->loadMultipleValuesAll();
 					$infoIns = (array)$item->values;
+					unset($infoIns['created']);
+					unset($infoIns['modified']);
+					unset($infoIns['ord']);
 					$info['recipes'][] = $infoIns;
 				}
 				$content = json_encode($info, JSON_PRETTY_PRINT);
