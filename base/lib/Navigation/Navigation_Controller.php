@@ -152,8 +152,8 @@ class Navigation_Controller extends Controller{
 					unset($infoIns['created']);
 					unset($infoIns['modified']);
 					unset($infoIns['ord']);
-					print_r($infoIns);
 					$infoIns['ingredients'] = array_filter((array)$infoIns['ingredients'], function($item) {return $item['label'];});
+					print_r($infoIns['ingredients']);
 					$info['recipes'][] = $infoIns;
 				}
 				$content = json_encode($info, JSON_PRETTY_PRINT);
