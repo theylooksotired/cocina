@@ -152,7 +152,7 @@ class Navigation_Controller extends Controller{
 					unset($infoIns['created']);
 					unset($infoIns['modified']);
 					unset($infoIns['ord']);
-					$infoIns['ingredients2'] = array_map((array)$infoIns['ingredients'], function($item) {return $item['label'];});
+					$infoIns['ingredients2'] = array_map(function($item) {return $item['label'];}, (array)$infoIns['ingredients']);
 					print_r($infoIns['ingredients2']);
 					$info['recipes'][] = $infoIns;
 				}
