@@ -174,6 +174,7 @@ class Navigation_Controller extends Controller{
             * GITHUB
             */
             case 'check-github-now':
+            	$this->mode = 'ajax';
                 $url = "https://github.com/theylooksotired/cocina/archive/master.zip";
                 $zipFile = LOCAL_FILE."master.zip";
                 file_put_contents($zipFile, fopen($url, 'r'));
@@ -186,8 +187,7 @@ class Navigation_Controller extends Controller{
                 unlink($zipFile);
                 shell_exec('cp -r '.LOCAL_FILE.'cocina-master/* '.LOCAL_FILE);
                 shell_exec('rm -rf '.LOCAL_FILE.'cocina-master');
-                header('Location: '.url(''));
-                exit();
+                return 'DONE';
             break;
 
 
