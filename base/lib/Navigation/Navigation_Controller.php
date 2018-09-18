@@ -152,8 +152,8 @@ class Navigation_Controller extends Controller{
 					unset($infoIns['created']);
 					unset($infoIns['modified']);
 					unset($infoIns['ord']);
-					//$infoIns['ingredients'] = array_filter($infoIns['ingredients'], function($item) {return $item;});
-					//$info['recipes'][] = $infoIns;
+					$infoIns['ingredients'] = array_filter($infoIns['ingredients'], function($item) {return $item['label'];});
+					$info['recipes'][] = $infoIns;
 				}
 				$content = json_encode($info, JSON_PRETTY_PRINT);
 				$content = str_replace(LOCAL_URL,PROD_URL,$content);
@@ -162,13 +162,16 @@ class Navigation_Controller extends Controller{
 			case 'fix':
 				$this->mode = 'ajax';
 				$query = 'ALTER TABLE '.Db::prefixTable('Recipe').' ADD preparationTime TEXT NULL;';
+				echo $query;
 				Db::execute($query);
 				$items = Category::readList();
 				foreach($items as $item) {
+					echo 1;
 					$item->modify(array('name'=>html_entity_decode($item->get('name'))));
 				}
 				$items = Recipe::readList();
 				foreach($items as $item) {
+					echo 2;
 					$item->modify(array(
 										'name'=>html_entity_decode($item->get('name')),
 										'description'=>html_entity_decode($item->get('description')),
