@@ -135,10 +135,7 @@ class Navigation_Controller extends Controller{
 			//JSON
 			case 'json-phonegap':
 				$this->mode = 'ajax';
-				$headers = apache_request_headers();
-				print_r($headers);
-				exit();
-				
+				$this->checkAuthorization();
 				$info = array('categories'=>array(),
 								'recipes'=>array());
 				$items = Category::readList(array('order'=>'ord'));
@@ -164,6 +161,7 @@ class Navigation_Controller extends Controller{
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
+				$this->checkAuthorization();
 				$query = 'ALTER TABLE '.Db::prefixTable('Recipe').' ADD preparationTime TEXT NULL;';
 				echo $query;
 				Db::execute($query);
@@ -192,6 +190,7 @@ class Navigation_Controller extends Controller{
             */
             case 'check-github-now':
             	$this->mode = 'ajax';
+            	$this->checkAuthorization();
                 $url = "https://github.com/theylooksotired/cocina/archive/master.zip";
                 $zipFile = LOCAL_FILE."master.zip";
                 file_put_contents($zipFile, fopen($url, 'r'));
@@ -210,5 +209,14 @@ class Navigation_Controller extends Controller{
 
 		}
 	}
+
+	function checkAuthorization() {
+		$headers = apache_request_headers();
+		if (!isset($headers) && !isset($headers['Authorization']) && $headers['Authorization']!='plastic') {
+			header('Location: '.url(''));
+			exit();
+		}
+	}
+
 }
 ?>
