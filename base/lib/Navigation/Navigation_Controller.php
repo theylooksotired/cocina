@@ -139,11 +139,12 @@ class Navigation_Controller extends Controller{
 								'recipes'=>array());
 				$items = Category::readList(array('order'=>'ord'));
 				foreach($items as $item) {
+					print_r($item->values);
 					$infoIns = (array)$item->values;
 					unset($infoIns['created']);
 					unset($infoIns['modified']);
 					unset($infoIns['ord']);
-					$info['categories'][] = $infoIns['values'];
+					$info['categories'][] = $infoIns;
 				}
 				$items = Recipe::readList(array('order'=>'nameUrl'));
 				foreach($items as $item) {
@@ -166,12 +167,10 @@ class Navigation_Controller extends Controller{
 				Db::execute($query);
 				$items = Category::readList();
 				foreach($items as $item) {
-					echo 1;
 					$item->modify(array('name'=>html_entity_decode($item->get('name'))));
 				}
 				$items = Recipe::readList();
 				foreach($items as $item) {
-					echo 2;
 					$item->modify(array(
 										'name'=>html_entity_decode($item->get('name')),
 										'description'=>html_entity_decode($item->get('description')),
