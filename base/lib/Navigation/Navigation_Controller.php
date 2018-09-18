@@ -139,7 +139,6 @@ class Navigation_Controller extends Controller{
 								'recipes'=>array());
 				$items = Category::readList(array('order'=>'ord'));
 				foreach($items as $item) {
-					print_r($item->values);
 					$infoIns = (array)$item->values;
 					unset($infoIns['created']);
 					unset($infoIns['modified']);
