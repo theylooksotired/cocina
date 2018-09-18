@@ -4,9 +4,6 @@
 	<info>
 		<sql>
 			<primary>idRecipe</primary>
-			<created>false</created>
-			<modified>false</modified>
-			<order>false</order>
 			<onCreate>RecipeIngredient</onCreate>
 			<onDelete>RecipeIngredient</onDelete>
 		</sql>
