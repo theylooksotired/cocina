@@ -152,13 +152,13 @@ class Navigation_Controller extends Controller{
 					unset($infoIns['created']);
 					unset($infoIns['modified']);
 					unset($infoIns['ord']);
-					print_r($infoIns['ingredients']);
+					print_r($infoIns);
 					$infoIns['ingredients'] = array_filter((array)$infoIns['ingredients'], function($item) {return $item['label'];});
 					$info['recipes'][] = $infoIns;
 				}
 				$content = json_encode($info, JSON_PRETTY_PRINT);
 				$content = str_replace(LOCAL_URL,PROD_URL,$content);
-				return $content;
+				//return $content;
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
