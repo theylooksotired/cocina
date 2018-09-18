@@ -65,6 +65,11 @@
 			<type>text</type>
 		</attribute>
 		<attribute>
+			<name>preparationTime</name>
+			<label>preparationTime</label>
+			<type>text</type>
+		</attribute>
+		<attribute>
 			<name>description</name>
 			<label>description</label>
 			<type>textarea</type>

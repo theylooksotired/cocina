@@ -144,13 +144,28 @@ class Navigation_Controller extends Controller{
 				}
 				$items = Recipe::readList(array('order'=>'nameUrl'));
 				foreach($items as $item) {
-					copy(str_replace(BASE_URL, BASE_FILE, $item->getImageUrl('image', 'web')), LOCAL_FILE.'phonegap/www/img/recipe/'.$item->get('idRecipe').'.jpg');
 					$infoIns = $item->toArray();
 					$info['recipes'][] = $infoIns;
 				}
-				$content = 'var db = '.json_encode($info).';';
+				$content = json_encode($info);
 				$content = str_replace(LOCAL_URL,PROD_URL,$content);
-				File::saveFile(LOCAL_FILE.'phonegap/www/js/db.js', $content);
+				return $content;
+			break;
+			case 'fix':
+				$this->mode = 'ajax';
+				Db::execute('ALTER TABLE coc_Recipe ADD "preparationTime" TEXT NULL;');
+				$items = Category::readList();
+				foreach($items as $item) {
+					$item->modify(array('name'=>html_entity_decode($item->get('name'))));
+				}
+				$items = Recipe::readList();
+				foreach($items as $item) {
+					$item->modify(array(
+										'name'=>html_entity_decode($item->get('name')),
+										'description'=>html_entity_decode($item->get('description')),
+										'preparation'=>html_entity_decode($item->get('preparation'))
+								));
+				}
 				return 'DONE';
 			break;
 
