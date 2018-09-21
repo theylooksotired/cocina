@@ -179,10 +179,26 @@ class Navigation_Ui extends Ui {
 	public function footer() {
 		return '<footer>
 					<div class="footer">
+						<div class="footerLinks">
+							<h3>Otros sitios de cocina por países</h3>
+							<a href="http://www.cocina-argentina.com" target="_blank" title="Recetas de cocina de Argentina">Argentina</a>
+							<a href="https://www.cocina-boliviana.com" target="_blank" title="Recetas de cocina de Bolivia">Bolivia</a>
+							<a href="https://www.cocina-brasilena.com" target="_blank" title="Recetas de cocina de Brasil">Brasil</a>
+							<a href="https://www.cocina-chilena.com" target="_blank" title="Recetas de cocina de Chile">Chile</a>
+							<a href="https://www.cocina-colombiana.com" target="_blank" title="Recetas de cocina de Colombia">Colombia</a>
+							<a href="https://www.cocina-cubana.com" target="_blank" title="Recetas de cocina de Cuba">Cuba</a>
+							<a href="https://www.cocina-ecuatoriana.com" target="_blank" title="Recetas de cocina de Ecuador">Ecuador</a>
+							<a href="http://www.la-cocina-mexicana.com" target="_blank" title="Recetas de cocina de México">México</a>
+							<a href="https://www.comida-peruana.com" target="_blank" title="Recetas de cocina del Peru">Peru</a>
+						</div>
 						<div class="footerIns">
 							<div class="footerLeft">
 								'.$this->shareIcons().'
-								'.HtmlSection::show('footer').'
+								<div class="pageComplete">
+									<p><strong>© '.Params::param('metainfo-titlePage').'</strong></p>
+									<p>Para mayor información escribenos a <a href="mailto:info@plasticwebs.com">info@plasticwebs.com</a></p>
+									<p>'.Params::param('metainfo-metaDescription').'</p>
+								</div>
 							</div>
 							<div class="footerRight">
 								<div class="appButtons">
