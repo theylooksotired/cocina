@@ -188,10 +188,10 @@ class Navigation_Ui extends Ui {
 								<div class="appButtons">
 									<p>Descarga nuestra aplicaci&oacute;n en:</p>
 									<div class="appButton appButtonApple">
-										<a href="'.Params::param('link-app-store').'" target="_blank">App Store</a>
+										<a href="'.Url::format(Params::param('link-app-store')).'" target="_blank">App Store</a>
 									</div>
 									<div class="appButton appButtonGoogle">
-										<a href="'.Params::param('link-google-play').'" target="_blank">Google Play</a>
+										<a href="'.Url::format(Params::param('link-google-play')).'" target="_blank">Google Play</a>
 									</div>
 								</div>
 							</div>
