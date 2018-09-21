@@ -17,11 +17,7 @@ class Url {
         if (substr($url,0,8)=='https://' || substr($url,0,7)=='http://') {
             return $url;
         } else {
-            if (substr($url,0,3)=='www') {
-                return 'http://'.$url;
-            } else {
-                return 'http://www.'.$url;
-            }
+            return 'http://'.$url;
         }
     }
 
