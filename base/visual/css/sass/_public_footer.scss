@@ -40,9 +40,8 @@
 }
 .footerLinks {
     max-width: $sizeDesktop;
-    margin: auto;
     padding: 0 0 20px;
-    margin: 0 0 20px;
+    margin: 0 auto 20px auto;
     border-bottom: 1px solid rgba($white, 0.4);
     h3 {
         display: block;
