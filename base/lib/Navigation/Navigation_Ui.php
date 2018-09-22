@@ -181,7 +181,7 @@ class Navigation_Ui extends Ui {
 					<div class="footer">
 						<div class="footerLinks">
 							<h3>Otros sitios de cocina por países</h3>
-							<a href="http://www.cocina-argentina.com" target="_blank" title="Recetas de cocina de Argentina">Argentina</a>
+							<a href="https://www.recetas-argentinas.com" target="_blank" title="Recetas de cocina de Argentina">Argentina</a>
 							<a href="https://www.cocina-boliviana.com" target="_blank" title="Recetas de cocina de Bolivia">Bolivia</a>
 							<a href="https://www.cocina-brasilena.com" target="_blank" title="Recetas de cocina de Brasil">Brasil</a>
 							<a href="https://www.cocina-chilena.com" target="_blank" title="Recetas de cocina de Chile">Chile</a>
