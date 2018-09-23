@@ -18,7 +18,7 @@ class Db {
         $db = Db_Connection::getInstance();
         echo $query;
         print_r($values);
-        $db->execute($query, $values);
+        var_dump($db->execute($query, $values));
     }
 
     /**
