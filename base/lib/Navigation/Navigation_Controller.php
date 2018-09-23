@@ -170,10 +170,9 @@ class Navigation_Controller extends Controller{
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
-				//$this->checkAuthorization();
-				$query = 'ALTER TABLE '.Db::prefixTable('Recipe').' ADD preparationTime TEXT NULL;';
-				echo $query;
-				Db::execute($query);
+				$this->checkAuthorization();
+				//$query = 'ALTER TABLE '.Db::prefixTable('Recipe').' ADD preparationTime TEXT NULL;';
+				//Db::execute($query);
 				$items = Category::readList();
 				foreach($items as $item) {
 					$item->modify(array('name'=>html_entity_decode($item->get('name'), ENT_COMPAT, 'UTF-8')));
