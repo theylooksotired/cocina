@@ -36,7 +36,7 @@ class Db_Connection extends Singleton {
             $this->pdo->beginTransaction();
             $prepare_execute = $this->getPDOStatement($query);
             $prepare_execute->execute($values);
-            $this->pdo->commit();
+            var_dump($this->pdo->commit());
         } catch(PDOException $error){
             if (DEBUG) {
                 throw new Exception('<pre>'.$error->getMessage().'</pre>');
