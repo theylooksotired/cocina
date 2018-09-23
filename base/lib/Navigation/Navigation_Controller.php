@@ -176,25 +176,27 @@ class Navigation_Controller extends Controller{
 				Db::execute($query);
 				$items = Category::readList();
 				foreach($items as $item) {
-					$item->modify(array('name'=>html_entity_decode($item->get('name'))));
+					$item->modify(array('name'=>html_entity_decode($item->get('name'), ENT_COMPAT, 'UTF-8')));
 				}
 				$items = RecipeIngredient::readList();
+				$i='';
 				foreach($items as $item) {
-					$item->modify(array('label'=>html_entity_decode($item->get('label'))));
+					$i += $item->get('label').' ';
+					$item->modify(array('label'=>html_entity_decode($item->get('label'), ENT_COMPAT, 'UTF-8')));
 				}
 				$items = Recipe::readList();
 				foreach($items as $item) {
 					$item->modify(array(
-										'name'=>html_entity_decode($item->get('name')),
-										'description'=>html_entity_decode($item->get('description')),
-										'preparation'=>html_entity_decode($item->get('preparation'))
+										'name'=>html_entity_decode($item->get('name'), ENT_COMPAT, 'UTF-8'),
+										'description'=>html_entity_decode($item->get('description'), ENT_COMPAT, 'UTF-8'),
+										'preparation'=>html_entity_decode($item->get('preparation'), ENT_COMPAT, 'UTF-8')
 								));
 				}
 				$items = RecipeIngredient::readList();
 				foreach($items as $item) {
 					$item->modify(array('label'=>html_entity_decode($item->get('label'))));
 				}
-				return 'DONE';
+				return 'DONE'.$i;
 			break;
 
 

@@ -203,7 +203,7 @@ class Navigation_Ui extends Ui {
 							</div>
 							<div class="footerRight">
 								<div class="appButtons">
-									<p>Descarga nuestra aplicaci&oacute;n en:</p>
+									<p>Descarga nuestra aplicación en:</p>
 									<div class="appButton appButtonApple">
 										<a href="'.Url::format(Params::param('link-app-store')).'" target="_blank">App Store</a>
 									</div>
