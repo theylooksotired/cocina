@@ -179,9 +179,9 @@ class Navigation_Controller extends Controller{
 					$item->modify(array('name'=>html_entity_decode($item->get('name'), ENT_COMPAT, 'UTF-8')));
 				}
 				$items = RecipeIngredient::readList();
-				print_r($items);
+				$i = '';
 				foreach($items as $item) {
-					$i += $item->get('label').' ';
+					$i .= $item->get('label').' ';
 					$item->modify(array('label'=>html_entity_decode($item->get('label'), ENT_COMPAT, 'UTF-8')));
 				}
 				$items = Recipe::readList();
