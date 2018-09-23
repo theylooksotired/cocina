@@ -181,7 +181,7 @@ class Navigation_Controller extends Controller{
 				$items = RecipeIngredient::readList();
 				$i = '';
 				foreach($items as $item) {
-					$i .= $item->get('label').' ';
+					$i .= $item->get('label').' - '.html_entity_decode($item->get('label'), ENT_COMPAT, 'UTF-8')))."\n";
 					$item->modify(array('label'=>html_entity_decode($item->get('label'), ENT_COMPAT, 'UTF-8')));
 				}
 				$items = Recipe::readList();
