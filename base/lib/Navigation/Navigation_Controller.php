@@ -170,7 +170,7 @@ class Navigation_Controller extends Controller{
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
-				//$this->checkAuthorization();
+				$this->checkAuthorization();
 				$query = 'ALTER TABLE '.Db::prefixTable('Recipe').' ADD preparationTime TEXT NULL;';
 				echo $query;
 				Db::execute($query);
