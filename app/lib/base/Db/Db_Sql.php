@@ -263,10 +263,10 @@ class Db_Sql {
     * Modify a single attribute.
     */
     public function modifySimple($attribute, $value) {
-        Db::execute('UPDATE '.$this->tableName.'
+        print_r(Db::execute('UPDATE '.$this->tableName.'
                         SET '.$attribute.' = :'.$attribute.'
                         WHERE '.$this->primary.' = :'.$this->primary,
-                    array($attribute=>$value, $this->primary=>$this->id()));
+                    array($attribute=>$value, $this->primary=>$this->id())));
     }
 
     /**
