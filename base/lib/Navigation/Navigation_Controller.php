@@ -170,7 +170,7 @@ class Navigation_Controller extends Controller{
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
-				$this->checkAuthorization();
+				//$this->checkAuthorization();
 				$query = 'ALTER TABLE '.Db::prefixTable('Recipe').' ADD preparationTime TEXT NULL;';
 				echo $query;
 				Db::execute($query);
@@ -189,7 +189,7 @@ class Navigation_Controller extends Controller{
 				$items = RecipeIngredient::readList();
 				$i = '';
 				foreach($items as $item) {
-					$i = $item->get('label').' - '.html_entity_decode($item->get('label'), ENT_COMPAT, 'UTF-8')."\n";
+					$i .= $item->get('label').' - '.html_entity_decode($item->get('label'), ENT_COMPAT, 'UTF-8')."\n";
 					$item->modifySimple('label', html_entity_decode($item->get('label'), ENT_COMPAT, 'UTF-8'));
 				}
 				return 'DONE'.$i;

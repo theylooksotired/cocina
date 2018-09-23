@@ -16,7 +16,9 @@ class Db {
     static public function execute($query, $values=array()) {
         $query = str_replace('\"', '"', $query);
         $db = Db_Connection::getInstance();
-        $db->execute($query, $values);
+        echo '<pre>';
+        print_r($db->execute($query, $values));
+        echo '</pre>';
     }
 
     /**
