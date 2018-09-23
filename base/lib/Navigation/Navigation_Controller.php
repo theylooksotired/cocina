@@ -178,6 +178,10 @@ class Navigation_Controller extends Controller{
 				foreach($items as $item) {
 					$item->modify(array('name'=>html_entity_decode($item->get('name'))));
 				}
+				$items = RecipeIngredient::readList();
+				foreach($items as $item) {
+					$item->modify(array('label'=>html_entity_decode($item->get('label'))));
+				}
 				$items = Recipe::readList();
 				foreach($items as $item) {
 					$item->modify(array(
