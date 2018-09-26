@@ -64,7 +64,7 @@ class Recipe_Ui extends Ui{
 	public function renderComplete() {
 		$description = ($this->object->get('description')!='') ? '<p itemprop="description">'.nl2br($this->object->get('description')).'</p>' : '';
 		$preparationTime = ($this->object->get('preparationTime')!='') ? '<p><strong>Tiempo de preparación:</strong> <span>'.$this->object->get('preparationTime').'</span></p>' : '';
-		$numberPersons = ($this->object->get('numberPersons')!='') ? '<p><strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numberPersons').'</span></p>' : '';
+		$numPersons = ($this->object->get('numPersons')!='') ? '<p><strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numPersons').'</span></p>' : '';
 		$query = 'SELECT ri.*
 				FROM '.Db::prefixTable('RecipeIngredient').' ri
 				WHERE ri.idRecipe="'.$this->object->id().'"
@@ -84,7 +84,7 @@ class Recipe_Ui extends Ui{
 						<div class="itemCompleteTopItem itemCompleteTopDescription">
 							'.$description.'
 							'.$preparationTime.'
-							'.$numberPersons.'
+							'.$numPersons.'
 							'.$this->stars().'
 						</div>
 					</div>

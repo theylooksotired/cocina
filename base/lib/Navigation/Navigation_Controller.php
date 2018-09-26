@@ -190,6 +190,21 @@ class Navigation_Controller extends Controller{
 				return 'DONE';
 			break;
 
+			/**
+            * SAVE IMAGE
+            */
+            case 'save-image':
+            	$this->mode = 'ajax';
+            	$this->checkAuthorization();
+                $recipe = Recipe::read($this->id);
+                if (isset($this->values['image_base64']) && $this->values['image_base64']!='') {
+        			$fileSave = Text::simpleUrlFileBase($recipe->id().'_image');
+                    if (Image_File::saveImageUrl($this->values['image_base64'], 'Recipe', $fileSave)) {
+                        $recipe->modifySimple('image', $fileSave);
+                    }
+        		}
+                return 'DONE';
+            break;
 
 			/**
             * GITHUB
