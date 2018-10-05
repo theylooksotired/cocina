@@ -86,10 +86,10 @@ class Recipe_Ui extends Ui{
 							'.$description.'
 							'.$preparationTime.'
 							'.$numPersons.'
-							'.$this->stars().'
 							<div class="itemCompleteCategory">
-								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo.'</a>
+								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo().'</a>
 							</div>
+							'.$this->stars().'
 						</div>
 					</div>
 					<div class="itemCompleteBottom">
