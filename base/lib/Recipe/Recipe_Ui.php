@@ -75,6 +75,7 @@ class Recipe_Ui extends Ui{
 			$ingredients .= '<div class="ingredient" itemprop="recipeIngredient">'.$result['label'].'</div>';
 		}
 		$descriptionComplete = ($this->object->get('descriptionComplete')!='') ? '<div class="descriptionComplete"><div class="pageComplete">'.$this->object->get('descriptionComplete').'</div></div>' : '';
+		$category = Category::read($this->object->get('idCategory'));
 		return Adsense::top().'
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
@@ -86,6 +87,9 @@ class Recipe_Ui extends Ui{
 							'.$preparationTime.'
 							'.$numPersons.'
 							'.$this->stars().'
+							<div class="itemCompleteCategory">
+								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo.'</a>
+							</div>
 						</div>
 					</div>
 					<div class="itemCompleteBottom">

@@ -425,6 +425,20 @@ body {
 			}
 		}
 	}
+	.itemCompleteCategory {
+		padding: 5px 0 0 0;
+		a {
+			padding: 5px 10px;
+			background: darken($white, 50%);
+			color: $white;
+			font-weight: normal;
+			@include borderRadius(15px);
+			@include animate();
+			&:hover {
+				background: darken($white, 60%);
+			}
+		}
+	}
 }
 
 .descriptionComplete,
