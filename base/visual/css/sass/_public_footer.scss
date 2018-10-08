@@ -16,10 +16,6 @@
         max-width: $sizeDesktop;
         margin: auto;
     }
-    .shareIcons {
-        float: left;
-        width: 4rem;
-    }
     .pageSimple {
         float: right;
         width: 80%;
@@ -27,11 +23,6 @@
     .footerLeft {
         width: 58%;
         float: left;
-        .shareIcons {
-            float: none;
-            padding: 0;
-            margin: 0 0 20px;
-        }
     }
     .footerRight {
         width: 40%;

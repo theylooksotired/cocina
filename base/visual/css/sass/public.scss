@@ -21,22 +21,31 @@ body {
 }
 
 .shareIcons {
-	display: table;
-	table-layout: fixed;
-	float: right;
-	padding-top: 1rem;
 	.shareIcon {
-		display: table-cell;
+		display: inline-block;
+		margin: 0 0 10px;
+		@include borderRadius(3px);
 		a {
-			@include animateHoverOpacity();
+			i {
+				padding: 10px;
+				font-size: 30px;
+			}
+			span {
+				display: none;
+			}
 		}
 	}
 	.shareIconFacebook a {
 		background-color: $colorFacebook;
+		&:hover {
+			background-color: darken($colorFacebook, 10%);
+		}
 	}
 	.shareIconTwitter a {
-		margin-left: 0.5rem;
 		background-color: $colorTwitter;
+		&:hover {
+			background-color: darken($colorTwitter, 10%);
+		}
 	}
 }
 
@@ -151,8 +160,12 @@ body {
 	height: 20px;
 	.starFull,
 	.starEmpty {
-		margin-right: 5px;
+		display: inline-block;
+		margin: 0 5px 0 0;
 		color: $colorAccentAlt;
+	}
+	.starEmpty {
+		color: darken($white, 30%);
 	}
 }
 

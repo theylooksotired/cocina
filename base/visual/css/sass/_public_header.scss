@@ -96,6 +96,10 @@
         margin: 0;
         cursor: pointer;
         width: 30px;
+        height: 30px;
+        line-height: 32px;
+        font-size: 20px;
+        color: $white;
         float: right;
         @include animateHoverOpacity();
     }
