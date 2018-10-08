@@ -86,7 +86,8 @@ class Recipe_Ui extends Ui{
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
 						<div class="itemCompleteTopLeft">
-							'.$this->object->getImageAmp('image', 'small').'
+							<span itemprop="image" src="'.$this->object->getImage('image', 'web').'"></span>
+							'.$this->object->getImageAmp('image', 'web').'
 							<div class="itemCompleteCategory">
 								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo().'</a>
 							</div>
