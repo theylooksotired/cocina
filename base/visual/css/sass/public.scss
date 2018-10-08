@@ -138,7 +138,7 @@ body {
 				@include borderRadius(5px);
 				@include animate();
 				.itemPublicMediumImage {
-					height: 200px;
+					height: 120px;
 					background-position: center center;
 					background-size: cover;
 					background-repeat: no-repeat;
@@ -148,7 +148,7 @@ body {
 					color: $colorMain;
 					padding: 10px 0 0 0;
 					font-size: $fontSizeSmall;
-					min-height: 2em;
+					min-height: 2.5em;
 					vertical-align: middle;
 					@include animate();
 				}
