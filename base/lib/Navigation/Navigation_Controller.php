@@ -52,7 +52,6 @@ class Navigation_Controller extends Controller{
 						$items = new ListObjects('Recipe', array('where'=>'idCategory="'.$item->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
 						$this->header = $items->metaNavigation();
 						$this->content = '<div class="listAll">
-											'.$items->pager().'
 											'.Adsense::top().'
 											'.$items->showList(array('function'=>'Public','middle'=>Adsense::top(), 'middleRepetitions'=>2)).'
 											'.$items->pager().'
@@ -65,7 +64,6 @@ class Navigation_Controller extends Controller{
 						$items = new ListObjects('Recipe', array('order'=>'nameUrl', 'results'=>'12'));
 						$this->header = $items->metaNavigation();
 						$this->content = '<div class="listAll">
-											'.$items->pager().'
 											'.Adsense::top().'
 											'.$items->showList(array('function'=>'Public','middle'=>Adsense::top(), 'middleRepetitions'=>2)).'
 											'.$items->pager().'
@@ -94,7 +92,6 @@ class Navigation_Controller extends Controller{
 					$items = new ListObjects('Post', array('order'=>'publishDate DESC', 'results'=>'12'));
 					$this->header = $items->metaNavigation();
 					$this->content = '<div class="listAllSimple">
-										'.$items->pager().'
 										'.Adsense::top().'
 										'.$items->showList(array('function'=>'Public','middle'=>Adsense::top(), 'middleRepetitions'=>2)).'
 										'.$items->pager().'
