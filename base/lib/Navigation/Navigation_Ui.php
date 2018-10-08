@@ -138,7 +138,9 @@ class Navigation_Ui extends Ui {
 
 	public function header() {
 		return '<header>
-					<div class="menuMobile" onclick="showHideMenu()"></div>
+					<div class="menuMobile" onclick="showHideMenu()">
+						<i class="icon icon-menu"></i>
+					</div>
 					<div class="headerWrapper">
 						<div class="header">
 					        <div class="headerLeft">
@@ -153,9 +155,7 @@ class Navigation_Ui extends Ui {
 											<div class="text formField ">
 												<input type="text" size="50" name="search" placeholder="'.__('search').'">
 											</div>
-											<button type="submit" class="formSubmit">
-												<span class="iconSearch">'.__('search').'</span>
-											</button>
+											<button type="submit" class="formSubmit"><i class="icon icon-search"></i></button>
 										</fieldset>
 									</form>
 								</div>
@@ -168,10 +168,16 @@ class Navigation_Ui extends Ui {
 	public function shareIcons() {
 		return '<div class="shareIcons">
 	        		<div class="shareIcon shareIconFacebook">
-	        			<a href="https://www.facebook.com/RecetasCocinaRC/" target="_blank">Facebook</a>
+	        			<a href="https://www.facebook.com/RecetasCocinaRC/" target="_blank">
+	        				<i class="icon icon-facebook"></i>
+	        				<span>Facebook</span>
+	        			</a>
 	        		</div>
 	        		<div class="shareIcon shareIconTwitter">
-	        			<a href="https://twitter.com/RecetasCocinaRC/" target="_blank">Twitter</a>
+	        			<a href="https://twitter.com/RecetasCocinaRC/" target="_blank">
+	        				<i class="icon icon-twitter"></i>
+	        				<span>Twitter</span>
+	        			</a>
 	        		</div>
 	        	</div>';
 	}
@@ -204,11 +210,17 @@ class Navigation_Ui extends Ui {
 							<div class="footerRight">
 								<div class="appButtons">
 									<p>Descarga nuestra aplicación en:</p>
-									<div class="appButton appButtonApple">
-										<a href="'.Url::format(Params::param('link-app-store')).'" target="_blank">App Store</a>
+									<div class="appButton">
+										<a href="'.Url::format(Params::param('link-app-store')).'" target="_blank">
+											<i class="icon icon-apple"></i>
+											<span>App Store</span>
+										</a>
 									</div>
 									<div class="appButton appButtonGoogle">
-										<a href="'.Url::format(Params::param('link-google-play')).'" target="_blank">Google Play</a>
+										<a href="'.Url::format(Params::param('link-google-play')).'" target="_blank">
+											<i class="icon icon-android"></i>
+											<span>Google Play</span>
+										</a>
 									</div>
 								</div>
 							</div>

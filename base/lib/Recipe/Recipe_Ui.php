@@ -75,26 +75,20 @@ class Recipe_Ui extends Ui{
 		return Adsense::top().'
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
-						<div class="itemCompleteTopItem itemCompleteTopImage">
-							<img itemprop="image" src="'.$this->object->getImageUrl('image', 'small').'" alt="'.$this->object->getBasicInfo().'"/>
-						</div>
-						<div class="itemCompleteTopItem itemCompleteTopDescription">
-							<p itemprop="description">'.nl2br($this->object->get('description')).'</p>
-							<p>
-								<strong>Tiempo de preparación:</strong>
-								<span itemprop="prepTime" content="'.$this->ptTime($this->object->get('preparationTime')).'">'.$this->object->get('preparationTime').'</span>
-							</p>
-							<p>
-								<strong>Porciones:</strong>
-								<span itemprop="recipeYield">'.$this->object->get('numPersons').'</span>
-							</p>
-							<p>
-								<span itemprop="recipeCuisine">Cocina '.Params::param('titleCountry').'</span>
-							</p>
+						<div class="itemCompleteLeft">
+							'.$this->stars().'
 							<div class="itemCompleteCategory">
 								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo().'</a>
 							</div>
-							'.$this->stars().'
+							<img itemprop="image" src="'.$this->object->getImageUrl('image', 'small').'" alt="'.$this->object->getBasicInfo().'"/>
+						</div>
+						<div class="itemCompleteCenter">
+							<p itemprop="description">'.nl2br($this->object->get('description')).'</p>
+						</div>
+						<div class="itemCompleteRight">
+							<p><strong>Preparación:</strong> <span itemprop="prepTime" content="'.$this->ptTime($this->object->get('preparationTime')).'">'.$this->object->get('preparationTime').'</span></p>
+							<p><strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numPersons').'</span></p>
+							<p><span itemprop="recipeCuisine">Cocina '.Params::param('titleCountry').'</span></p>
 						</div>
 					</div>
 					<div class="itemCompleteBottom">
@@ -177,7 +171,7 @@ class Recipe_Ui extends Ui{
 	public function stars($simple=false) {
 		$stars = '';
 		for ($i=1;$i<=5;$i++) {
-			$stars .= ($i<=$this->object->get('rating')) ? '<div class="starFull"></div>' : '<div class="starEmpty"></div>';
+			$stars .= ($i<=$this->object->get('rating')) ? '<div class="starFull"><i class="icon icon-star-full"></i></div>' : '<div class="starEmpty"><i class="icon icon-star-empty"></i></div>';
 		}
 		if ($simple) {
 			return '<div class="stars">'.$stars.'</div>';

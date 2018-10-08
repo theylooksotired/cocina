@@ -83,7 +83,6 @@
             font-size: 1.2rem;
             font-weight: normal;
             position: relative;
-            @include iconSingle('\e910', 2rem, $black);
             @include animate();
             @include borderRadius(5px);
             &:before {
@@ -99,9 +98,6 @@
                     color: $white;
                 }
             }
-        }
-        &.appButtonGoogle a:before {
-            content: '\e911';
         }
     }
 }

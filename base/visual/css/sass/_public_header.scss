@@ -99,7 +99,4 @@
         float: right;
         @include animateHoverOpacity();
     }
-    .iconSearch {
-        @include iconSimple("\e903", 2rem, 1.5rem);
-    }
 }

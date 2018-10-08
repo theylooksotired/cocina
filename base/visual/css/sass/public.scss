@@ -3,6 +3,7 @@
 @import "_variables.scss";
 @import "_mixins.scss";
 @import "_common.scss";
+@import "_icons.scss";
 
 @import "_public_header.scss";
 @import "_public_menu.scss";
@@ -32,12 +33,10 @@ body {
 	}
 	.shareIconFacebook a {
 		background-color: $colorFacebook;
-		@include iconSimple("\e90b");
 	}
 	.shareIconTwitter a {
 		margin-left: 0.5rem;
 		background-color: $colorTwitter;
-		@include iconSimple("\e90c");
 	}
 }
 
@@ -153,12 +152,7 @@ body {
 	.starFull,
 	.starEmpty {
 		margin-right: 5px;
-	}
-	.starFull {
-		@include iconSimple('\e914', 15px, 15px, $colorAccentAlt);
-	}
-	.starEmpty {
-		@include iconSimple('\e912', 15px, 15px, $colorAccentAlt);
+		color: $colorAccentAlt;
 	}
 }
 
@@ -494,17 +488,6 @@ body {
 .shareOptions {
 	padding: 0 0 10px;
 	text-align: right;
-	.optionFacebook {
-		@include iconSingle('\e90b');
-		background: $colorFacebook;
-	}
-	.optionTwitter {
-		@include iconSingle('\e90c');
-		background: $colorTwitter;
-	}
-	.optionPrint {
-		@include iconSingle('\e900');
-	}
 	a {
 		display: inline-block;
 		margin: 0 0 10px 0;
@@ -873,7 +856,6 @@ body {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		@include animate();
-		@include iconSingle('\e908', 1rem, rgba($colorText, 0.5));
 		p {
 			display: inline;
 		}
