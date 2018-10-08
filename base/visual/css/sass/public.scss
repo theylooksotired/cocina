@@ -433,12 +433,8 @@ body {
 				}
 				.ingredient {
 					padding: 0 0 5px;
-					i,
-					span {
-						display: inline-block;
-						vertical-align: middle;
-					}
 					i {
+						display: inline-block;
 						opacity: 0.6;
 						padding: 0 5px 0 0;
 						font-size: $fontSizeTiny;
