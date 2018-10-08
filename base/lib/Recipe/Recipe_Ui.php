@@ -128,7 +128,7 @@ class Recipe_Ui extends Ui{
 							</div>
 						</div>
 					</div>
-					'.Adsense::amp().'
+					'.Adsense::ampTop().'
 					<div class="itemCompleteShare">
 						<h3>Compartir esta receta en:</h3>
 						'.$this->share(array('facebook'=>true, 'twitter'=>true)).'
