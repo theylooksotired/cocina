@@ -114,7 +114,7 @@ body {
 
 .menuBottomWrapper {
 	padding: 0 0 10px;
-	> h3 {
+	.menuBottomWrapperTitle {
 		font-size: $fontSizeSmall;
 		padding: 10px 0;
 		color: darken($white, 40%);
