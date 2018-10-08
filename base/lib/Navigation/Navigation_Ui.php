@@ -246,13 +246,17 @@ class Navigation_Ui extends Ui {
 						<a href="'.url('').'" itemprop="item">
 							<span itemprop="name">'.__('home').'</span>
 						</a>
+						<meta itemprop="position" content="1" />
 					</span> &raquo;';
+			$i = 2;
 			foreach ($breadCrumbs as $url=>$title) {
 				$html .= '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
 								<a href="'.$url.'" itemprop="item">
 									<span itemprop="name">'.$title.'</span>
 								</a>
+								<meta itemprop="position" content="'.$i.'" />
 							</span> &raquo;';
+				$i++;
 			}
 			$html = '<div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
 						'.substr($html, 0, -8).'
