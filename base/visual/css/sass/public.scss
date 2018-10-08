@@ -435,9 +435,9 @@ body {
 					padding: 0 0 5px;
 					i {
 						display: inline-block;
-						opacity: 0.6;
+						opacity: 0.4;
 						padding: 0 5px 0 0;
-						font-size: $fontSizeTiny;
+						font-size: $fontSizeTiny * 0.8;
 					}
 					&:last-child {
 						padding: 0;
