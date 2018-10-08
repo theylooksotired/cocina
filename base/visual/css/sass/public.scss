@@ -23,7 +23,7 @@ body {
 .shareIcons {
 	.shareIcon {
 		display: inline-block;
-		margin: 0 0 15px;
+		margin: 0 10px 0 0;
 		a {
 			display: inline-block;
 			@include borderRadius(3px);

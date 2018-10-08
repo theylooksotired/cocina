@@ -57,37 +57,21 @@
 }
 .appButtons {
     text-align: right;
-    p {
-        font-size: 0.8em;
-    }
     .appButton {
-        width: 11rem;
         display: inline-block;
-        margin-left: 1rem;
-        margin-bottom: 1rem;
+        margin: 0 0 0 10px;
         a {
             display: block;
             background: $white;
             color: $black;
-            padding: 1rem;
-            padding-left: 3rem;
-            font-size: 1.2rem;
+            padding: 5px 10px;
+            font-size: $fontSizeBig * 8 / 10;
             font-weight: normal;
-            position: relative;
             @include animate();
-            @include borderRadius(5px);
-            &:before {
-                position: absolute;
-                left: 0.5rem;
-                top: 0.5rem;
-                @include animate();
-            }
+            @include borderRadius(3px);
             &:hover {
                 background: $black;
                 color: $white;
-                &:before {
-                    color: $white;
-                }
             }
         }
     }
