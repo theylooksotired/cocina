@@ -162,7 +162,7 @@ class Navigation_Ui extends Ui {
 						</div>
 					</div>
 				</header>
-				'.(($amp) ? '' : $this->menu());
+				'.$this->menu();
 	}
 
 	public function shareIcons() {
