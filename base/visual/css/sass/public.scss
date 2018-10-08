@@ -408,12 +408,13 @@ body {
 			float: right;
 			padding: 15px;
 			background: darken($white, 5%);
-			font-size: $fontSizeNormal * 1.2;
+			font-size: $fontSizeNormal * 1.1;
 			@include borderRadius(5px);
 			@include borderBox();
 			@include clearer();
 			h2 {
-				padding: 0 0 10px;
+				font-size: $fontSizeNormal * 1.2;
+				padding: 0 0 15px;
 				i,
 				span {
 					display: inline-block;
