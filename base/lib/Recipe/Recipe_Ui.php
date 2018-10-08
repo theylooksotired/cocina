@@ -86,9 +86,18 @@ class Recipe_Ui extends Ui{
 							<p itemprop="description">'.nl2br($this->object->get('description')).'</p>
 						</div>
 						<div class="itemCompleteTopRight">
-							<p><i class="icon icon-clock"></i><strong>Preparación:</strong> <span itemprop="prepTime" content="'.$this->ptTime($this->object->get('preparationTime')).'">'.$this->object->get('preparationTime').'</span></p>
-							<p><i class="icon icon-serving"></i><strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numPersons').'</span></p>
-							<p><i class="icon icon-world"></i><span itemprop="recipeCuisine"><strong>Cocina '.Params::param('titleCountry').'</span></strong></p>
+							<p>
+								<strong>Preparación:</strong> <span itemprop="prepTime" content="'.$this->ptTime($this->object->get('preparationTime')).'">'.$this->object->get('preparationTime').'</span>
+								<i class="icon icon-clock"></i>
+							</p>
+							<p>
+								<strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numPersons').'</span>
+								<i class="icon icon-serving"></i>
+							</p>
+							<p>
+								<span itemprop="recipeCuisine"><strong>Cocina '.Params::param('titleCountry').'</span></strong>
+								<i class="icon icon-world"></i>
+							</p>
 						</div>
 					</div>
 					<div class="itemCompleteBottom">
