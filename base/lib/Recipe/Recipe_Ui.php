@@ -62,19 +62,15 @@ class Recipe_Ui extends Ui{
 	}
 
 	public function renderComplete() {
-		$description = ($this->object->get('description')!='') ? '<p itemprop="description">'.nl2br($this->object->get('description')).'</p>' : '';
-		$preparationTime = ($this->object->get('preparationTime')!='') ? '<p><strong>Tiempo de preparación:</strong> <span>'.$this->object->get('preparationTime').'</span></p>' : '';
-		$numPersons = ($this->object->get('numPersons')!='') ? '<p><strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numPersons').'</span></p>' : '';
 		$query = 'SELECT ri.*
 				FROM '.Db::prefixTable('RecipeIngredient').' ri
 				WHERE ri.idRecipe="'.$this->object->id().'"
 				ORDER BY ri.ord;';
-		$ingredients = '';
 		$results = Db::returnAll($query);
+		$ingredients = '';
 		foreach ($results as $result) {
 			$ingredients .= '<div class="ingredient" itemprop="recipeIngredient">'.$result['label'].'</div>';
 		}
-		$descriptionComplete = ($this->object->get('descriptionComplete')!='') ? '<div class="descriptionComplete"><div class="pageComplete">'.$this->object->get('descriptionComplete').'</div></div>' : '';
 		$category = Category::read($this->object->get('idCategory'));
 		return Adsense::top().'
 				<div class="itemComplete itemCompleteRecipe">
@@ -83,9 +79,18 @@ class Recipe_Ui extends Ui{
 							<img itemprop="image" src="'.$this->object->getImageUrl('image', 'small').'" alt="'.$this->object->getBasicInfo().'"/>
 						</div>
 						<div class="itemCompleteTopItem itemCompleteTopDescription">
-							'.$description.'
-							'.$preparationTime.'
-							'.$numPersons.'
+							<p itemprop="description">'.nl2br($this->object->get('description')).'</p>
+							<p>
+								<strong>Tiempo de preparación:</strong>
+								<span itemprop="prepTime" content="'.$this->ptTime($this->object->get('preparationTime')).'">'.$this->object->get('preparationTime').'</span>
+							</p>
+							<p>
+								<strong>Porciones:</strong>
+								<span itemprop="recipeYield">'.$this->object->get('numPersons').'</span>
+							</p>
+							<p>
+								<span itemprop="recipeCuisine">Cocina '.Params::param('titleCountry').'</span>
+							</p>
 							<div class="itemCompleteCategory">
 								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo().'</a>
 							</div>
@@ -116,7 +121,6 @@ class Recipe_Ui extends Ui{
 					'.$this->share(array('facebook'=>true, 'twitter'=>true, 'print'=>true)).'
 				</div>
 				'.Navigation_Ui::facebookComments($this->object->url()).'
-				'.$descriptionComplete.'
 				'.$this->related();
 	}
 
@@ -219,6 +223,11 @@ class Recipe_Ui extends Ui{
 						</div>
 					</div>';
 		}
+	}
+
+	public function ptTime($time) {
+		$array = array("2 horas"=>"PT2H", "15 minutos"=>"PT15M", "30 minutos"=>"PT30M", "1 hora"=>"PT1H", "+2 horas"=>"PT5H");
+		return (isset($array[$item])) ? $array[$item] : $array[0];
 	}
 
 }

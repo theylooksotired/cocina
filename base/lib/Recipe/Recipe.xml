@@ -64,7 +64,14 @@
 		<attribute>
 			<name>preparationTime</name>
 			<label>preparationTime</label>
-			<type>text</type>
+			<type>select</type>
+			<values>
+				<value id="2 horas">2 horas</value>
+				<value id="15 minutos">15 minutos</value>
+				<value id="30 minutos">30 minutos</value>
+				<value id="1 hora">1 hora</value>
+				<value id="+2 horas">+2 horas</value>
+			</values>
 		</attribute>
 		<attribute>
 			<name>description</name>

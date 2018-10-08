@@ -168,10 +168,10 @@ class Navigation_Ui extends Ui {
 	public function shareIcons() {
 		return '<div class="shareIcons">
 	        		<div class="shareIcon shareIconFacebook">
-	        			<a href="'.Params::param('linksocial-facebook').'" target="_blank">Facebook</a>
+	        			<a href="https://www.facebook.com/RecetasCocinaRC/" target="_blank">Facebook</a>
 	        		</div>
 	        		<div class="shareIcon shareIconTwitter">
-	        			<a href="'.Params::param('linksocial-twitter').'" target="_blank">Twitter</a>
+	        			<a href="https://twitter.com/RecetasCocinaRC/" target="_blank">Twitter</a>
 	        		</div>
 	        	</div>';
 	}
@@ -266,6 +266,7 @@ class Navigation_Ui extends Ui {
 	}
 
 	static public function facebookHeader() {
+		return '';
 		return '<div id="fb-root"></div>
 					<script>(function(d, s, id) {
 					  var js, fjs = d.getElementsByTagName(s)[0];
@@ -277,6 +278,7 @@ class Navigation_Ui extends Ui {
 	}
 
 	static public function facebookComments($url) {
+		return '';
 		return '<div class="fb-comments" data-href="'.$url.'" data-width="100%" data-numposts="5"></div>';
 	}
 
