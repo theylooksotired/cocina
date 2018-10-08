@@ -384,7 +384,7 @@ body {
 		}
 	}
 	.stars {
-		padding: 0 0 10px;
+		padding: 15px 0 0 0;
 	}
 	p {
 		padding: 0 0 10px;
@@ -406,16 +406,31 @@ body {
 		.itemCompleteBottomRecipe {
 			width: calc(100% - 350px);
 			float: right;
-			padding: 10px;
+			padding: 15px;
 			background: darken($white, 5%);
+			font-size: $fontSizeNormal * 1.2;
 			@include borderRadius(5px);
 			@include borderBox();
 			@include clearer();
+			> h2 {
+				padding: 0 0 10px;
+				i,
+				span {
+					display: inline-block;
+					vertical-align: middle;
+				}
+				i {
+					padding: 0 10px 0 0;
+				}
+			}
 			.itemCompleteBottomIngredients {
 				width: 200px;
 				float: left;
 				color: lighten($colorMain, 10%);
 				font-size: $fontSizeSmall;
+				.ingredientList {
+					padding: 0 0 0 10px;
+				}
 				.ingredient {
 					padding: 0 0 10px;
 					&:last-child {
@@ -456,7 +471,7 @@ body {
 		}
 	}
 	.itemCompleteCategory {
-		padding: 0 0 15px;
+		padding: 15px 0 0 0;
 		a {
 			padding: 5px 15px;
 			background: $colorAccent;

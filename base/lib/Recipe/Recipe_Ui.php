@@ -106,11 +106,11 @@ class Recipe_Ui extends Ui{
 						</div>
 						<div class="itemCompleteBottomRecipe">
 							<div class="itemCompleteBottomItem itemCompleteBottomIngredients">
-								<h2>Ingredientes</h2>
-								'.$ingredients.'
+								<h2><i class="icon icon-ingredients"></i><span>Ingredientes</span></h2>
+								<div class="ingredientList">'.$ingredients.'</div>
 							</div>
 							<div class="itemCompleteBottomItem itemCompleteBottomPreparation">
-								<h2>Preparación</h2>
+								<h2><i class="icon icon-preparation"></i><span>Preparación</span></h2>
 								<div class="pageComplete">
 									<div itemprop="recipeInstructions">
 										'.$this->object->get('preparation').'
