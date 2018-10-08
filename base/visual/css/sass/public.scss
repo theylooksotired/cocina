@@ -247,12 +247,6 @@ body {
 		width: 100px;
 		float: left;
 	}
-	.itemPublicImage {
-		@include imageInside(6rem);
-		img {
-			min-height: 100%;
-		}
-	}
 	.itemPublicRight {
 		width: calc(100% - 110px);
 		float: right;
