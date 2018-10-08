@@ -7,7 +7,9 @@ class Post_Ui extends Ui{
 					<a href="'.$this->object->url().'">
 						<h2>'.$this->object->getBasicInfo().'</h2>
 						<div class="itemPublicIns">
+							<div class="itemPublicImage">
 							'.(($amp) ? $this->object->getImageAmp('image', 'small') : $this->object->getImageIcon('image')) .'
+							</div>
 							<p>'.$this->object->get('shortDescription').'</p>
 						</div>
 					</a>
