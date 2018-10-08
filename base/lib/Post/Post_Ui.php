@@ -2,7 +2,7 @@
 class Post_Ui extends Ui{
 
 	public function renderPublic($options=array()) {
-		$amp = (isset($options['amp'])) ? true : false;
+		$amp = (isset($options['amp']) && $options['amp']==true) ? true : false;
 		return '<div class="itemPublic itemPublicPost">
 					<a href="'.$this->object->url().'">
 						<h2>'.$this->object->getBasicInfo().'</h2>
