@@ -115,7 +115,7 @@ class Recipe_Ui extends Ui{
 					</div>
 					<div class="itemCompleteBottom">
 						<div class="itemCompleteBottomItem itemCompleteBottomAd">
-							'.Adsense::amp().'
+							'.Adsense::ampInline().'
 						</div>
 						<div class="itemCompleteBottomRecipe">
 							<div class="itemCompleteBottomItem itemCompleteBottomIngredients">
