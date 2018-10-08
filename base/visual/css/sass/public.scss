@@ -433,6 +433,15 @@ body {
 				}
 				.ingredient {
 					padding: 0 0 5px;
+					i,
+					span {
+						display: inline-block;
+						vertical-align: middle;
+					}
+					i {
+						opacity: 0.6;
+						padding: 0 5px 0 0;
+					}
 					&:last-child {
 						padding: 0;
 					}
@@ -538,14 +547,25 @@ body {
 }
 
 .itemCompleteShare {
-	padding: 0 0 10px;
+	padding: 30px 10px;
 	text-align: center;
 	> h3 {
-		text-transform: uppercase;
 		font-size: $fontSizeSmall;
-		padding: 0 0 10px;
+		padding: 10px 0;
 		color: darken($white, 40%);
 		font-weight: normal;
+		position: relative;
+		&:before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			width: 100px;
+			height: 1px;
+			background: rgba($black, 0.2);
+			margin: auto;
+			content: '';
+		}
 	}
 }
 .shareOptions {

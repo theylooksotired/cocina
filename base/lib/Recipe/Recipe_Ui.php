@@ -69,7 +69,7 @@ class Recipe_Ui extends Ui{
 		$results = Db::returnAll($query);
 		$ingredients = '';
 		foreach ($results as $result) {
-			$ingredients .= '<div class="ingredient" itemprop="recipeIngredient">'.$result['label'].'</div>';
+			$ingredients .= '<div class="ingredient" itemprop="recipeIngredient"><i class="icon icon-arrow-right"></i><span>'.$result['label'].'</span></div>';
 		}
 		$category = Category::read($this->object->get('idCategory'));
 		return Adsense::top().'
