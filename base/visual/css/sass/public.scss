@@ -21,6 +21,7 @@ body {
 }
 
 .shareIcons {
+	padding: 0 0 10px;
 	.shareIcon {
 		display: inline-block;
 		margin: 0 10px 0 0;
@@ -29,7 +30,7 @@ body {
 			@include borderRadius(3px);
 			padding: 10px;
 			i {
-				font-size: 30px;
+				font-size: 20px;
 			}
 			span {
 				display: none;
