@@ -412,7 +412,7 @@ body {
 			@include borderRadius(5px);
 			@include borderBox();
 			@include clearer();
-			> h2 {
+			h2 {
 				padding: 0 0 10px;
 				i,
 				span {
@@ -427,12 +427,11 @@ body {
 				width: 200px;
 				float: left;
 				color: lighten($colorMain, 10%);
-				font-size: $fontSizeSmall;
 				.ingredientList {
 					padding: 0 0 0 10px;
 				}
 				.ingredient {
-					padding: 0 0 10px;
+					padding: 0 0 5px;
 					&:last-child {
 						padding: 0;
 					}
@@ -443,7 +442,7 @@ body {
 				float: right;
 				ol,
 				ul {
-					padding: 0 0 10px 40px;
+					padding: 0 0 10px 30px;
 					margin: 0;
 					li {
 						padding: 0 0 10px;
