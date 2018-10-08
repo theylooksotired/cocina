@@ -1024,36 +1024,41 @@ body {
 }
 
 .menuAmp {
-	background: $colorMain;
 	margin: 40px 0 0 0;
 	ul {
 		margin: 0;
 		padding: 0;
+		width: 100%;
 		li {
 			margin: 0;
 			padding: 0;
-			&:first-child {
-				a {
-					background: rgba($white, 0.3);
-				}
-			}
-			&.menuArticles  {
-				a {
-					background: rgba($white, 0.4);
-				}
-			}
+			width: 100%;
 			&.selected {
-				a {
-					background: darken($colorMain, 10%);
-				}
-			}
+	            a {
+	                background: $white;
+	                color: $colorMain;
+	            }
+	        }
+	        &.menuArticles {
+	        	background: transparent;
+	        	a {
+	        		background: adjust-hue($colorAccentAlt, -10deg);
+	        	}
+	        }
 			a {
-				display: block;
-				padding: 5px 30px 5px 20px;
-				color: $white;
-				background: rgba($white, 0.2);
-				border-bottom: 1px solid rgba($white, 0.1);
-				font-weight: normal;
+				border-right: 0;
+	            color: rgba($black, 0.8);
+	            font-weight: normal;
+	            padding: 5px 7px;
+	            margin: 0 3px;
+	            font-size: $fontSizeNormal * 8 / 10;
+	            display: inline-block;
+	            background: darken($colorAccentAlt, 5%);
+	            @include borderRadius(5px);
+	            &:hover{
+	                background: $colorAccent;
+	                color: $white;
+	            }
 			}
 		}
 	}
