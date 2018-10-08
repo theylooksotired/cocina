@@ -359,10 +359,18 @@ body {
 			float: right;
 			padding: 10px;
 			background: rgba($colorAccentAlt, 0.1);
-			color: darken($colorAccentAlt, 10%);
+			color: darken($colorAccentAlt, 20%);
 			@include borderRadius(3px);
 			strong {
 				font-size: $fontSizeTiny;
+			}
+			p {
+				padding: 0 0 5px;
+				i {
+					display: inline-block;
+					padding: 0 10px 0 0;
+					color: darken($colorAccentAlt, 10%);
+				}
 			}
 		}
 		.itemCompleteTopCenter {
@@ -375,7 +383,7 @@ body {
 		}
 	}
 	.stars {
-		padding: 0 0 5px;
+		padding: 0 0 10px;
 	}
 	p {
 		padding: 0 0 10px;
@@ -447,12 +455,13 @@ body {
 		}
 	}
 	.itemCompleteCategory {
-		padding: 0 0 10px;
+		padding: 0 0 15px;
 		a {
-			padding: 5px 10px;
+			padding: 5px 15px;
 			background: $colorAccent;
 			color: $white;
 			font-weight: normal;
+			font-size: $fontSizeSmall;
 			@include borderRadius(15px);
 			@include animate();
 			&:hover {

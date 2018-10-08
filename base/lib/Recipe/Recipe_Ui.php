@@ -76,19 +76,19 @@ class Recipe_Ui extends Ui{
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
 						<div class="itemCompleteTopLeft">
+							<img itemprop="image" src="'.$this->object->getImageUrl('image', 'small').'" alt="'.$this->object->getBasicInfo().'"/>
 							<div class="itemCompleteCategory">
 								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo().'</a>
 							</div>
 							'.$this->stars().'
-							<img itemprop="image" src="'.$this->object->getImageUrl('image', 'small').'" alt="'.$this->object->getBasicInfo().'"/>
 						</div>
 						<div class="itemCompleteTopCenter">
 							<p itemprop="description">'.nl2br($this->object->get('description')).'</p>
 						</div>
 						<div class="itemCompleteTopRight">
-							<p><strong>Preparación:</strong> <span itemprop="prepTime" content="'.$this->ptTime($this->object->get('preparationTime')).'">'.$this->object->get('preparationTime').'</span></p>
-							<p><strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numPersons').'</span></p>
-							<p><span itemprop="recipeCuisine">Cocina '.Params::param('titleCountry').'</span></p>
+							<p><i class="icon icon-clock"></i><strong>Preparación:</strong> <span itemprop="prepTime" content="'.$this->ptTime($this->object->get('preparationTime')).'">'.$this->object->get('preparationTime').'</span></p>
+							<p><i class="icon icon-serving"></i><strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numPersons').'</span></p>
+							<p><i class="icon icon-world"></i><span itemprop="recipeCuisine"><strong>Cocina '.Params::param('titleCountry').'</span></strong></p>
 						</div>
 					</div>
 					<div class="itemCompleteBottom">
