@@ -1057,7 +1057,6 @@ body {
 	            margin: 0 3px;
 	            font-size: $fontSizeNormal * 8 / 10;
 	            background: darken($colorAccentAlt, 5%);
-	            @include borderRadius(5px);
 	            &:hover{
 	                background: $colorAccent;
 	                color: $white;
