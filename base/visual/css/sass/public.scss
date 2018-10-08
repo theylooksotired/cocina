@@ -23,11 +23,12 @@ body {
 .shareIcons {
 	.shareIcon {
 		display: inline-block;
-		margin: 0 0 10px;
-		@include borderRadius(3px);
+		margin: 0 0 15px;
 		a {
+			display: inline-block;
+			@include borderRadius(3px);
+			padding: 10px;
 			i {
-				padding: 10px;
 				font-size: 30px;
 			}
 			span {
