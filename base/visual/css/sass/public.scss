@@ -356,21 +356,34 @@ body {
 		}
 		.itemCompleteTopRight {
 			width: 300px;
-			float: left;
+			float: right;
+			padding: 10px;
+			background: rgba($colorAccentAlt, 0.1);
+			color: darken($colorAccentAlt, 10%);
+			@include borderRadius(3px);
+			strong {
+				font-size: $fontSizeTiny;
+				display: block;
+				padding: 0 0 5px;
+			}
 		}
 		.itemCompleteTopCenter {
-			width: calc(100% - 520px);
+			width: calc(100% - 420px);
 			margin: 0 0 0 10px;
 			float: left;
-			font-size: $fontSizeSmall;
-			color: lighten($black, 30%);
+			font-size: $fontSizeNormal;
+			color: lighten($black, 40%);
+			line-height: 1.4em;
 		}
 	}
 	.stars {
 		padding: 0 0 5px;
 	}
 	p {
-		padding-bottom: 10px;
+		padding: 0 0 10px;
+		&:last-child {
+			padding: 0;
+		}
 	}
 	.itemCompleteBottom {
 		padding: 0 0 20px 0;
