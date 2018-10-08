@@ -21,14 +21,15 @@
 
     <link href="<?php echo BASE_URL;?>visual/css/stylesheets/public.css?v=<? echo $version; ?>" rel="stylesheet" type="text/css" />
 
-    <?php echo Params::param('metainfo-google-analytics')?>
+    <?php echo Navigation_Ui::analytics();?>
+    <?php echo $header;?>
+
     <script type="text/javascript">
         function showHideMenu() {
             var menuDiv = document.getElementById("menu");
             menuDiv.style.display = (menuDiv.style.display === "block") ? "none" : "block";
         }
     </script>
-    <?php echo $header;?>
 
 </head>
 <body>

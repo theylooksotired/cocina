@@ -304,5 +304,21 @@ class Navigation_Ui extends Ui {
 		return '<div class="fb-comments" data-href="'.$url.'" data-width="100%" data-numposts="5"></div>';
 	}
 
+	static public function analytics() {
+		return '<script async src="https://www.googletagmanager.com/gtag/js?id='.Params::param('metainfo-google-analytics').'"></script>
+			    <script>
+			      window.dataLayer = window.dataLayer || [];
+			      function gtag(){dataLayer.push(arguments);}
+			      gtag(\'js\', new Date());
+			      gtag(\'config\', \''.Params::param('metainfo-google-analytics').'\');
+			    </script>';
+	}
+
+	static public function analyticsAmp() {
+		return '<amp-analytics type="googleanalytics">
+			<script type="application/json">{"vars": {"account": "UA-XXXXX-Y"}, "triggers": { "trackPageview": { "on": "visible", "request": "pageview"}}}</script>
+		</amp-analytics>';
+	}
+
 }
 ?>
