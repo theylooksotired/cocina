@@ -206,7 +206,8 @@ class Recipe_Ui extends Ui{
 		if ($items->isEmpty()) {
 			$items = new ListObjects('Post', array('order'=>'RAND()', 'limit'=>'5'));
 		}
-		return '<div class="relatedWrapper">
+		return $this->recipesBottom().
+				'<div class="relatedWrapper">
 					<div class="relatedRight">
 						<h2 class="titleRelated">Algunas noticias relacionadas con <strong>'.$this->object->getBasicInfo().'</strong></h2>
 						'.$items->showList(array('function'=>'Public')).'
@@ -226,6 +227,18 @@ class Recipe_Ui extends Ui{
 						<div class="menuSideWrapperTitle">Algunas recetas que podrían interesarte</div>
 						<div class="menuSideWrapperItems">
 							'.$items->showList(array('function'=>'Public')).'
+						</div>
+					</div>';
+		}
+	}
+
+	public function recipesBottom() {
+		$items = new ListObjects('Recipe', array('where'=>'rating>=3 AND idCategory="'.$this->object->get('idCategory').'"', 'results'=>'8'));
+		if (!$items->isEmpty()) {
+			return '<div class="menuBottomWrapper">
+						<div class="menuBottomWrapperTitle">También le pueden interesar estas recetas</div>
+						<div class="menuBottomWrapperItems">
+							'.$items->showList(array('function'=>'Simple')).'
 						</div>
 					</div>';
 		}
