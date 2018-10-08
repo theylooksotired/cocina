@@ -81,11 +81,11 @@ class Recipe_Ui extends Ui{
 			$ingredients .= '<div class="ingredient" itemprop="recipeIngredient"><span>'.$result['label'].'</span></div>';
 		}
 		$category = Category::read($this->object->get('idCategory'));
-		return Adsense::top().'
+		return Adsense::amp().'
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
 						<div class="itemCompleteTopLeft">
-							<img itemprop="image" src="'.$this->object->getImageUrl('image', 'small').'" alt="'.$this->object->getBasicInfo().'"/>
+							'.$this->object->getImageAmp('image', 'small').'
 							<div class="itemCompleteCategory">
 								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo().'</a>
 							</div>
@@ -111,7 +111,7 @@ class Recipe_Ui extends Ui{
 					</div>
 					<div class="itemCompleteBottom">
 						<div class="itemCompleteBottomItem itemCompleteBottomAd">
-							'.Adsense::inline().'
+							'.Adsense::amp().'
 						</div>
 						<div class="itemCompleteBottomRecipe">
 							<div class="itemCompleteBottomItem itemCompleteBottomIngredients">
@@ -123,13 +123,12 @@ class Recipe_Ui extends Ui{
 								<div class="pageComplete">
 									<div itemprop="recipeInstructions">
 										'.$this->object->get('preparation').'
-										'.Adsense::linksAll().'
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					'.Adsense::top().'
+					'.Adsense::amp().'
 					<div class="itemCompleteShare">
 						<h3>Compartir esta receta en:</h3>
 						'.$this->share(array('facebook'=>true, 'twitter'=>true)).'
@@ -253,9 +252,9 @@ class Recipe_Ui extends Ui{
 		}
 	}
 
-	public function ptTime($time) {
+	public function ptTime($time='') {
 		$array = array("2 horas"=>"PT2H", "15 minutos"=>"PT15M", "30 minutos"=>"PT30M", "1 hora"=>"PT1H", "+2 horas"=>"PT5H");
-		return (isset($array[$item])) ? $array[$item] : $array[0];
+		return (isset($array[$time])) ? $array[$time] : "PT2H";
 	}
 
 }

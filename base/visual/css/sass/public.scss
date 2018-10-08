@@ -260,6 +260,7 @@ body {
 		display: block;
 		padding: 0 0 3px;
 		color: $colorMain;
+		font-size: $fontSizeNormal * 1.1;
 	}
 	p {
 		font-size: $fontSizeSmall * 9 / 10;
@@ -1025,6 +1026,42 @@ body {
 		color: darken($white, 40%);
 		&:hover {
 			text-decoration: underline;
+		}
+	}
+}
+
+.menuAmp {
+	background: $colorMain;
+	margin: 40px 0 0 0;
+	ul {
+		margin: 0;
+		padding: 0;
+		li {
+			margin: 0;
+			padding: 0;
+			&:first-child {
+				a {
+					background: rgba($white, 0.3);
+				}
+			}
+			&.menuArticles  {
+				a {
+					background: rgba($white, 0.4);
+				}
+			}
+			&.selected {
+				a {
+					background: darken($colorMain, 10%);
+				}
+			}
+			a {
+				display: block;
+				padding: 5px 30px 5px 20px;
+				color: $white;
+				background: rgba($white, 0.2);
+				border-bottom: 1px solid rgba($white, 0.1);
+				font-weight: normal;
+			}
 		}
 	}
 }

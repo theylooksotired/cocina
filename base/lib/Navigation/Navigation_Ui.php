@@ -13,7 +13,6 @@ class Navigation_Ui extends Ui {
 		switch ($layoutPage) {
 			case 'intro':
 				return $this->header().'
-						'.$this->menu().'
 						<div class="contentFormatWrapper">
 							<div class="contentFormat">
 								<div class="contentFormatIns">
@@ -25,7 +24,6 @@ class Navigation_Ui extends Ui {
 			break;
 			default:
 				return $this->header().'
-						'.$this->menu().'
 						<div class="contentFormatWrapper">
 							<div class="contentFormat">
 								<div class="contentFormatIns">
@@ -49,7 +47,6 @@ class Navigation_Ui extends Ui {
 			break;
 			case 'simple':
 				return $this->header().'
-						'.$this->menu().'
 						<div class="contentFormatWrapper">
 							<div class="contentFormat">
 								<div class="contentFormatIns">
@@ -66,7 +63,6 @@ class Navigation_Ui extends Ui {
 			break;
 			case 'single':
 				return $this->header().'
-						'.$this->menu().'
 						<div class="contentFormatWrapper">
 							<div class="contentFormat">
 								<div class="contentFormatIns">
@@ -82,8 +78,7 @@ class Navigation_Ui extends Ui {
 			break;
 			case 'recipe':
 				return Navigation_Ui::facebookHeader().'
-						'.$this->header().'
-						'.$this->menu().'
+						'.$this->header(true).'
 						<div class="contentFormatWrapper">
 							<div class="contentFormat">
 								<div class="contentFormatIns">
@@ -103,7 +98,6 @@ class Navigation_Ui extends Ui {
 			case 'post':
 				return Navigation_Ui::facebookHeader().'
 						'.$this->header().'
-						'.$this->menu().'
 						<div class="contentFormatWrapper contentFormatWrapperPost">
 							<div class="contentFormat">
 								<div class="contentFormatIns">
@@ -136,9 +130,9 @@ class Navigation_Ui extends Ui {
 		}
 	}
 
-	public function header() {
+	public function header($amp=false) {
 		return '<header>
-					<div class="menuMobile" onclick="showHideMenu()">
+					<div class="menuMobile" '.(($amp) ? 'role="button" on="tap:menu.toggle" tabindex="0"' : 'onclick="showHideMenu()"').'>
 						<i class="icon icon-menu"></i>
 					</div>
 					<div class="headerWrapper">
@@ -150,7 +144,12 @@ class Navigation_Ui extends Ui {
 					        </div>
 					        <div class="headerRight">
 								<div class="searchTop">
-									<form accept-charset="UTF-8" class="formSearchSimple" enctype="multipart/form-data" method="post" action="'.url('buscar').'">
+									<form
+										accept-charset="UTF-8"
+										class="formSearchSimple"
+										enctype="multipart/form-data"
+										'.(($amp) ? 'action-xhr="'.url('buscar').'"' : 'action="'.url('buscar').'"').'
+										method="post">
 										<fieldset>
 											<div class="text formField ">
 												<input type="text" size="50" name="search" placeholder="'.__('search').'">
@@ -162,7 +161,8 @@ class Navigation_Ui extends Ui {
 							</div>
 						</div>
 					</div>
-				</header>';
+				</header>
+				'.(($amp) ? '' : $this->menu());
 	}
 
 	public function shareIcons() {
@@ -230,19 +230,29 @@ class Navigation_Ui extends Ui {
 	}
 
 	public function menu() {
+		return '<nav class="menuWrapper"><nav class="menuAll" id="menu">'.Navigation_Ui::menuItems().'</nav></div>';
+	}
+
+	static public function menuAmp() {
+		return '<amp-sidebar id="menu" class="menuAmp" layout="nodisplay" side="left">'.Navigation_Ui::menuItems().'</amp-sidebar>';
+	}
+
+	static public function menuItems() {
 		$category = new Category();
-		if ($this->object->action=='recetas') {
-			$infoCategory = explode('_', $this->object->id);
+		if ($_GET['action']=='recetas') {
+			$infoCategory = explode('_', $_GET['id']);
 			$category = Category::read($infoCategory[0]);
 		}
 		$categories = new ListObjects('Category', array('order'=>'ord', 'limit'=>'6'));
-		return '<nav class="menuWrapper">
-					<nav class="menuAll" id="menu">
-						<ul>
-							<li class="hideMobile '.(($this->object->action=='intro') ? 'selected' : '').'"><a href="'.url('').'">Inicio</a></li>'.$categories->showList(array('function'=>'Menu'), array('categorySelected'=>$category)).'<li class="menuArticles '.(($this->object->action=='articulos') ? 'selected' : '').'"><a href="'.url('articulos').'">Artículos</a></li>
-						</ul>
-					</nav>
-				</div>';
+		return '<ul>
+					<li class="hideMobile '.(($_GET['action']=='intro') ? 'selected' : '').'">
+						<a href="'.url('').'">Inicio</a>
+					</li>
+					'.$categories->showList(array('function'=>'Menu'), array('categorySelected'=>$category)).'
+					<li class="menuArticles '.(($_GET['action']=='articulos') ? 'selected' : '').'">
+						<a href="'.url('articulos').'">Artículos</a>
+					</li>
+				</ul>';
 	}
 
 	public function breadCrumbs() {

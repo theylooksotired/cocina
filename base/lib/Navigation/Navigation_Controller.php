@@ -7,12 +7,6 @@ class Navigation_Controller extends Controller{
 	}
 
 	public function controlActions(){
-		$this->header = '<script type="text/javascript">
-							function showHideMenu() {
-							    var menuDiv = document.getElementById("menu");
-						        menuDiv.style.display = (menuDiv.style.display === "block") ? "none" : "block";
-							}
-						</script>';
 		switch ($this->action) {
 
 			default:
@@ -34,13 +28,13 @@ class Navigation_Controller extends Controller{
 				$item = Recipe::read($info[0]);
 				if ($item->id()!='') {
 					//$this->mode = 'amp';
+					$this->layoutPage = 'recipe';
 					$this->metaUrl = $item->url();
 					$this->titlePage = $item->getBasicInfo();
 					$this->metaDescription = $this->titlePage.'. '.$item->get('description');
 					$this->metaImage = $item->getImageUrl('image', 'web');
 					$parent = Category::read($item->get('idCategory'));
 					$this->breadCrumbs = array(url('recetas')=>'Recetas', $parent->url()=>$parent->getBasicInfo(), $item->url()=>$item->getBasicInfo());
-					$this->layoutPage = 'recipe';
 					$this->content = $item->showUi('Complete');
 				} else {
 					$info = explode('_', $this->id);

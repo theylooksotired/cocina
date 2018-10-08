@@ -259,6 +259,10 @@
 			}
 		}
 	}
+	.menuBottomWrapper .menuBottomWrapperItems .itemPublicMedium {
+		 width: calc(100% / 3 - 10px);
+		 margin-bottom: 10px;
+	}
 }
 
 @media screen and (max-width: $sizeMobile ) {
@@ -290,6 +294,8 @@
 					float: none;
 					width: auto;
 					margin: 0 0 20px;
+					border: 0;
+					padding: 0;
 					&:last-child {
 						margin: 0;
 					}
@@ -309,6 +315,18 @@
 	}
 	.footer {
 		font-size: $fontSizeSmall;
+	}
+	.menuBottomWrapper .menuBottomWrapperItems .itemPublicMedium {
+		 width: calc(100% / 2 - 10px);
+	}
+	.itemComplete .itemCompleteTop {
+		.itemCompleteTopLeft,
+		.itemCompleteTopCenter,
+		.itemCompleteTopRight {
+			margin: 0 0 10px;
+			width: auto;
+			float: none;
+		}
 	}
 }
 
