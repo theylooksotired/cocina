@@ -82,7 +82,7 @@ class Recipe_Ui extends Ui{
 			$ingredients .= '<div class="ingredient" itemprop="recipeIngredient"><span>'.$result['label'].'</span></div>';
 		}
 		$category = Category::read($this->object->get('idCategory'));
-		return Adsense::ampTop().'
+		return Adsense::amp().'
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
 						<div class="itemCompleteTopLeft">
@@ -129,7 +129,7 @@ class Recipe_Ui extends Ui{
 							</div>
 						</div>
 					</div>
-					'.Adsense::ampTop().'
+					'.Adsense::amp().'
 					<div class="itemCompleteShare">
 						<h3>Compartir esta receta en:</h3>
 						'.$this->share(array('facebook'=>true, 'twitter'=>true)).'
