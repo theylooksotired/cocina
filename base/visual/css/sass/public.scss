@@ -1025,14 +1025,17 @@ body {
 
 .menuAmp {
 	margin: 40px 0 0 0;
+	background: transparent;
 	ul {
 		margin: 0;
 		padding: 0;
-		width: 100%;
+		width: 100vh;
+		display: block;
 		li {
 			margin: 0;
 			padding: 0;
-			width: 100%;
+			width: 100vh;
+			display: block;
 			&.selected {
 	            a {
 	                background: $white;
@@ -1046,13 +1049,13 @@ body {
 	        	}
 	        }
 			a {
+				display: block;
 				border-right: 0;
 	            color: rgba($black, 0.8);
 	            font-weight: normal;
 	            padding: 5px 7px;
 	            margin: 0 3px;
 	            font-size: $fontSizeNormal * 8 / 10;
-	            display: inline-block;
 	            background: darken($colorAccentAlt, 5%);
 	            @include borderRadius(5px);
 	            &:hover{
