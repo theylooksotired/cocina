@@ -47,8 +47,7 @@ class Adsense {
 	   					height=100
 						type="adsense"
 						data-ad-client="ca-pub-7429223453905389"
-						data-ad-slot="3066154144"
-						data-auto-format="rspv">
+						data-ad-slot="3066154144">
 							<div overflow></div>
 					</amp-ad>
 				</div>';
@@ -60,8 +59,7 @@ class Adsense {
 						height=320
 						type="adsense"
 						data-ad-client="ca-pub-7429223453905389"
-						data-ad-slot="3066154144"
-						data-auto-format="rspv">
+						data-ad-slot="3066154144">
 						<div overflow></div>
 					</amp-ad>
 				</div>';
