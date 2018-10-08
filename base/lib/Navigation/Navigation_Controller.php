@@ -27,7 +27,7 @@ class Navigation_Controller extends Controller{
 				$info = explode('_', $this->extraId);
 				$item = Recipe::read($info[0]);
 				if ($item->id()!='') {
-					//$this->mode = 'amp';
+					$this->mode = 'amp';
 					$this->layoutPage = 'recipe';
 					$this->metaUrl = $item->url();
 					$this->titlePage = $item->getBasicInfo();
