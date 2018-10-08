@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php $version = (DEBUG) ? md5(rand()) : date('mY').'4';?>
+<?php $version = (DEBUG) ? md5(rand()) : date('mY').'5';?>
 <html lang="<?php echo Lang::active();?>">
 <head>
 
