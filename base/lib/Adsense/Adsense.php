@@ -42,8 +42,8 @@ class Adsense {
 	}
 
 	static public function amp() {
-		if (!isMobile()) return Adsense::inline();
-		return '<div class="adsense adsenseTop">
+		if (!isMobile()) return Adsense::ampDesktop();
+		return '<div class="adsense">
 					<amp-ad width="100vw" height=320
 						  type="adsense"
 						  data-ad-client="ca-pub-7429223453905389"
@@ -52,6 +52,18 @@ class Adsense {
 						  data-full-width>
 						    <div overflow></div>
 						</amp-ad>
+				</div>';
+	}
+
+	static public function ampDesktop() {
+		return '<div class="adsense ">
+					<amp-ad
+						layout="fixed-height"
+						height=100
+						type="adsense"
+						data-ad-client="ca-pub-7429223453905389"
+						data-ad-slot="3066154144">
+					</amp-ad>
 				</div>';
 	}
 
