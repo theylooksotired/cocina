@@ -1,12 +1,13 @@
 <?php
 class Post_Ui extends Ui{
 
-	public function renderPublic() {
+	public function renderPublic($options=array()) {
+		$amp = (isset($options['amp'])) ? true : false;
 		return '<div class="itemPublic itemPublicPost">
 					<a href="'.$this->object->url().'">
 						<h2>'.$this->object->getBasicInfo().'</h2>
 						<div class="itemPublicIns">
-							'.$this->object->getImageIcon('image').'
+							'.(($amp) ? $this->object->getImageAmp('image', 'small') : $this->object->getImageIcon('image')) .'
 							<p>'.$this->object->get('shortDescription').'</p>
 						</div>
 					</a>

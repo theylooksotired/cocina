@@ -218,7 +218,7 @@ class Recipe_Ui extends Ui{
 				'<div class="relatedWrapper">
 					<div class="relatedRight">
 						<h2 class="titleRelated">Algunas noticias relacionadas con <strong>'.$this->object->getBasicInfo().'</strong></h2>
-						'.$items->showList(array('function'=>'Public')).'
+						'.$items->showList(array('function'=>'Public'), array('amp'=>true)).'
 					</div>
 					<div class="relatedLeft">
 						<aside>
