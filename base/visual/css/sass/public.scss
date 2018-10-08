@@ -120,17 +120,7 @@ body {
 		color: darken($white, 40%);
 		font-weight: normal;
 		position: relative;
-		&:before {
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			width: 100px;
-			height: 1px;
-			background: rgba($black, 0.2);
-			margin: auto;
-			content: '';
-		}
+		text-align: center;
 	}
 	.menuBottomWrapperItems {
 		margin: 0 -5px;
@@ -145,7 +135,7 @@ body {
 				text-align: center;
 				background: rgba($colorMain, 0.03);
 				border: 1px solid rgba($colorMain, 0.06);
-				.itemPublicMedium {
+				.itemPublicMediumImage {
 					height: 200px;
 					background-position: center center;
 					background-size: cover;
