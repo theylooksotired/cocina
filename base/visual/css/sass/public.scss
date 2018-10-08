@@ -251,6 +251,9 @@ body {
 		float: left;
 		max-width: 120px;
 		margin: 0 10px 5px 0;
+		> img {
+			width: 120px;
+		}
 	}
 	.itemPublicRight {
 		width: calc(100% - 110px);
