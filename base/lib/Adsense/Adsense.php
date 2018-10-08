@@ -42,6 +42,7 @@ class Adsense {
 	}
 
 	static public function amp() {
+		if (!isMobile()) return Adsense::inline();
 		return '<div class="adsense adsenseTop">
 					<amp-ad width="100vw" height=320
 						  type="adsense"
