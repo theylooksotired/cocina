@@ -347,26 +347,27 @@ body {
 		margin: auto;
 		padding: 0 0 15px 0;
 		@include clearer();
-	}
-	.itemCompleteTopImage {
-		width: 200px;
-		float: left;
-		img {
-			width: 100%;
+		.itemCompleteTopLeft {
+			width: 200px;
+			float: left;
+			img {
+				width: 100%;
+			}
+		}
+		.itemCompleteTopRight {
+			width: 300px;
+			float: left;
+		}
+		.itemCompleteTopCenter {
+			width: calc(100% - 520px);
+			margin: 0 0 0 10px;
+			float: left;
+			font-size: $fontSizeSmall;
+			color: lighten($black, 30%);
 		}
 	}
-	.itemCompleteTopDescription {
-		width: calc(100% - 220px);
-		float: left;
-		font-size: 0.9rem;
-		margin: 0 0 0 20px;
-		max-width: $sizeTablet * 6 / 10;
-		font-size: $fontSizeBig * 8 / 10;
-		color: lighten($black, 30%);
-	}
 	.stars {
-		margin: auto;
-		padding: 5px 0 0 0;
+		padding: 0 0 5px;
 	}
 	p {
 		padding-bottom: 10px;
@@ -500,25 +501,48 @@ body {
 	}
 }
 
+.itemCompleteShare {
+	padding: 0 0 10px;
+	text-align: center;
+	> h3 {
+		text-transform: uppercase;
+		font-size: $fontSizeSmall;
+		padding: 0 0 10px;
+		color: darken($white, 40%);
+		font-weight: normal;
+	}
+}
 .shareOptions {
 	padding: 0 0 10px;
-	text-align: right;
 	a {
 		display: inline-block;
-		margin: 0 0 10px 0;
-		padding: 10px 10px 10px 30px;
-		margin-right: 1rem;
+		margin: 0 0 0 10px;
+		padding: 10px 15px;
 		font-weight: normal;
 		color: $white;
 		background: $colorText;
 		position: relative;
-		&:before {
-			position: absolute;
-			top: 0.5rem;
-			left: 0.5rem;
+		@include borderRadius(5px);
+		i,
+		span {
+			display: inline-block;
+			vertical-align: middle;
 		}
-		@include animateHoverOpacity();
-		@include borderRadius(3px);
+		i {
+			padding: 0 10px 0 0;
+		}
+		&.optionFacebook {
+			background: $colorFacebook;
+			&:hover {
+				background: darken($colorFacebook, 10%);
+			}
+		}
+		&.optionTwitter {
+			background: $colorTwitter;
+			&:hover {
+				background: darken($colorTwitter, 10%);
+			}
+		}
 	}
 }
 

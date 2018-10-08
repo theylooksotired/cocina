@@ -75,17 +75,17 @@ class Recipe_Ui extends Ui{
 		return Adsense::top().'
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
-						<div class="itemCompleteLeft">
+						<div class="itemCompleteTopLeft">
 							'.$this->stars().'
 							<div class="itemCompleteCategory">
 								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo().'</a>
 							</div>
 							<img itemprop="image" src="'.$this->object->getImageUrl('image', 'small').'" alt="'.$this->object->getBasicInfo().'"/>
 						</div>
-						<div class="itemCompleteCenter">
+						<div class="itemCompleteTopCenter">
 							<p itemprop="description">'.nl2br($this->object->get('description')).'</p>
 						</div>
-						<div class="itemCompleteRight">
+						<div class="itemCompleteTopRight">
 							<p><strong>Preparación:</strong> <span itemprop="prepTime" content="'.$this->ptTime($this->object->get('preparationTime')).'">'.$this->object->get('preparationTime').'</span></p>
 							<p><strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numPersons').'</span></p>
 							<p><span itemprop="recipeCuisine">Cocina '.Params::param('titleCountry').'</span></p>
@@ -112,7 +112,10 @@ class Recipe_Ui extends Ui{
 						</div>
 					</div>
 					'.Adsense::top().'
-					'.$this->share(array('facebook'=>true, 'twitter'=>true, 'print'=>true)).'
+					<div class="itemCompleteShare">
+						<h3>Compartir esta receta en:</h3>
+						'.$this->share(array('facebook'=>true, 'twitter'=>true)).'
+					</div>
 				</div>
 				'.Navigation_Ui::facebookComments($this->object->url()).'
 				'.$this->related();
