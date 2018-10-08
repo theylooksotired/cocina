@@ -135,6 +135,8 @@ body {
 				text-align: center;
 				background: rgba($colorMain, 0.03);
 				border: 1px solid rgba($colorMain, 0.06);
+				@include borderRadius(5px);
+				@include animate();
 				.itemPublicMediumImage {
 					height: 200px;
 					background-position: center center;
@@ -146,6 +148,15 @@ body {
 					color: $colorMain;
 					padding: 10px 0 0 0;
 					font-size: $fontSizeSmall;
+					min-height: 2em;
+					vertical-align: middle;
+					@include animate();
+				}
+				&:hover {
+					background: rgba($colorMain, 0.06);
+					p {
+						color: darken($colorMain, 10%);
+					}
 				}
 			}
 		}
