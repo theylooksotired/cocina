@@ -1053,10 +1053,11 @@ body {
 				border-right: 0;
 	            color: rgba($black, 0.8);
 	            font-weight: normal;
-	            padding: 5px 7px;
-	            margin: 0 3px;
+	            padding: 6px 8px;
 	            font-size: $fontSizeNormal * 8 / 10;
 	            background: darken($colorAccentAlt, 5%);
+	            border-bottom: 1px solid rgba($black, 0.05);
+	            width: 100vh;
 	            &:hover{
 	                background: $colorAccent;
 	                color: $white;
