@@ -407,7 +407,7 @@ body {
 			width: calc(100% - 350px);
 			float: right;
 			padding: 15px;
-			background: darken($white, 5%);
+			background: rgba($colorMain, 0.1);
 			font-size: $fontSizeNormal * 1.1;
 			@include borderRadius(5px);
 			@include borderBox();
@@ -428,16 +428,12 @@ body {
 				width: 200px;
 				float: left;
 				color: lighten($colorMain, 10%);
-				.ingredientList {
-					padding: 0 0 0 10px;
-				}
 				.ingredient {
+					font-size: $fontSizeNormal;
 					padding: 0 0 5px;
-					i {
-						display: inline-block;
-						opacity: 0.4;
-						padding: 0 5px 0 0;
-						font-size: $fontSizeTiny * 0.8;
+					&:before {
+						content: '• ';
+						opacity: 0.6;
 					}
 					&:last-child {
 						padding: 0;
@@ -445,7 +441,9 @@ body {
 				}
 			}
 			.itemCompleteBottomPreparation {
-				width: calc(100% - 220px);
+				width: calc(100% - 230px);
+				padding: 0 0 0 15px;
+				border-left: 1px solid rgba($colorMain, 0.4);
 				float: right;
 				ol,
 				ul {
