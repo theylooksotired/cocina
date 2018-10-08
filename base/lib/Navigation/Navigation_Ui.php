@@ -230,7 +230,7 @@ class Navigation_Ui extends Ui {
 	}
 
 	public function menu() {
-		return '<nav class="menuWrapper"><nav class="menuAll" id="menu">'.Navigation_Ui::menuItems().'</nav></div>';
+		return '<div class="menuWrapper"><div class="menuAll" id="menu">'.Navigation_Ui::menuItems().'</div></div>';
 	}
 
 	static public function menuAmp() {
