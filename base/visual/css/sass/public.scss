@@ -133,22 +133,27 @@ body {
 		}
 	}
 	.menuBottomWrapperItems {
-		margin: 0 -10px;
+		margin: 0 -5px;
 		@include clearer();
-		.itemPublicSimple {
-			width: calc(100% / 6);
+		.itemPublicMedium {
+			width: calc(100% / 6 - 10px);
 			float: left;
-			margin: 0 10px;
+			margin: 0 5px;
 			a {
 				display: block;
 				padding: 10px;
 				text-align: center;
 				background: rgba($colorMain, 0.03);
 				border: 1px solid rgba($colorMain, 0.06);
-				img {
-					width: 100%;
+				.itemPublicMedium {
+					height: 200px;
+					background-position: center center;
+					background-size: cover;
+					background-repeat: no-repeat;
 				}
 				p {
+					font-weight: bold;
+					color: $colorMain;
 					padding: 10px 0 0 0;
 					font-size: $fontSizeSmall;
 				}

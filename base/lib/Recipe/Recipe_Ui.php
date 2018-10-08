@@ -28,6 +28,15 @@ class Recipe_Ui extends Ui{
 				</div>';
 	}
 
+	public function renderPublicMedium() {
+		return '<div class="itemPublicMedium">
+					<a href="'.$this->object->url().'">
+						<div class="itemPublicMediumImage" style="background-image: url('.$this->object->getImageUrl('image', 'small').');"></div>
+						<p>'.$this->object->getBasicInfo().'</p>
+					</a>
+				</div>';
+	}
+
 	public function renderSide() {
 		return '<div class="itemSide itemSideRecipe">
 					<div class="itemSideIns">
@@ -233,7 +242,7 @@ class Recipe_Ui extends Ui{
 	}
 
 	public function recipesBottom() {
-		$items = new ListObjects('Recipe', array('where'=>'rating>=3 AND idCategory="'.$this->object->get('idCategory').'"', 'results'=>'8'));
+		$items = new ListObjects('Recipe', array('where'=>'rating>=3 AND idCategory="'.$this->object->get('idCategory').'"', 'limit'=>'6'));
 		if (!$items->isEmpty()) {
 			return '<div class="menuBottomWrapper">
 						<div class="menuBottomWrapperTitle">También le pueden interesar estas recetas</div>
