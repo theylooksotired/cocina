@@ -407,7 +407,7 @@ body {
 			width: calc(100% - 350px);
 			float: right;
 			padding: 15px;
-			background: rgba($colorMain, 0.1);
+			background: rgba($colorMain, 0.05);
 			font-size: $fontSizeNormal * 1.1;
 			@include borderRadius(5px);
 			@include borderBox();
@@ -433,7 +433,7 @@ body {
 					padding: 0 0 5px;
 					&:before {
 						content: '• ';
-						opacity: 0.6;
+						color: rgba($colorMain, 0.3);
 					}
 					&:last-child {
 						padding: 0;
@@ -443,7 +443,7 @@ body {
 			.itemCompleteBottomPreparation {
 				width: calc(100% - 230px);
 				padding: 0 0 0 15px;
-				border-left: 1px solid rgba($colorMain, 0.4);
+				border-left: 1px solid rgba($colorMain, 0.1);
 				float: right;
 				ol,
 				ul {
