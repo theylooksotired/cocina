@@ -41,17 +41,28 @@ class Adsense {
 		return '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>';
 	}
 
+	static public function ampTop() {
+		return '<amp-ad layout="fixed-height"
+   					height=100
+					type="adsense"
+					data-ad-client="ca-pub-7429223453905389"
+					data-ad-slot="3066154144"
+					data-auto-format="rspv"
+					data-full-width>
+						<div overflow></div>
+				</amp-ad>';
+	}
+
 	static public function amp() {
-		return '<div class="adsense">
-					<amp-ad width="100vw" height=320
-					  type="adsense"
-					  data-ad-client="ca-pub-7429223453905389"
-					  data-ad-slot="3066154144"
-					  data-auto-format="rspv"
-					  data-full-width>
-					    <div overflow></div>
-					</amp-ad>
-				</div>';
+		return '<amp-ad layout="fixed-height"
+					height=320
+					type="adsense"
+					data-ad-client="ca-pub-7429223453905389"
+					data-ad-slot="3066154144"
+					data-auto-format="rspv"
+					data-full-width>
+					<div overflow></div>
+				</amp-ad>';
 	}
 
 }

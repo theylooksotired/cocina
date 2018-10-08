@@ -81,7 +81,7 @@ class Recipe_Ui extends Ui{
 			$ingredients .= '<div class="ingredient" itemprop="recipeIngredient"><span>'.$result['label'].'</span></div>';
 		}
 		$category = Category::read($this->object->get('idCategory'));
-		return Adsense::amp().'
+		return Adsense::ampTop().'
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
 						<div class="itemCompleteTopLeft">
