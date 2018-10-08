@@ -238,7 +238,7 @@ class Recipe_Ui extends Ui{
 			return '<div class="menuBottomWrapper">
 						<div class="menuBottomWrapperTitle">También le pueden interesar estas recetas</div>
 						<div class="menuBottomWrapperItems">
-							'.$items->showList(array('function'=>'Simple')).'
+							'.$items->showList(array('function'=>'PublicSimple')).'
 						</div>
 					</div>';
 		}
