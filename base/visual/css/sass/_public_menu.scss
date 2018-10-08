@@ -18,9 +18,13 @@
         width: 100%;
         table-layout: fixed;
         display: table;
+        margin: 0;
+        padding: 0;
     }
     li {
         display: table-cell;
+        margin: 0;
+        padding: 0;
         a {
             border-right: 1px solid darken($colorAccentAlt, 5%);
             color: rgba($black, 0.8);
