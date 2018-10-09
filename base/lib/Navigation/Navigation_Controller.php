@@ -111,8 +111,9 @@ class Navigation_Controller extends Controller{
 			break;
 
 			case 'buscar':
-				if (isset($this->values['search']) && $this->values['search']!='') {
-					$search = Text::simpleUrl($this->values['search']);
+				if (isset($_GET['search']) && $_GET['search']!='') {
+					$search = Text::simpleUrl($_GET['search']);
+					header("HTTP/1.1 301 Moved Permanently");
 					header('Location: '.url('buscar/'.$search));
 					exit();
 				}
