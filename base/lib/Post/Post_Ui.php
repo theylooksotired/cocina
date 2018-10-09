@@ -29,20 +29,15 @@ class Post_Ui extends Ui{
 		return '<div class="itemComplete itemCompletePost">
 					<div class="postTop">
 						<div class="postTopLeft">
-							<div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-								'.$this->object->getImageAmp('image', 'web').'
-								<meta itemprop="url" content="'.$this->object->getImageUrl('image', 'web').'"></meta>
-							</div>
+							'.$this->object->getImageAmp('image', 'web').'
 						</div>
 						<div class="postTopRight">
-							<p><em itemprop="datePublished" content="'.$this->object->get('publishDate').'">'.Date::sqlText($this->object->get('publishDate')).'</em></p>
+							<p>'.Date::sqlText($this->object->get('publishDate')).'</p>
 							<p><strong>'.$this->object->get('shortDescription').'</strong></p>
 						</div>
 					</div>
 					'.Adsense::amp().'
-					<div class="postContent pageComplete" itemprop="articleBody">
-						'.$this->object->get('description').'
-					</div>
+					<div class="postContent pageComplete">'.$this->object->get('description').'</div>
 					<div class="itemCompleteShare">
 						<h3>Compartir este artículo en:</h3>
 						'.$this->share(array('facebook'=>true, 'twitter'=>true)).'
@@ -77,6 +72,20 @@ class Post_Ui extends Ui{
 						</div>
 					</div>';
 		}
+	}
+
+	public function renderJsonHeader() {
+		$info = array("@context" => "http://schema.org/",
+					"@type" => "Article",
+					"headline" => $this->object->getBasicInfo(),
+					"image" => $this->object->getImageUrl('image', 'web'),
+					"author" => array("@type" => "Organization", "name" => Params::param('titlePage')),
+					"publisher" => array("@type" => "Organization", "name" => "Plasticwebs", "logo" => "https://www.plasticwebs.com/plastic/visual/img/logo.jpg"),
+					"datePublished" => $this->object->get('publishDate'),
+					"dateModified" => $this->object->get('publishDate'),
+					"articleBody" => strip_tags($this->object->get('description'))
+					);
+		return '<script type="application/ld+json">'.json_encode($info).'</script>';
 	}
 
 }

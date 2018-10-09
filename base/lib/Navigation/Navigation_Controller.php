@@ -33,6 +33,7 @@ class Navigation_Controller extends Controller{
 					$this->titlePage = $item->getBasicInfo();
 					$this->metaDescription = $item->get('description');
 					$this->metaImage = $item->getImageUrl('image', 'web');
+					$this->header = $item->showUi('JsonHeader');
 					$parent = Category::read($item->get('idCategory'));
 					$this->breadCrumbs = array(url('recetas')=>'Recetas', $parent->url()=>$parent->getBasicInfo(), $item->url()=>$item->getBasicInfo());
 					$this->content = $item->showUi('Complete');
@@ -87,6 +88,7 @@ class Navigation_Controller extends Controller{
 					$this->titlePage = $item->getBasicInfo();
 					$this->metaDescription = $item->get('shortDescription');
 					$this->metaImage = $item->getImageUrl('image', 'web');
+					$this->header = $item->showUi('JsonHeader');
 					$this->breadCrumbs = array(url('articulos')=>'Artículos', $item->url()=>$item->getBasicInfo());
 					$this->content = $item->showUi('Complete');
 				} else {

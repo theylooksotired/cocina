@@ -83,11 +83,8 @@ class Navigation_Ui extends Ui {
 							<div class="contentFormat">
 								<div class="contentFormatIns">
 									'.$this->breadCrumbs().'
-									<div itemscope itemtype="http://schema.org/Recipe">
-										<h1 itemprop="name">'.$this->object->titlePage.'</h1>
-										<span style="display:none;" itemprop="author" itemscope itemtype="http://schema.org/Person">
-											<span itemprop="name">'.Params::param('titlePage').'</span>
-										</span>
+									<div class="contentRecipe">
+										<h1>'.$this->object->titlePage.'</h1>
 										'.$content.'
 									</div>
 								</div>
@@ -102,17 +99,9 @@ class Navigation_Ui extends Ui {
 							<div class="contentFormat">
 								<div class="contentFormatIns">
 									'.$this->breadCrumbs().'
-									<div itemscope itemtype="http://schema.org/Article">
-										<h1 itemprop="headline">'.$this->object->titlePage.'</h1>
-										<div style="display:none;" itemprop="author" itemscope itemtype="http://schema.org/Organization">
-											<span itemprop="name">'.Params::param('titlePage').'</span>
-										</div>
-										<div style="display:none;" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-											<span itemprop="name">PlasticWebs</span>
-										</div>
-										<div class="contentLeft">
-											'.$content.'
-										</div>
+									<div class="contentArticle">
+										<h1>'.$this->object->titlePage.'</h1>
+										<div class="contentLeft">'.$content.'</div>
 										<div class="contentRight">
 											<aside>
 												'.Adsense::ampInline().'

@@ -6,7 +6,7 @@ class Recipe_Ui extends Ui{
 		return '<div class="itemPublic">
 					<a href="'.$this->object->url().'">
 						<h2>'.$this->object->getBasicInfo().'</h2>
-						'.$this->stars(true).'
+						'.$this->stars().'
 						<div class="itemPublicRight">
 							'.$description.'
 						</div>
@@ -71,43 +71,34 @@ class Recipe_Ui extends Ui{
 	}
 
 	public function renderComplete() {
-		$query = 'SELECT ri.*
-				FROM '.Db::prefixTable('RecipeIngredient').' ri
-				WHERE ri.idRecipe="'.$this->object->id().'"
-				ORDER BY ri.ord;';
-		$results = Db::returnAll($query);
+		$this->object->loadCategory();
+		$this->object->loadIngredients();
 		$ingredients = '';
-		foreach ($results as $result) {
-			$ingredients .= '<div class="ingredient" itemprop="recipeIngredient"><span>'.$result['label'].'</span></div>';
+		foreach ($this->object->ingredients as $item) {
+			$ingredients .= '<div class="ingredient"><span>'.$item['label'].'</span></div>';
 		}
-		$category = Category::read($this->object->get('idCategory'));
 		return Adsense::amp().'
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
 						<div class="itemCompleteTopLeft">
-							<div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-								'.$this->object->getImageAmp('image', 'web').'
-								<meta itemprop="url" content="'.$this->object->getImageUrl('image', 'web').'"></meta>
-							</div>
+							'.$this->object->getImageAmp('image', 'web').'
 							<div class="itemCompleteCategory">
-								<a href="'.$category->url().'" itemprop="recipeCategory">'.$category->getBasicInfo().'</a>
+								<a href="'.$this->object->category->url().'">'.$this->object->category->getBasicInfo().'</a>
 							</div>
 							'.$this->stars().'
 						</div>
-						<div class="itemCompleteTopCenter">
-							<p itemprop="description">'.nl2br($this->object->get('description')).'</p>
-						</div>
+						<div class="itemCompleteTopCenter"><p>'.nl2br($this->object->get('description')).'</p></div>
 						<div class="itemCompleteTopRight">
 							<p>
-								<strong>Preparación:</strong> <span itemprop="prepTime" content="'.$this->ptTime($this->object->get('preparationTime')).'">'.$this->object->get('preparationTime').'</span>
+								<strong>Preparación:</strong> <span>'.$this->object->get('preparationTime').'</span>
 								<i class="icon icon-clock"></i>
 							</p>
 							<p>
-								<strong>Porciones:</strong> <span itemprop="recipeYield">'.$this->object->get('numPersons').'</span>
+								<strong>Porciones:</strong> <span>'.$this->object->get('numPersons').'</span>
 								<i class="icon icon-serving"></i>
 							</p>
 							<p>
-								<span itemprop="recipeCuisine"><strong>Cocina '.Params::param('titleCountry').'</span></strong>
+								<span><strong>Cocina '.Params::param('titleCountry').'</span></strong>
 								<i class="icon icon-world"></i>
 							</p>
 						</div>
@@ -123,11 +114,7 @@ class Recipe_Ui extends Ui{
 							</div>
 							<div class="itemCompleteBottomItem itemCompleteBottomPreparation">
 								<h2><i class="icon icon-preparation"></i><span>Preparación</span></h2>
-								<div class="pageComplete">
-									<div itemprop="recipeInstructions">
-										'.$this->object->get('preparation').'
-									</div>
-								</div>
+								<div class="pageComplete">'.$this->object->get('preparation').'</div>
 							</div>
 						</div>
 					</div>
@@ -190,25 +177,12 @@ class Recipe_Ui extends Ui{
 				</div>';
 	}
 
-	public function stars($simple=false) {
+	public function stars() {
 		$stars = '';
 		for ($i=1;$i<=5;$i++) {
 			$stars .= ($i<=$this->object->get('rating')) ? '<div class="starFull"><i class="icon icon-star-full"></i></div>' : '<div class="starEmpty"><i class="icon icon-star-empty"></i></div>';
 		}
-		if ($simple) {
-			return '<div class="stars">'.$stars.'</div>';
-		} else {
-			return '<div class="stars" itemprop="review" itemscope itemtype="http://schema.org/Review">
-						<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-							'.$stars.'
-							<span style="display:none;" itemprop="ratingValue">'.$this->object->get('rating').'</span>
-							<span style="display:none;" itemprop="bestRating">5</span>
-						</div>
-						<span style="display:none;" itemprop="author" itemscope itemtype="http://schema.org/Person">
-							<span itemprop="name">'.Params::param('titlePage').'</span>
-						</span>
-					</div>';
-		}
+		return '<div class="stars">'.$stars.'</div>';
 	}
 
 	public function related() {
@@ -257,6 +231,31 @@ class Recipe_Ui extends Ui{
 	public function ptTime($time='') {
 		$array = array("2 horas"=>"PT2H", "15 minutos"=>"PT15M", "30 minutos"=>"PT30M", "1 hora"=>"PT1H", "+2 horas"=>"PT5H");
 		return (isset($array[$time])) ? $array[$time] : "PT2H";
+	}
+
+	public function renderJsonHeader() {
+		$this->object->loadCategory();
+		$this->object->loadIngredients();
+		$ingredients = array();
+		foreach ($this->object->ingredients as $item) { $ingredients[] = $item['label']; }
+		$info = array("@context" => "http://schema.org/",
+					"@type" => "Recipe",
+					"name" => $this->object->getBasicInfo(),
+					"image" => $this->object->getImageUrl('image', 'web'),
+					"author" => array("@type" => "Organisation", "name" => Params::param('titlePage')),
+					"description" => $this->object->get('description'),
+					"prepTime" => $this->ptTime($this->object->get('preparationTime')),
+					"keywords" => "receta, ".str_replace('-', ' ', Params::param('country-code')).", ".$this->object->category->getBasicInfo(),
+					"recipeYield" => intval($this->object->get('numPersons'))." porciones",
+					"recipeCategory" => $this->object->category->getBasicInfo(),
+					"recipeCuisine" => "Cocina ".Params::param('titleCountry'),
+					"recipeIngredient" => $ingredients,
+					"recipeInstructions" => $this->object->get('preparation'),
+					"aggregateRating" => array("@type" => "AggregateRating",
+												"ratingValue" => $this->object->get('rating'),
+												"ratingCount" => $this->object->get('rating') * 5)
+					);
+		return '<script type="application/ld+json">'.json_encode($info).'</script>';
 	}
 
 }
