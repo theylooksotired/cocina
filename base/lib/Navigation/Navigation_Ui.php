@@ -142,7 +142,7 @@ class Navigation_Ui extends Ui {
 					        </div>
 					        <div class="headerRight">
 								<div class="searchTop">
-									<form accept-charset="UTF-8" class="formSearchSimple" action-xhr="'.url('buscar').'" method="GET">
+									<form accept-charset="UTF-8" class="formSearchSimple" action="'.url('buscar').'" method="GET">
 										<fieldset>
 											<div class="text formField ">
 												<input type="text" size="50" name="search" placeholder="'.__('search').'">
