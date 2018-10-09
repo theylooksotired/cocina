@@ -1,8 +1,7 @@
 <?php
 class Recipe_Ui extends Ui{
 
-	public function renderPublic($options=array()) {
-		$amp = (isset($options['amp']) && $options['amp']==true) ? true : false;
+	public function renderPublic() {
 		$description = ($this->object->get('description')!='') ? '<p>'.nl2br($this->object->get('description')).'</p>' : '';
 		return '<div class="itemPublic">
 					<a href="'.$this->object->url().'">
@@ -13,7 +12,7 @@ class Recipe_Ui extends Ui{
 						</div>
 						<div class="itemPublicLeft">
 							<div class="itemPublicImage">
-								'.(($amp) ? $this->object->getImageAmp('image', 'small') : $this->object->getImageIcon('image')).'
+								'.$this->object->getImageAmp('image', 'small').'
 							</div>
 						</div>
 					</a>
@@ -232,13 +231,13 @@ class Recipe_Ui extends Ui{
 				</div>';
 	}
 
-	static public function side($amp=false) {
+	static public function side() {
 		$items = new ListObjects('Recipe', array('where'=>'rating>=3', 'order'=>'RAND()', 'results'=>'3'));
 		if (!$items->isEmpty()) {
 			return '<div class="menuSideWrapper">
 						<div class="menuSideWrapperTitle">Algunas recetas que podrían interesarte</div>
 						<div class="menuSideWrapperItems">
-							'.$items->showList(array('function'=>'Public'), array('amp'=>$amp)).'
+							'.$items->showList(array('function'=>'Public')).'
 						</div>
 					</div>';
 		}

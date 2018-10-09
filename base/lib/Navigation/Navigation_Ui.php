@@ -78,7 +78,7 @@ class Navigation_Ui extends Ui {
 			break;
 			case 'recipe':
 				return Navigation_Ui::facebookHeader().'
-						'.$this->header(true).'
+						'.$this->header().'
 						<div class="contentFormatWrapper">
 							<div class="contentFormat">
 								<div class="contentFormatIns">
@@ -106,18 +106,16 @@ class Navigation_Ui extends Ui {
 										<h1 itemprop="headline">'.$this->object->titlePage.'</h1>
 										<div style="display:none;" itemprop="author" itemscope itemtype="http://schema.org/Organization">
 											<span itemprop="name">'.Params::param('titlePage').'</span>
-											<img itemprop="logo" src="'.LOCAL_URL.'visual/img/logo.png"/>
 										</div>
 										<div style="display:none;" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
 											<span itemprop="name">PlasticWebs</span>
-											<img itemprop="logo" src="https://www.plasticwebs.com/plastic/visual/img/logo.png"/>
 										</div>
 										<div class="contentLeft">
 											'.$content.'
 										</div>
 										<div class="contentRight">
 											<aside>
-												'.Adsense::inline().'
+												'.Adsense::ampInline().'
 												'.Recipe_Ui::side().'
 											</aside>
 										</div>
@@ -130,9 +128,9 @@ class Navigation_Ui extends Ui {
 		}
 	}
 
-	public function header($amp=false) {
+	public function header() {
 		return '<header>
-					<div class="menuMobile" '.(($amp) ? 'role="button" on="tap:menu.toggle" tabindex="0"' : 'onclick="showHideMenu()"').'>
+					<div class="menuMobile" role="button" on="tap:menu.toggle" tabindex="0">
 						<i class="icon icon-menu"></i>
 					</div>
 					<div class="headerWrapper">
@@ -148,7 +146,7 @@ class Navigation_Ui extends Ui {
 										accept-charset="UTF-8"
 										class="formSearchSimple"
 										enctype="multipart/form-data"
-										'.(($amp) ? 'action-xhr="'.url('buscar').'"' : 'action="'.url('buscar').'"').'
+										action-xhr="'.url('buscar').'"
 										method="post">
 										<fieldset>
 											<div class="text formField ">

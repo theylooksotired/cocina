@@ -1,14 +1,13 @@
 <?php
 class Post_Ui extends Ui{
 
-	public function renderPublic($options=array()) {
-		$amp = (isset($options['amp']) && $options['amp']==true) ? true : false;
+	public function renderPublic() {
 		return '<div class="itemPublic itemPublicPost">
 					<a href="'.$this->object->url().'">
 						<h2>'.$this->object->getBasicInfo().'</h2>
 						<div class="itemPublicIns">
 							<div class="itemPublicImage">
-							'.(($amp) ? $this->object->getImageAmp('image', 'small') : $this->object->getImageIcon('image')) .'
+							'.$this->object->getImageAmp('image', 'small').'
 							</div>
 							<p>'.$this->object->get('shortDescription').'</p>
 						</div>
@@ -30,21 +29,26 @@ class Post_Ui extends Ui{
 		return '<div class="itemComplete itemCompletePost">
 					<div class="postTop">
 						<div class="postTopLeft">
-							<img itemprop="image" src="'.$this->object->getImageUrl('image', 'small').'" alt="'.$this->object->getBasicInfo().'"/>
+							<div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+								'.$this->object->getImageAmp('image', 'web').'
+								<meta itemprop="url" content="'.$this->object->getImageUrl('image', 'web').'"></meta>
+							</div>
 						</div>
 						<div class="postTopRight">
 							<p><em itemprop="datePublished" content="'.$this->object->get('publishDate').'">'.Date::sqlText($this->object->get('publishDate')).'</em></p>
 							<p><strong>'.$this->object->get('shortDescription').'</strong></p>
 						</div>
 					</div>
-					'.Adsense::top().'
+					'.Adsense::amp().'
 					<div class="postContent pageComplete" itemprop="articleBody">
 						'.$this->object->get('description').'
 					</div>
-					'.Adsense::linksAll().'
-					'.$this->share(array('facebook'=>true, 'twitter'=>true, 'print'=>true)).'
+					<div class="itemCompleteShare">
+						<h3>Compartir este artículo en:</h3>
+						'.$this->share(array('facebook'=>true, 'twitter'=>true)).'
+					</div>
+					'.Adsense::amp().'
 				</div>
-				'.Navigation_Ui::facebookComments($this->object->url()).'
 				'.$this->related();
 	}
 
@@ -52,7 +56,6 @@ class Post_Ui extends Ui{
 		$items = new ListObjects('Post', array('where'=>'idPost!="'.$this->object->id().'"', 'order'=>'RAND()', 'limit'=>'5'));
 		return '<div class="related relatedPost">
 					<h2>Otras noticias que pueden interesarte</h2>
-					'.Adsense::top().'
 					<div class="relatedIns">'.$items->showList().'</div>
 				</div>';
 	}

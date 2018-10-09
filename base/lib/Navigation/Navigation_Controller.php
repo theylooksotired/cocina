@@ -7,6 +7,7 @@ class Navigation_Controller extends Controller{
 	}
 
 	public function controlActions(){
+		$this->mode = 'amp';
 		switch ($this->action) {
 
 			default:
@@ -27,11 +28,10 @@ class Navigation_Controller extends Controller{
 				$info = explode('_', $this->extraId);
 				$item = Recipe::read($info[0]);
 				if ($item->id()!='') {
-					$this->mode = 'amp';
 					$this->layoutPage = 'recipe';
 					$this->metaUrl = $item->url();
 					$this->titlePage = $item->getBasicInfo();
-					$this->metaDescription = $this->titlePage.'. '.$item->get('description');
+					$this->metaDescription = $item->get('description');
 					$this->metaImage = $item->getImageUrl('image', 'web');
 					$parent = Category::read($item->get('idCategory'));
 					$this->breadCrumbs = array(url('recetas')=>'Recetas', $parent->url()=>$parent->getBasicInfo(), $item->url()=>$item->getBasicInfo());
@@ -40,6 +40,11 @@ class Navigation_Controller extends Controller{
 					$info = explode('_', $this->id);
 					$item = Category::read($info[0]);
 					if ($item->id()!='') {
+						if ($this->extraId!='') {
+							header("HTTP/1.1 301 Moved Permanently");
+							header('Location: '.$item->url());
+							exit();
+						}
 						$this->metaUrl = $item->url();
 						$this->titlePage = 'Listado de recetas de '.strtolower($item->getBasicInfo());
 						$this->breadCrumbs = array(url('recetas')=>'Recetas', $item->url()=>$item->getBasicInfo());
@@ -52,6 +57,11 @@ class Navigation_Controller extends Controller{
 											'.$items->pager().'
 										</div>';
 					} else {
+						if ($this->id!='') {
+							header("HTTP/1.1 301 Moved Permanently");
+							header('Location: '.url($this->action));
+							exit();
+						}
 						$this->metaUrl = url($this->action);
 						$this->titlePage = 'Listado de recetas';
 						$this->metaDescription = $this->titlePage;
@@ -75,11 +85,16 @@ class Navigation_Controller extends Controller{
 					$this->layoutPage = 'post';
 					$this->metaUrl = $item->url();
 					$this->titlePage = $item->getBasicInfo();
-					$this->metaDescription = $this->titlePage.' - '.$item->get('shortDescription');
+					$this->metaDescription = $item->get('shortDescription');
 					$this->metaImage = $item->getImageUrl('image', 'web');
 					$this->breadCrumbs = array(url('articulos')=>'Artículos', $item->url()=>$item->getBasicInfo());
 					$this->content = $item->showUi('Complete');
 				} else {
+					if ($this->id!='') {
+						header("HTTP/1.1 301 Moved Permanently");
+						header('Location: '.url('articulos'));
+						exit();
+					}
 					$this->metaUrl = url('articulos');
 					$this->titlePage = 'Listado de artículos';
 					$this->metaDescription = $this->titlePage;
@@ -102,6 +117,7 @@ class Navigation_Controller extends Controller{
 					exit();
 				}
 				if ($this->id!='') {
+					$this->headersFormAmp();
 					$this->metaUrl = url($this->action.'/'.$this->id);
 					$search = str_replace('-', ' ', Text::simpleUrl($this->id));
 					$this->titlePage = 'Resultados de la busqueda - '.ucwords($search);
@@ -229,6 +245,13 @@ class Navigation_Controller extends Controller{
 			header('Location: '.url(''));
 			exit();
 		}
+	}
+
+	function headersFormAmp() {
+		header("Access-Control-Allow-Credentials: true");
+        header("Access-Control-Allow-Origin: ". str_replace('.', '-',url('')) .".cdn.ampproject.org");
+        header("AMP-Access-Control-Allow-Source-Origin: " . url(''));
+        header("Access-Control-Expose-Headers: AMP-Access-Control-Allow-Source-Origin");
 	}
 
 }
