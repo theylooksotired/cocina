@@ -242,7 +242,7 @@ class Recipe_Ui extends Ui{
 					"@type" => "Recipe",
 					"name" => $this->object->getBasicInfo(),
 					"image" => $this->object->getImageUrl('image', 'web'),
-					"author" => array("@type" => "Organisation", "name" => Params::param('titlePage')),
+					"author" => array("@type" => "Organization", "name" => Params::param('titlePage')),
 					"description" => $this->object->get('description'),
 					"prepTime" => $this->ptTime($this->object->get('preparationTime')),
 					"keywords" => "receta, ".str_replace('-', ' ', Params::param('country-code')).", ".$this->object->category->getBasicInfo(),
