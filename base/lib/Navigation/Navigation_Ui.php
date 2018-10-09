@@ -320,5 +320,9 @@ class Navigation_Ui extends Ui {
 		</amp-analytics>';
 	}
 
+	static public function autoadsAmp() {
+		return '<amp-auto-ads type="adsense" data-ad-client="ca-pub-7429223453905389"></amp-auto-ads>';
+	}
+
 }
 ?>
