@@ -131,8 +131,8 @@ class Navigation_Controller extends Controller{
 						$itemsOther = new ListObjects('Recipe', array('order'=>'RAND()', 'limit'=>'20'));
 					}
 					$this->content = '<div class="itemsAll">
-										'.Adsense::top().'
-										'.$items->showList(array('function'=>'Public', 'middle'=>Adsense::top(), 'middleRepetitions'=>2)).'
+										'.Adsense::amp().'
+										'.$items->showList(array('function'=>'Public', 'middle'=>Adsense::amp(), 'middleRepetitions'=>2)).'
 									</div>';
 					return $this->ui->render();
 				} else {
