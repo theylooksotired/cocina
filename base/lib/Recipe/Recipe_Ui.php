@@ -238,6 +238,13 @@ class Recipe_Ui extends Ui{
 		$this->object->loadIngredients();
 		$ingredients = array();
 		foreach ($this->object->ingredients as $item) { $ingredients[] = $item['label']; }
+		$instructions = array();
+		$instructionsDocument = new DOMDocument();
+		$instructionsDocument->loadHTML($this->object->get('preparation'));
+		$instructionsItems = $instructionsDocument->getElementsByTagName("li");
+		foreach($instructionsItems as $instructionsItem) {
+			$instructions[] = array("@type" => "HowToStep", "text" => (string) $instructionsItem->nodeValue);
+		}
 		$info = array("@context" => "http://schema.org/",
 					"@type" => "Recipe",
 					"name" => $this->object->getBasicInfo(),
@@ -250,7 +257,7 @@ class Recipe_Ui extends Ui{
 					"recipeCategory" => $this->object->category->getBasicInfo(),
 					"recipeCuisine" => "Cocina ".Params::param('titleCountry'),
 					"recipeIngredient" => $ingredients,
-					"recipeInstructions" => $this->object->get('preparation'),
+					"recipeInstructions" => $instructions,
 					"aggregateRating" => array("@type" => "AggregateRating",
 												"ratingValue" => $this->object->get('rating'),
 												"ratingCount" => $this->object->get('rating') * 5)
