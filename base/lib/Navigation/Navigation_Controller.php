@@ -249,8 +249,8 @@ class Navigation_Controller extends Controller{
 
 	function headersFormAmp() {
 		header("Access-Control-Allow-Credentials: true");
-        header("Access-Control-Allow-Origin: ". str_replace('.', '-', substr(BASE_URL, 0 -1)) .".cdn.ampproject.org");
-        header("AMP-Access-Control-Allow-Source-Origin: " . substr(BASE_URL, 0 -1));
+        header("Access-Control-Allow-Origin: ". str_replace('.', '-', substr(BASE_URL, 0, -1)) .".cdn.ampproject.org");
+        header("AMP-Access-Control-Allow-Source-Origin: " . substr(BASE_URL, 0, -1));
         header("Access-Control-Expose-Headers: AMP-Access-Control-Allow-Source-Origin");
 	}
 
