@@ -145,7 +145,7 @@ class Recipe_Ui extends Ui{
 		$posts = new ListObjects('Post', array('order'=>'publishDate DESC', 'results'=>'10'));
 		$categories = new ListObjects('Category', array('order'=>'ord'));
 		$recipesIntro = new ListObjects('Recipe', array('where'=>'rating="5"', 'order'=>'RAND()', 'limit'=>'5'));
-		return Adsense::top().'
+		return Adsense::amp().'
 				<div class="introTop">
 					<div class="introTopItems">
 						'.$categories->showList(array('function'=>'Intro')).'
@@ -154,7 +154,7 @@ class Recipe_Ui extends Ui{
 						<a href="'.url('recetas').'">Ver todas las recetas</a>
 					</div>
 				</div>
-				'.Adsense::top().'
+				'.Adsense::amp().'
 				<div class="introBottom">
 					<h1>'.Params::param('titlePage').'</h1>
 					<div class="pageComplete introText">'.HtmlSection::show('intro-text').'</div>
@@ -169,7 +169,6 @@ class Recipe_Ui extends Ui{
 								<a href="'.url('recetas').'">Ver todas las recetas</a>
 							</div>
 						</div>
-						'.Adsense::linksAll().'
 						<div class="pageComplete introText introTextComplete">'.HtmlSection::show('intro-complete').'</div>
 						<div class="blockIntro">
 							<h2 class="titleBlock"><a href="'.url('noticias').'">'.Params::param('title-news').'</a></h2>
@@ -184,7 +183,7 @@ class Recipe_Ui extends Ui{
 					<div class="contentRight">
 						<aside>
 							'.Recipe_Ui::side().'
-							'.Adsense::inline().'
+							'.Adsense::ampInline().'
 							'.Post_Ui::side().'
 						</aside>
 					</div>

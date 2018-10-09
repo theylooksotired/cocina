@@ -34,9 +34,9 @@ class Navigation_Ui extends Ui {
 									</div>
 									<div class="contentRight">
 										<aside>
-											'.Adsense::inline().'
+											'.Adsense::ampInline().'
 											'.Recipe_Ui::side().'
-											'.Adsense::inline().'
+											'.Adsense::ampInline().'
 											'.Post_Ui::side().'
 										</aside>
 									</div>
@@ -52,7 +52,7 @@ class Navigation_Ui extends Ui {
 								<div class="contentFormatIns">
 									'.$this->breadCrumbs().'
 									'.$title.'
-									'.Adsense::top().'
+									'.Adsense::amp().'
 									<div class="contentSimple">
 										'.$content.'
 									</div>
