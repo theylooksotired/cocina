@@ -240,10 +240,10 @@ class Recipe_Ui extends Ui{
 		foreach ($this->object->ingredients as $item) { $ingredients[] = $item['label']; }
 		$instructions = array();
 		$instructionsDocument = new DOMDocument();
-		$instructionsDocument->loadHTML($this->object->get('preparation'));
+		$instructionsDocument->loadHTML(mb_convert_encoding($this->object->get('preparation'), 'HTML-ENTITIES', 'UTF-8'));
 		$instructionsItems = $instructionsDocument->getElementsByTagName("li");
 		foreach($instructionsItems as $instructionsItem) {
-			$instructions[] = array("@type" => "HowToStep", "text" => utf8_decode((string) $instructionsItem->nodeValue));
+			$instructions[] = array("@type" => "HowToStep", "text" => (string) $instructionsItem->nodeValue);
 		}
 		$info = array("@context" => "http://schema.org/",
 					"@type" => "Recipe",
