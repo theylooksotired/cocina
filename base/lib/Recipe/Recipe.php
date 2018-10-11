@@ -3,7 +3,7 @@ class Recipe extends Db_Object {
 
 	public function url() {
 		$this->loadCategory();
-		return $this->category->url().'/'.$this->id().'_'.$this->get('nameUrl');
+		return $this->category->url().'/'.$this->get('nameUrl');
 	}
 
 	public function loadCategory() {

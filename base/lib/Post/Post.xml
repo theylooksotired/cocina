@@ -11,7 +11,7 @@
             <label>#title</label>
             <pager>10</pager>
             <viewPublic>true</viewPublic>
-            <publicUrl>@posts / #idPost _ #titleUrl</publicUrl>
+            <publicUrl>@posts / #titleUrl</publicUrl>
             <publicUrlList>@posts</publicUrlList>
             <templateItemAdmin>
                 <div class="active active-##active">

@@ -12,7 +12,7 @@
             <orderBy>ord</orderBy>
             <label>#name</label>
             <viewPublic>true</viewPublic>
-            <publicUrl>@recipes / #idCategory _ #nameUrl</publicUrl>
+            <publicUrl>@recipes / #nameUrl</publicUrl>
             <publicUrlList>@recipes</publicUrlList>
             <templateItemAdmin>
                 <p class="accent"><strong>#name</strong></p>

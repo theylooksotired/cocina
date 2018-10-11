@@ -25,9 +25,11 @@ class Navigation_Controller extends Controller{
 			break;
 
 			case 'recetas':
-				$info = explode('_', $this->extraId);
-				$item = Recipe::read($info[0]);
-				if ($item->id()!='') {
+				if ($this->extraId!='') {
+					$info = explode('_', $this->extraId);
+					$item = (isset($info[1])) ? Recipe::read($info[0]) : Recipe::readFirst(array('where'=>'nameUrl="'.$this->extraId.'"'));
+				}
+				if ($this->extraId!='' && $item->id()!='') {
 					$this->layoutPage = 'recipe';
 					$this->metaUrl = $item->url();
 					$this->titlePage = $item->getBasicInfo();
@@ -38,9 +40,11 @@ class Navigation_Controller extends Controller{
 					$this->breadCrumbs = array(url('recetas')=>'Recetas', $parent->url()=>$parent->getBasicInfo(), $item->url()=>$item->getBasicInfo());
 					$this->content = $item->showUi('Complete');
 				} else {
-					$info = explode('_', $this->id);
-					$item = Category::read($info[0]);
-					if ($item->id()!='') {
+					if ($this->id!='') {
+						$info = explode('_', $this->id);
+						$item = (isset($info[1])) ? Category::read($info[0]) : Category::readFirst(array('where'=>'nameUrl="'.$this->id.'"'));
+					}
+					if ($this->id!='' && $item->id()!='') {
 						if ($this->extraId!='') {
 							header("HTTP/1.1 301 Moved Permanently");
 							header('Location: '.$item->url());
@@ -80,9 +84,11 @@ class Navigation_Controller extends Controller{
 			break;
 
 			case 'articulos':
-				$info = explode('_', $this->id);
-				$item = Post::read($info[0]);
-				if ($item->id()!='') {
+				if ($this->id!='') {
+					$info = explode('_', $this->id);
+					$item = (isset($info[1])) ? Post::read($info[0]) : Post::readFirst(array('where'=>'titleUrl="'.$this->id.'"'));
+				}
+				if ($this->id!='' && $item->id()!='') {
 					$this->layoutPage = 'post';
 					$this->metaUrl = $item->url();
 					$this->titlePage = $item->getBasicInfo();
