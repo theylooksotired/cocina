@@ -221,9 +221,8 @@ class Navigation_Ui extends Ui {
 
 	static public function menuItems() {
 		$category = new Category();
-		if ($_GET['action']=='recetas') {
-			$infoCategory = explode('_', $_GET['id']);
-			$category = Category::read($infoCategory[0]);
+		if ($this->object->action=='recetas' && $this->object->id!='') {
+			$category = Category::readFirst(array('where'=>'nameUrl="'.$this->object->id.'"'));
 		}
 		$categories = new ListObjects('Category', array('order'=>'ord', 'limit'=>'6'));
 		return '<ul>
