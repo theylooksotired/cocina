@@ -192,12 +192,6 @@ class Navigation_Ui extends Ui {
 							<div class="footerRight">
 								<div class="appButtons">
 									<p>Descarga nuestra aplicación en:</p>
-									<div class="appButton">
-										<a href="'.Url::format(Params::param('link-app-store')).'" target="_blank">
-											<i class="icon icon-apple"></i>
-											<span>App Store</span>
-										</a>
-									</div>
 									<div class="appButton appButtonGoogle">
 										<a href="'.Url::format(Params::param('link-google-play')).'" target="_blank">
 											<i class="icon icon-android"></i>
@@ -210,6 +204,15 @@ class Navigation_Ui extends Ui {
 					</div>
 				</footer>';
 	}
+
+	/*
+	<div class="appButton">
+		<a href="'.Url::format(Params::param('link-app-store')).'" target="_blank">
+			<i class="icon icon-apple"></i>
+			<span>App Store</span>
+		</a>
+	</div>
+	*/
 
 	public function menu() {
 		return '<div class="menuWrapper"><div class="menuAll" id="menu">'.Navigation_Ui::menuItems().'</div></div>';
