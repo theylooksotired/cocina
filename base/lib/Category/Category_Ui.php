@@ -23,9 +23,8 @@ class Category_Ui extends Ui{
 	public function renderComplete() {
 		$items = new ListObjects('Recipe', array('where'=>'idCategory="'.$this->object->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
 		return '<div class="listAll">
-					'.$items->pager().'
-					'.Adsense::top().'
-					'.$items->showList(array('function'=>'Public','middle'=>Adsense::top(), 'middleRepetitions'=>2)).'
+					'.Adsense::amp().'
+					'.$items->showList(array('function'=>'Public','middle'=>Adsense::amp(), 'middleRepetitions'=>2)).'
 					'.$items->pager().'
 				</div>';
 	}
