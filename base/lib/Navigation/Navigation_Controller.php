@@ -50,7 +50,7 @@ class Navigation_Controller extends Controller{
 						$item = (isset($info[1])) ? Category::read($info[0]) : Category::readFirst(array('where'=>'nameUrl="'.$this->id.'"'));
 					}
 					if ($this->id!='' && $item->id()!='') {
-						if ($this->extraId!='') {
+						if ($this->extraId!='' || $this->id!=$item->get('nameUrl')) {
 							header("HTTP/1.1 301 Moved Permanently");
 							header('Location: '.$item->url());
 							exit();
