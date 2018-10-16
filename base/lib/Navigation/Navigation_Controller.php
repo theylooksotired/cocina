@@ -55,12 +55,14 @@ class Navigation_Controller extends Controller{
 							header('Location: '.$item->url());
 							exit();
 						}
+						$itemUi = new Category_Ui($item);
 						$this->metaUrl = $item->url();
 						$this->titlePage = 'Listado de recetas de '.strtolower($item->getBasicInfo());
 						$this->breadCrumbs = array(url('recetas')=>'Recetas', $item->url()=>$item->getBasicInfo());
 						$this->metaDescription = $this->titlePage;
 						$items = new ListObjects('Recipe', array('where'=>'idCategory="'.$item->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
-						$this->header = $items->metaNavigation();
+						$this->header = $items->metaNavigation().'
+										'.$itemUi->renderJsonHeader($items);
 						$this->content = '<div class="listAll">
 											'.Adsense::amp().'
 											'.$items->showList(array('function'=>'Public','middle'=>Adsense::amp(), 'middleRepetitions'=>2)).'

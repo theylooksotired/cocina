@@ -233,7 +233,8 @@ class Recipe_Ui extends Ui{
 		return (isset($array[$time])) ? $array[$time] : "PT2H";
 	}
 
-	public function renderJsonHeader() {
+	public function renderJsonHeader($options=array()) {
+		$simple = (isset($options['simple'])) ? true : false;
 		$this->object->loadCategory();
 		$this->object->loadIngredients();
 		$ingredients = array();
@@ -248,6 +249,7 @@ class Recipe_Ui extends Ui{
 		$info = array("@context" => "http://schema.org/",
 					"@type" => "Recipe",
 					"name" => $this->object->getBasicInfo(),
+					"url" => $this->object->url(),
 					"image" => $this->object->getImageUrl('image', 'web'),
 					"author" => array("@type" => "Organization", "name" => Params::param('titlePage')),
 					"description" => $this->object->get('description'),
@@ -262,7 +264,7 @@ class Recipe_Ui extends Ui{
 												"ratingValue" => $this->object->get('rating'),
 												"ratingCount" => $this->object->get('rating') * 5)
 					);
-		return '<script type="application/ld+json">'.json_encode($info).'</script>';
+		return ($simple) ? json_encode($info) : '<script type="application/ld+json">'.json_encode($info).'</script>';
 	}
 
 }

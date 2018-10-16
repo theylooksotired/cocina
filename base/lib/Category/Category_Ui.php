@@ -49,5 +49,20 @@ class Category_Ui extends Ui{
 		return $html;
 	}
 
+	public function renderJsonHeader($items) {
+		$recipes = array();
+		$i = 1;
+		foreach ($items->list as $item) {
+			$recipes[] = array("@type" => "ListItem",
+								"position" => $i,
+								"url" => $item->url());
+			$i++;
+		}
+		$info = array("@context" => "http://schema.org/",
+					"@type" => "ItemList",
+					"itemListElement" => $recipes);
+		return '<script type="application/ld+json">'.json_encode($info).'</script>';
+	}
+
 }
 ?>
