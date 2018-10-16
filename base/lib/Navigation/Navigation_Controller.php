@@ -57,9 +57,9 @@ class Navigation_Controller extends Controller{
 						}
 						$itemUi = new Category_Ui($item);
 						$this->metaUrl = $item->url();
-						$this->titlePage = 'Listado de recetas de '.strtolower($item->getBasicInfo());
+						$this->titlePage = ($item->get('title')!='') ? $item->get('title') : 'Listado de recetas de '.strtolower($item->getBasicInfo());
 						$this->breadCrumbs = array(url('recetas')=>'Recetas', $item->url()=>$item->getBasicInfo());
-						$this->metaDescription = $this->titlePage;
+						$this->metaDescription = ($item->get('description')!='') ? $item->get('description') : $this->titlePage;
 						$items = new ListObjects('Recipe', array('where'=>'idCategory="'.$item->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
 						$this->header = $items->metaNavigation().'
 										'.$itemUi->renderJsonHeader($items);
@@ -195,6 +195,11 @@ class Navigation_Controller extends Controller{
 			case 'fix':
 				$this->mode = 'ajax';
 				$this->checkAuthorization();
+				// Add title and description to categories
+				Db::execute('ALTER TABLE `'.Db::prefixTable('Category').'` ADD `title` VARCHAR(255) NULL;');
+				Db::execute('ALTER TABLE `'.Db::prefixTable('Category').'` ADD `description` TEXT NULL;');
+				/*
+				// Fix encoding
 				$items = Category::readList();
 				foreach($items as $item) {
 					$item->modify(array('name'=>html_entity_decode($item->get('name'), ENT_COMPAT, 'UTF-8')));
@@ -211,6 +216,7 @@ class Navigation_Controller extends Controller{
 				foreach($items as $item) {
 					$item->modifySimple('label', html_entity_decode($item->get('label'), ENT_COMPAT, 'UTF-8'));
 				}
+				*/
 				return 'DONE';
 			break;
 

@@ -36,6 +36,16 @@
             <type>hidden-url</type>
             <refAttribute>name</refAttribute>
         </attribute>
+        <attribute>
+            <name>title</name>
+            <label>title</label>
+            <type>text-long</type>
+        </attribute>
+        <attribute>
+            <name>description</name>
+            <label>description</label>
+            <type>textarea</type>
+        </attribute>
     </attributes>
     <indexes>
         <index>
