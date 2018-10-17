@@ -30,7 +30,7 @@ class Navigation_Controller extends Controller{
 					$item = (isset($info[1])) ? Recipe::read($info[0]) : Recipe::readFirst(array('where'=>'nameUrl="'.$this->extraId.'"'));
 				}
 				if ($this->extraId!='' && $item->id()!='') {
-					if (isset($_GET['pagina']) && $_GET['pagina']!='') {
+					if ((isset($_GET['pagina']) && $_GET['pagina']!='') || $this->extraId!=$item->get('nameUrl')) {
 						header("HTTP/1.1 301 Moved Permanently");
 						header('Location: '.$item->url());
 						exit();
