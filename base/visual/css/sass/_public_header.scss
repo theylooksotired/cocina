@@ -9,6 +9,7 @@
     right: 0;
     z-index: 99999;
 }
+
 .header {
     max-width: $sizeDesktop;
     margin: auto;
@@ -65,6 +66,12 @@
 }
 .uruguay .logo a {
     background-image: url('../../img/logo_uruguay.png');
+}
+.honduras .logo a {
+    background-image: url('../../img/logo_honduras.png');
+}
+.panama .logo a {
+    background-image: url('../../img/logo_panama.png');
 }
 
 .searchTop {
