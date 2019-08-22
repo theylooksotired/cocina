@@ -39,7 +39,7 @@ class Post_Ui extends Ui{
 					'.Adsense::amp().'
 					<div class="postContent pageComplete">'.$this->object->get('description').'</div>
 					<div class="itemCompleteShare">
-						<h3>Ayúdanos compartiendo esta receta o dejando tu comentario.</h3>
+						<h3>Ayúdanos compartiendo esta nota o dejando tu comentario.</h3>
 						'.$this->share(array('facebook'=>true, 'twitter'=>true)).'
 						'.Navigation_Ui::facebookComments($this->object->url()).'
 					</div>
