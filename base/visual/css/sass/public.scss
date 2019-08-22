@@ -594,10 +594,10 @@ body {
 	padding: 30px 10px;
 	text-align: center;
 	> h3 {
-		font-size: $fontSizeSmall;
-		padding: 10px 0;
-		color: darken($white, 40%);
-		font-weight: normal;
+		font-size: $fontSizeNormal;
+		padding: 10px 0 20px 0;
+		color: $colorFacebook;
+		font-weight: bold;
 		position: relative;
 		&:before {
 			position: absolute;

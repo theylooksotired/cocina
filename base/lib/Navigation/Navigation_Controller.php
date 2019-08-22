@@ -30,7 +30,7 @@ class Navigation_Controller extends Controller{
 					$item = (isset($info[1])) ? Recipe::read($info[0]) : Recipe::readFirst(array('where'=>'nameUrl="'.$this->extraId.'"'));
 				}
 				if ($this->extraId!='' && $item->id()!='') {
-					if (isset($_GET['pagina']) && $_GET['pagina']!='') {
+					if ((isset($_GET['pagina']) && $_GET['pagina']!='') || $this->extraId!=$item->get('nameUrl')) {
 						header("HTTP/1.1 301 Moved Permanently");
 						header('Location: '.$item->url());
 						exit();
@@ -40,7 +40,7 @@ class Navigation_Controller extends Controller{
 					$this->titlePage = $item->getBasicInfo();
 					$this->metaDescription = $item->get('description');
 					$this->metaImage = $item->getImageUrl('image', 'web');
-					$this->header = $item->showUi('JsonHeader');
+					$this->header = $item->showUi('JsonHeader').$this->ampFacebookHeader();
 					$parent = Category::read($item->get('idCategory'));
 					$this->breadCrumbs = array(url('recetas')=>'Recetas', $parent->url()=>$parent->getBasicInfo(), $item->url()=>$item->getBasicInfo());
 					$this->content = $item->showUi('Complete');
@@ -101,7 +101,7 @@ class Navigation_Controller extends Controller{
 					$this->titlePage = $item->getBasicInfo();
 					$this->metaDescription = $item->get('shortDescription');
 					$this->metaImage = $item->getImageUrl('image', 'web');
-					$this->header = $item->showUi('JsonHeader');
+					$this->header = $item->showUi('JsonHeader').$this->ampFacebookHeader();
 					$this->breadCrumbs = array(url('articulos')=>'Artículos', $item->url()=>$item->getBasicInfo());
 					$this->content = $item->showUi('Complete');
 				} else {
@@ -274,6 +274,10 @@ class Navigation_Controller extends Controller{
         header("Access-Control-Allow-Origin: ". str_replace('.', '-', SERVER_URL) .".cdn.ampproject.org");
         header("AMP-Access-Control-Allow-Source-Origin: " . SERVER_URL);
         header("Access-Control-Expose-Headers: AMP-Access-Control-Allow-Source-Origin");
+	}
+
+	function ampFacebookHeader() {
+		return '<script async custom-element="amp-facebook-comments" src="https://cdn.ampproject.org/v0/amp-facebook-comments-0.1.js"></script>';
 	}
 
 }

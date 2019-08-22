@@ -284,8 +284,7 @@ class Navigation_Ui extends Ui {
 	}
 
 	static public function facebookComments($url) {
-		return '';
-		return '<div class="fb-comments" data-href="'.$url.'" data-width="100%" data-numposts="5"></div>';
+		return '<amp-facebook-comments layout="responsive" height="300" width="600" data-href="'.$url.'"></amp-facebook-comments>';
 	}
 
 	static public function analytics() {
