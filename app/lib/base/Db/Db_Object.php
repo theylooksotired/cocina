@@ -462,6 +462,16 @@ class Db_Object extends Db_Sql {
     }
 
     /**
+    * Gets the HTML image that the attribute points.
+    */
+    public function getImageAmpFill($attributeName, $version='', $alternative='') {
+        $imageUrl = $this->getImageUrl($attributeName, $version, false);
+        if ($imageUrl!='') {
+            return '<amp-img src="'.$imageUrl.'" alt="'.$this->getBasicInfo().'" layout="fill" class="amp-container"/>';
+        }
+    }
+
+    /**
     * Gets the HTML image that exists and fits to an icon.
     */
     public function getImageIcon($attributeName) {

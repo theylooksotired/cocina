@@ -511,6 +511,11 @@ body {
 			}
 		}
 	}
+	.itemCompleteImage {
+		amp-img > img {
+			object-fit: cover;
+		}
+	}
 	&.itemCompletePost {
 		.itemCompleteImage {
 			float: left;

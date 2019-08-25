@@ -7,6 +7,7 @@
     <meta name="description" content="<?php echo $metaDescription;?>"/>
     <meta name="keywords" content="<?php echo $metaKeywords;?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="fb:app_id" content="168728593755836" />
     <?php echo Params::param('metainfo-google-webmasters');?>
 
     <meta property="og:title" content="<?php echo $title;?>" />

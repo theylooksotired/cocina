@@ -81,7 +81,9 @@ class Recipe_Ui extends Ui{
 				<div class="itemComplete itemCompleteRecipe">
 					<div class="itemCompleteTop">
 						<div class="itemCompleteTopLeft">
-							'.$this->object->getImageAmp('image', 'web').'
+							<div class="itemCompleteImage">
+								'.$this->object->getImageAmpFill('image', 'web').'
+							</div>
 							<div class="itemCompleteCategory">
 								<a href="'.$this->object->category->url().'">'.$this->object->category->getBasicInfo().'</a>
 							</div>
@@ -131,7 +133,7 @@ class Recipe_Ui extends Ui{
 	static public function renderIntroSite() {
 		$posts = new ListObjects('Post', array('order'=>'publishDate DESC', 'results'=>'10'));
 		$categories = new ListObjects('Category', array('order'=>'ord'));
-		$recipesIntro = new ListObjects('Recipe', array('where'=>'rating="5"', 'order'=>'RAND()', 'limit'=>'5'));
+		$recipesIntro = new ListObjects('Recipe', array('where'=>'active="1" AND rating="5"', 'order'=>'RAND()', 'limit'=>'5'));
 		return Adsense::amp().'
 				<div class="introTop">
 					<div class="introTopItems">
@@ -205,7 +207,7 @@ class Recipe_Ui extends Ui{
 	}
 
 	static public function side() {
-		$items = new ListObjects('Recipe', array('where'=>'rating>=3', 'order'=>'RAND()', 'results'=>'3'));
+		$items = new ListObjects('Recipe', array('where'=>'active="1" AND rating>=3', 'order'=>'RAND()', 'results'=>'3'));
 		if (!$items->isEmpty()) {
 			return '<div class="menuSideWrapper">
 						<div class="menuSideWrapperTitle">Algunas recetas que podrían interesarte</div>
@@ -217,7 +219,7 @@ class Recipe_Ui extends Ui{
 	}
 
 	public function recipesBottom() {
-		$items = new ListObjects('Recipe', array('where'=>'rating>=3 AND idCategory="'.$this->object->get('idCategory').'"', 'limit'=>'6'));
+		$items = new ListObjects('Recipe', array('where'=>'active="1" AND rating>=3 AND idCategory="'.$this->object->get('idCategory').'"', 'limit'=>'6'));
 		if (!$items->isEmpty()) {
 			return '<div class="menuBottomWrapper">
 						<div class="menuBottomWrapperTitle">También le pueden interesar estas recetas</div>

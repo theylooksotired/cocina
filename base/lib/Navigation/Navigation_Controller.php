@@ -60,7 +60,7 @@ class Navigation_Controller extends Controller{
 						$this->titlePage = ($item->get('title')!='') ? $item->get('title') : 'Listado de recetas de '.strtolower($item->getBasicInfo());
 						$this->breadCrumbs = array(url('recetas')=>'Recetas', $item->url()=>$item->getBasicInfo());
 						$this->metaDescription = ($item->get('description')!='') ? $item->get('description') : $this->titlePage;
-						$items = new ListObjects('Recipe', array('where'=>'idCategory="'.$item->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
+						$items = new ListObjects('Recipe', array('where'=>'active="1" AND idCategory="'.$item->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
 						$this->header = $items->metaNavigation().'
 										'.$itemUi->renderJsonHeader($items);
 						$this->content = '<div class="listAll">
@@ -78,7 +78,7 @@ class Navigation_Controller extends Controller{
 						$this->titlePage = 'Listado de recetas';
 						$this->metaDescription = $this->titlePage;
 						$this->breadCrumbs = array(url('recetas')=>'Recetas');
-						$items = new ListObjects('Recipe', array('order'=>'nameUrl', 'results'=>'12'));
+						$items = new ListObjects('Recipe', array('where'=>'active="1"', 'order'=>'nameUrl', 'results'=>'12'));
 						$this->header = $items->metaNavigation();
 						$this->content = '<div class="listAll">
 											'.Adsense::amp().'
@@ -137,13 +137,13 @@ class Navigation_Controller extends Controller{
 					$this->metaUrl = url($this->action.'/'.$this->id);
 					$search = str_replace('-', ' ', Text::simpleUrl($this->id));
 					$this->titlePage = 'Resultados de la busqueda - '.ucwords($search);
-					$items = new ListObjects('Recipe', array('where'=>'MATCH (name, nameUrl, description, preparation) AGAINST ("'.$search.'")', 'order'=>'MATCH (name, nameUrl, description, preparation) AGAINST ("'.$search.'") DESC', 'limit'=>'20'));
+					$items = new ListObjects('Recipe', array('where'=>'active="1" AND MATCH (name, nameUrl, description, preparation) AGAINST ("'.$search.'")', 'order'=>'MATCH (name, nameUrl, description, preparation) AGAINST ("'.$search.'") DESC', 'limit'=>'20'));
 					if ($items->isEmpty()) {
-						$items = new ListObjects('Recipe', array('where'=>'CONCAT(name," ",nameUrl," ",description," ",preparation) LIKE ("%'.$search.'%")', 'order'=>'nameUrl', 'limit'=>'20'));
+						$items = new ListObjects('Recipe', array('where'=>'active="1" AND CONCAT(name," ",nameUrl," ",description," ",preparation) LIKE ("%'.$search.'%")', 'order'=>'nameUrl', 'limit'=>'20'));
 					}
 					if ($items->isEmpty()) {
 						$this->titlePage = 'Lo sentimos, no encontramos resultados para su búsqueda';
-						$itemsOther = new ListObjects('Recipe', array('order'=>'RAND()', 'limit'=>'20'));
+						$itemsOther = new ListObjects('Recipe', array('where'=>'active="1"', 'order'=>'RAND()', 'limit'=>'20'));
 					}
 					$this->content = '<div class="itemsAll">
 										'.Adsense::amp().'
@@ -195,9 +195,12 @@ class Navigation_Controller extends Controller{
 			case 'fix':
 				$this->mode = 'ajax';
 				$this->checkAuthorization();
-				// Add title and description to categories
-				Db::execute('ALTER TABLE `'.Db::prefixTable('Category').'` ADD `title` VARCHAR(255) NULL;');
-				Db::execute('ALTER TABLE `'.Db::prefixTable('Category').'` ADD `description` TEXT NULL;');
+				// Add the active checkbox
+				Db::execute('ALTER TABLE `'.Db::prefixTable('Recipe').'` ADD `active` INT NULL;');
+				Db::execute('UPDATE `'.Db::prefixTable('Recipe').'` SET `active`=1;');
+				// // Add title and description to categories
+				// Db::execute('ALTER TABLE `'.Db::prefixTable('Category').'` ADD `title` VARCHAR(255) NULL;');
+				// Db::execute('ALTER TABLE `'.Db::prefixTable('Category').'` ADD `description` TEXT NULL;');
 				/*
 				// Fix encoding
 				$items = Category::readList();

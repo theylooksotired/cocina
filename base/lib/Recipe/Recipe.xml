@@ -91,6 +91,11 @@
 			<type>textarea-ck</type>
 			<required>notEmpty</required>
 		</attribute>
+		<attribute>
+			<name>active</name>
+			<label>active</label>
+			<type>checkbox</type>
+		</attribute>
 	</attributes>
 	<indexes>
         <index>

@@ -21,7 +21,7 @@ class Category_Ui extends Ui{
 	}
 
 	public function renderComplete() {
-		$items = new ListObjects('Recipe', array('where'=>'idCategory="'.$this->object->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
+		$items = new ListObjects('Recipe', array('where'=>'active="1" AND idCategory="'.$this->object->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
 		return '<div class="listAll">
 					'.Adsense::amp().'
 					'.$items->showList(array('function'=>'Public','middle'=>Adsense::amp(), 'middleRepetitions'=>2)).'
@@ -33,7 +33,7 @@ class Category_Ui extends Ui{
 		$html = '';
 		$items = Category::readList(array('order'=>'ord'));
 		foreach ($items as $item) {
-			$itemsIns = new ListObjects('Recipe', array('where'=>'idCategory="'.$item->id().'"', 'order'=>'RAND()', 'results'=>'5'));
+			$itemsIns = new ListObjects('Recipe', array('where'=>'active="1" AND idCategory="'.$item->id().'"', 'order'=>'RAND()', 'results'=>'5'));
 			$html .= '<div class="listAllCategory">
 						<h2>'.$item->link().'</h2>
 						<div class="contentSimple">
