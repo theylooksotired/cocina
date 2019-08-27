@@ -176,7 +176,7 @@ class Navigation_Ui extends Ui {
 							<a href="https://www.cocina-colombiana.com" target="_blank" title="Recetas de cocina de Colombia">Colombia</a>
 							<a href="https://www.cocina-cubana.com" target="_blank" title="Recetas de cocina de Cuba">Cuba</a>
 							<a href="https://www.cocina-ecuatoriana.com" target="_blank" title="Recetas de cocina de Ecuador">Ecuador</a>
-							<a href="https://www.www.recetashonduras.com" target="_blank" title="Recetas de cocina de Honduras">Honduras</a>
+							<a href="https://www.recetashonduras.com" target="_blank" title="Recetas de cocina de Honduras">Honduras</a>
 							<a href="https://www.la-cocina-mexicana.com" target="_blank" title="Recetas de cocina de México">México</a>
 							<a href="https://www.recetaspanama.com/" target="_blank" title="Recetas de cocina de Panamá">Panamá</a>
 							<a href="https://www.comida-peruana.com" target="_blank" title="Recetas de cocina del Peru">Peru</a>
