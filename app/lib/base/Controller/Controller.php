@@ -34,7 +34,7 @@ abstract class Controller{
     * By default it uses the title defined in the Parameters.
     */
     public function getTitle() {
-        return (isset($this->titlePage)) ? $this->titlePage.' - '.Params::param('metainfo-titlePage') : Params::param('metainfo-titlePage');
+        return (isset($this->titlePage)) ? ((strlen($this->titlePage)<=30) ? $this->titlePage.' - '.Params::param('metainfo-titlePage') : $this->titlePage) : Params::param('metainfo-titlePage');
     }
 
     /**
