@@ -232,7 +232,7 @@ class Navigation_Controller extends Controller{
                 $recipe = Recipe::read($this->id);
                 if (isset($this->values['image_base64']) && $this->values['image_base64']!='') {
         			$fileSave = Text::simpleUrlFileBase($recipe->id().'_image');
-                    if (Image_File::saveImageUrl($this->values['image_base64'], 'Recipe', $fileSave)) {
+                    if (Image_File::saveImageData($this->values['image_base64'], 'Recipe', $fileSave)) {
                         $recipe->modifySimple('image', $fileSave);
                     }
         		}

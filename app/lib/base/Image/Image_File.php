@@ -16,6 +16,13 @@ class Image_File{
     static public function saveImageUrl($url, $objectName, $uploadName) {
         return Image_File::saveFileImage($url, $uploadName, STOCK_FILE.$objectName, true);
     }
+    
+    /**
+    * Save an image from a DATA.
+    */
+    static public function saveImageData($url, $objectName, $uploadName) {
+        return Image_File::saveFileImage($url, $uploadName, STOCK_FILE.$objectName, true, true);
+    }
 
     /**
     * Save an image from an input file.
@@ -31,7 +38,7 @@ class Image_File{
     /**
     * Save the image and create versions of itself.
     */
-    static private function saveFileImage($fileImage, $fileName, $mainFolder, $copy=false) {
+    static private function saveFileImage($fileImage, $fileName, $mainFolder, $copy=false, $isData=false) {
         $localFolder = Text::simpleUrlFileBase($fileName);
         $folder = $mainFolder.'/'.$localFolder;
         if (is_dir($folder)) {
@@ -42,9 +49,16 @@ class Image_File{
         $saveImage = true;
         if ($copy) {
             $fileDestination = $localFolder;
-            $destination = $folder."/".$fileDestination.'.'.strtolower(substr($fileImage, -3));
-            if (!@copy(str_replace(STOCK_URL, STOCK_FILE, $fileImage), $destination)) {
-                $saveImage = false;
+            if ($isData) {
+                $destination = $folder."/".$fileDestination.'.jpg';
+                if (!@Image_File::base64ToJpeg($fileImage, $destination)) {
+                    $saveImage = false;
+                }
+            } else {
+                $destination = $folder."/".$fileDestination.'.'.strtolower(substr($fileImage, -3));
+                if (!@copy(str_replace(STOCK_URL, STOCK_FILE, $fileImage), $destination)) {
+                    $saveImage = false;
+                }   
             }
         } else {
             $tmpImage = new Image($fileImage);
@@ -97,6 +111,14 @@ class Image_File{
     public static function deleteImage($objectName, $name) {
         $directory = STOCK_FILE.$objectName.'/'.$name.'/';
         rrmdir($directory);
+    }
+    
+    static public function base64ToJpeg($base64String, $outputFile) {
+        $ifp = fopen( $outputFile, 'wb' ); 
+        $data = explode( ',', $base64String );
+        fwrite( $ifp, base64_decode( $data[ 1 ] ) );
+        fclose( $ifp ); 
+        return $outputFile; 
     }
 
 }
