@@ -219,7 +219,7 @@ class Recipe_Ui extends Ui{
 	}
 
 	public function recipesBottom() {
-		$items = new ListObjects('Recipe', array('order'=>'MATCH (name, nameUrl, description, preparation) AGAINST ("'.$this->object->getBasicInfo().'") DESC', 'limit'=>'6'));
+		$items = new ListObjects('Recipe', array('where'=>'active="1" AND idRecipe!="'.$this->object->id().'"', 'order'=>'MATCH (name, nameUrl, description, preparation) AGAINST ("'.$this->object->getBasicInfo().'") DESC', 'limit'=>'6'));
 		if ($items->isEmpty()) {
 			$items = new ListObjects('Recipe', array('where'=>'active="1" AND rating>=3 AND idCategory="'.$this->object->get('idCategory').'"', 'limit'=>'6'));
 		}
