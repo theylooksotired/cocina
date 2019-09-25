@@ -196,8 +196,8 @@ class Navigation_Controller extends Controller{
 				$this->mode = 'ajax';
 				$this->checkAuthorization();
 				// Add the active checkbox
-				Db::execute('ALTER TABLE `'.Db::prefixTable('Recipe').'` ADD `active` INT NULL;');
-				Db::execute('UPDATE `'.Db::prefixTable('Recipe').'` SET `active`=1;');
+				// Db::execute('ALTER TABLE `'.Db::prefixTable('Recipe').'` ADD `active` INT NULL;');
+				// Db::execute('UPDATE `'.Db::prefixTable('Recipe').'` SET `active`=1;');
 				// // Add title and description to categories
 				// Db::execute('ALTER TABLE `'.Db::prefixTable('Category').'` ADD `title` VARCHAR(255) NULL;');
 				// Db::execute('ALTER TABLE `'.Db::prefixTable('Category').'` ADD `description` TEXT NULL;');

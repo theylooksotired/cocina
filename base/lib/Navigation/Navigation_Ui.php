@@ -126,7 +126,10 @@ class Navigation_Ui extends Ui {
 						<div class="header">
 					        <div class="headerLeft">
 						    	<div class="logo">
-						    		<a href="'.url('').'">'.Params::param('titlePage').'</a>
+						    		<a href="'.url('').'">
+						    			<span>Recetas de</span>
+						    			<em>'.Params::param('country').'</em>
+						    		</a>
 						    	</div>
 					        </div>
 					        <div class="headerRight">

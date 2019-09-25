@@ -21,11 +21,22 @@
         a {
             height: 30px;
             display:block;
-            text-indent: -100rem;
-            overflow: hidden;
-            background-repeat: no-repeat;
-            background-position: left center;
-            background-size: contain;
+            text-align: center;
+            span,
+            em {
+                display: block;
+                text-transform: uppercase;
+                font-style: normal;
+                line-height: 1em;
+            }
+            span {
+                font-size: 10px;
+            }
+            em {
+                padding: 2px 0 0 0;
+                font-size: 18px;
+                font-weight: bold;
+            }
         }
     }
     .headerLeft {
