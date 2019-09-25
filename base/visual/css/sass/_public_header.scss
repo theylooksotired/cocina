@@ -23,7 +23,7 @@
             display:block;
             text-align: left;
             color: $white;
-            padding: 0 0 0 30px;
+            padding: 0 0 0 35px;
             background-image: url(../../img/logo_icon.png);
             background-position: left center;
             background-repeat: no-repeat;
@@ -35,7 +35,7 @@
                 top: 0;
                 left: 25px;
                 bottom: 0;
-                width: 1px;
+                width: 2px;
                 height: 30px;
                 background: rgba($white, 0.5);
                 content: '';
@@ -46,15 +46,17 @@
                 text-transform: uppercase;
                 font-style: normal;
                 line-height: 1em;
-                font-weight: normal;
+                font-weight: 300;
             }
             span {
-                font-size: 10px;
+                font-size: 13px;
+                letter-spacing: -1px;
             }
             em {
                 padding: 2px 0 0 0;
                 font-size: 18px;
                 font-weight: bold;
+                letter-spacing: 4px;
             }
         }
     }
