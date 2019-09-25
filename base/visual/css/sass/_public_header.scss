@@ -23,11 +23,23 @@
             display:block;
             text-align: left;
             color: $white;
-            padding: 0 0 0 35px;
+            padding: 0 0 0 30px;
             background-image: url(../../img/logo_icon.png);
             background-position: left center;
             background-repeat: no-repeat;
             background-size: contain;
+            position: relative;
+            &:before {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 25px;
+                bottom: 0;
+                width: 1px;
+                height: 30px;
+                background: rgba($white, 0.5);
+                content: '';
+            }
             span,
             em {
                 display: block;
