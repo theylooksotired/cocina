@@ -37,7 +37,7 @@
                 bottom: 0;
                 width: 2px;
                 height: 30px;
-                background: rgba($white, 0.5);
+                background: #ffb703;
                 content: '';
             }
             span,
@@ -46,16 +46,15 @@
                 text-transform: uppercase;
                 font-style: normal;
                 line-height: 1em;
-                font-weight: 300;
             }
             span {
                 font-size: 13px;
-                letter-spacing: -1px;
+                letter-spacing: 4px;
+                color: #ffb703;
             }
             em {
                 padding: 2px 0 0 0;
                 font-size: 18px;
-                font-weight: bold;
                 letter-spacing: 4px;
             }
         }
