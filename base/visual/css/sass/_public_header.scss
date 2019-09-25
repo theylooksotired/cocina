@@ -21,8 +21,13 @@
         a {
             height: 30px;
             display:block;
-            text-align: center;
+            text-align: left;
             color: $white;
+            padding: 0 0 0 35px;
+            background-image: url(../../img/logo_icon.png);
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-size: contain;
             span,
             em {
                 display: block;
