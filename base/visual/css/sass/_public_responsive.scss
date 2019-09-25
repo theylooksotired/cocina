@@ -82,6 +82,12 @@
 	            background-image: url('../../img/logo_icon.png');
 	            background-position: left center;
 	            background-size: contain;
+	            padding: 0;
+	            &:before,
+	            span,
+	            em {
+	            	display: none;
+	            }
 	        }
 	    }
 	    .headerLeft {
