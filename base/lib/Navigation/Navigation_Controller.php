@@ -59,7 +59,7 @@ class Navigation_Controller extends Controller{
 						$this->metaUrl = $item->url();
 						$this->titlePageSimple = ($item->get('title')!='') ? $item->get('title') : 'Listado de recetas de '.strtolower($item->getBasicInfo());
 						$this->breadCrumbs = array(url('recetas')=>'Recetas', $item->url()=>$item->getBasicInfo());
-						$this->metaDescription = ($item->get('description')!='') ? $item->get('description') : $this->titlePage;
+						$this->metaDescription = ($item->get('description')!='') ? $item->get('description') : $this->titlePageSimple;
 						$items = new ListObjects('Recipe', array('where'=>'active="1" AND idCategory="'.$item->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
 						$this->header = $items->metaNavigation().'
 										'.$itemUi->renderJsonHeader($items);
