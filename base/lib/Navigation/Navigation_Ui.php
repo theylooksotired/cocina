@@ -200,28 +200,28 @@ class Navigation_Ui extends Ui {
 									<p>'.Params::param('metainfo-metaDescription').'</p>
 								</div>
 							</div>
-							<div class="footerRight">
-								<div class="appButtons">
-									<p>Descarga nuestra aplicación en:</p>
-									<div class="appButton appButtonGoogle">
-										<a href="'.Url::format(Params::param('link-google-play')).'" target="_blank">
-											<i class="icon icon-android"></i>
-											<span>Google Play</span>
-										</a>
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>
 				</footer>';
 	}
 
 	/*
-	<div class="appButton">
-		<a href="'.Url::format(Params::param('link-app-store')).'" target="_blank">
-			<i class="icon icon-apple"></i>
-			<span>App Store</span>
-		</a>
+	<div class="footerRight">
+		<div class="appButtons">
+			<p>Descarga nuestra aplicación en:</p>
+			<div class="appButton appButtonGoogle">
+				<a href="'.Url::format(Params::param('link-google-play')).'" target="_blank">
+					<i class="icon icon-android"></i>
+					<span>Google Play</span>
+				</a>
+			</div>
+			<div class="appButton">
+				<a href="'.Url::format(Params::param('link-app-store')).'" target="_blank">
+					<i class="icon icon-apple"></i>
+					<span>App Store</span>
+				</a>
+			</div>
+		</div>
 	</div>
 	*/
 
