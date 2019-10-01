@@ -172,18 +172,24 @@ class Navigation_Ui extends Ui {
 					<div class="footer">
 						<div class="footerLinks">
 							<h3>Otros sitios de cocina por países</h3>
-							<a href="https://www.recetas-argentinas.com" target="_blank" title="Recetas de cocina de Argentina">Argentina</a>
-							<a href="https://www.cocina-boliviana.com" target="_blank" title="Recetas de cocina de Bolivia">Bolivia</a>
-							<a href="https://www.cocina-brasilena.com" target="_blank" title="Recetas de cocina de Brasil">Brasil</a>
-							<a href="https://www.cocina-chilena.com" target="_blank" title="Recetas de cocina de Chile">Chile</a>
-							<a href="https://www.cocina-colombiana.com" target="_blank" title="Recetas de cocina de Colombia">Colombia</a>
-							<a href="https://www.cocina-cubana.com" target="_blank" title="Recetas de cocina de Cuba">Cuba</a>
-							<a href="https://www.cocina-ecuatoriana.com" target="_blank" title="Recetas de cocina de Ecuador">Ecuador</a>
-							<a href="https://www.recetashonduras.com" target="_blank" title="Recetas de cocina de Honduras">Honduras</a>
-							<a href="https://www.la-cocina-mexicana.com" target="_blank" title="Recetas de cocina de México">México</a>
-							<a href="https://www.recetaspanama.com/" target="_blank" title="Recetas de cocina de Panamá">Panamá</a>
-							<a href="https://www.comida-peruana.com" target="_blank" title="Recetas de cocina del Peru">Peru</a>
-							<a href="https://www.cocina-uruguaya.com" target="_blank" title="Recetas de cocina del Uruguay">Uruguay</a>
+							<a href="https://www.recetas-argentinas.com" target="_blank" title="Recetas de Argentina">Argentina</a>
+							<a href="https://www.cocina-boliviana.com" target="_blank" title="Recetas de Bolivia">Bolivia</a>
+							<a href="https://www.cocina-brasilena.com" target="_blank" title="Recetas de Brasil">Brasil</a>
+							<a href="https://www.cocina-chilena.com" target="_blank" title="Recetas de Chile">Chile</a>
+							<a href="https://www.cocina-colombiana.com" target="_blank" title="Recetas de Colombia">Colombia</a>
+							<a href="https://www.recetascostarica.com" target="_blank" title="Recetas de Costa Rica">Costa Rica</a>
+							<a href="https://www.cocina-cubana.com" target="_blank" title="Recetas de Cuba">Cuba</a>
+							<a href="https://www.cocina-ecuatoriana.com" target="_blank" title="Recetas de Ecuador">Ecuador</a>
+							<a href="https://www.recetas-guatemala.com" target="_blank" title="Recetas de Guatemala">Guatemala</a>
+							<a href="https://www.recetashonduras.com" target="_blank" title="Recetas de Honduras">Honduras</a>
+							<a href="https://www.la-cocina-mexicana.com" target="_blank" title="Recetas de México">México</a>
+							<a href="https://www.recetaspanama.com/" target="_blank" title="Recetas de Panamá">Panamá</a>
+							<a href="https://www.comida-peruana.com" target="_blank" title="Recetas de Peru">Peru</a>
+							<a href="https://www.cocina-uruguaya.com" target="_blank" title="Recetas de Uruguay">Uruguay</a>
+						</div>
+						<div class="footerLinks">
+							<h3>Otros sitios de cocina por tipos</h3>
+							<a href="https://www.recetaspizzas.com" target="_blank" title="Recetas de Pizzas">Pizzas</a>
 						</div>
 						<div class="footerIns">
 							<div class="footerLeft">
