@@ -194,6 +194,7 @@ class Navigation_Ui extends Ui {
 						<div class="footerLinks">
 							<h3>Otros sitios de cocina por tipos</h3>
 							<a href="https://www.recetaspizzas.com" target="_blank" title="Recetas de Pizzas">Pizzas</a>
+							<a href="https://www.recetas-veganas.com" target="_blank" title="Recetas veganas">Veganas</a>
 						</div>
 						<div class="footerIns">
 							<div class="footerLeft">
