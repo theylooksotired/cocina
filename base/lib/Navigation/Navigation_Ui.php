@@ -118,6 +118,8 @@ class Navigation_Ui extends Ui {
 	}
 
 	public function header() {
+		$logoTitle = 'Recetas de';
+		$logoTitle = (Params::param('country-code')=='veganas') ? 'Recetas' : '';
 		return '<header>
 					<div class="menuMobile" role="button" on="tap:menu.toggle" tabindex="0">
 						<i class="icon icon-menu"></i>
@@ -127,7 +129,7 @@ class Navigation_Ui extends Ui {
 					        <div class="headerLeft">
 						    	<div class="logo">
 						    		<a href="'.url('').'">
-						    			<span>Recetas de</span>
+						    			<span>'.$logoTitle.'</span>
 						    			<em>'.Params::param('country').'</em>
 						    		</a>
 						    	</div>
