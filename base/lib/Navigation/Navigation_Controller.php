@@ -573,6 +573,59 @@ class Navigation_Controller extends Controller{
                 return 'DONE';
             break;
 
+            case 'check-github-now-all':
+            	$this->mode = 'ajax';
+            	$this->checkAuthorization();
+                shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-boliviana.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-argentinas.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-brasilena.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-chilena.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-colombiana.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-cubana.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-ecuatoriana.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.la-cocina-mexicana.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.comida-peruana.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-uruguaya.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- http://www.recetaspanama.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetashonduras.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetascostarica.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-guatemala.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetaspizzas.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-nicaragua.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetassalvador.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.receta-vegetariana.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-veganas.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-espana.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-italia.com/check-github-now &> /dev/null');
+                return 'DONE';
+            break;
+            case 'fix-all':
+            	$this->mode = 'ajax';
+            	$this->checkAuthorization();
+                shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-boliviana.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-argentinas.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-brasilena.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-chilena.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-colombiana.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-cubana.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-ecuatoriana.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.la-cocina-mexicana.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.comida-peruana.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.cocina-uruguaya.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- http://www.recetaspanama.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetashonduras.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetascostarica.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-guatemala.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetaspizzas.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-nicaragua.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetassalvador.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.receta-vegetariana.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-veganas.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-espana.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-italia.com/fix &> /dev/null');
+                return 'DONE';
+            break;
+
 
 		}
 	}
