@@ -25,6 +25,9 @@ class Navigation_Controller extends Controller{
 			break;
 
 			case 'recetas':
+			case 'recettes':
+			case 'recipes':
+			case 'receitas':
 				if ($this->extraId!='') {
 					$info = explode('_', $this->extraId);
 					$item = (isset($info[1])) ? Recipe::read($info[0]) : Recipe::readFirst(array('where'=>'nameUrl="'.$this->extraId.'"'));
@@ -42,7 +45,7 @@ class Navigation_Controller extends Controller{
 					$this->metaImage = $item->getImageUrl('image', 'web');
 					$this->header = $item->showUi('JsonHeader').$this->ampFacebookHeader();
 					$parent = Category::read($item->get('idCategory'));
-					$this->breadCrumbs = array(url('recetas')=>'Recetas', $parent->url()=>$parent->getBasicInfo(), $item->url()=>$item->getBasicInfo());
+					$this->breadCrumbs = array(url($this->action)=>__('recipes'), $parent->url()=>$parent->getBasicInfo(), $item->url()=>$item->getBasicInfo());
 					$this->content = $item->showUi('Complete');
 				} else {
 					if ($this->id!='') {
@@ -58,7 +61,7 @@ class Navigation_Controller extends Controller{
 						$itemUi = new Category_Ui($item);
 						$this->metaUrl = $item->url();
 						$this->titlePageSimple = ($item->get('title')!='') ? $item->get('title') : 'Listado de recetas de '.strtolower($item->getBasicInfo());
-						$this->breadCrumbs = array(url('recetas')=>'Recetas', $item->url()=>$item->getBasicInfo());
+						$this->breadCrumbs = array(url($this->action)=>__('recipes'), $item->url()=>$item->getBasicInfo());
 						$this->metaDescription = ($item->get('description')!='') ? $item->get('description') : $this->titlePageSimple;
 						$items = new ListObjects('Recipe', array('where'=>'active="1" AND idCategory="'.$item->id().'"', 'order'=>'nameUrl', 'results'=>'12'));
 						$this->header = $items->metaNavigation().'
@@ -75,9 +78,9 @@ class Navigation_Controller extends Controller{
 							exit();
 						}
 						$this->metaUrl = url($this->action);
-						$this->titlePage = 'Listado de recetas';
+						$this->titlePage = __('recipesList');
 						$this->metaDescription = $this->titlePage;
-						$this->breadCrumbs = array(url('recetas')=>'Recetas');
+						$this->breadCrumbs = array(url($this->action)=>__('recipes'));
 						$items = new ListObjects('Recipe', array('where'=>'active="1"', 'order'=>'nameUrl', 'results'=>'12'));
 						$this->header = $items->metaNavigation();
 						$this->content = '<div class="listAll">
@@ -91,6 +94,9 @@ class Navigation_Controller extends Controller{
 			break;
 
 			case 'articulos':
+			case 'articles':
+			case 'posts':
+			case 'artigos':
 				if ($this->id!='') {
 					$info = explode('_', $this->id);
 					$item = (isset($info[1])) ? Post::read($info[0]) : Post::readFirst(array('where'=>'titleUrl="'.$this->id.'"'));
@@ -102,18 +108,18 @@ class Navigation_Controller extends Controller{
 					$this->metaDescription = $item->get('shortDescription');
 					$this->metaImage = $item->getImageUrl('image', 'web');
 					$this->header = $item->showUi('JsonHeader').$this->ampFacebookHeader();
-					$this->breadCrumbs = array(url('articulos')=>'Artículos', $item->url()=>$item->getBasicInfo());
+					$this->breadCrumbs = array(url($this->action)=>__('posts'), $item->url()=>$item->getBasicInfo());
 					$this->content = $item->showUi('Complete');
 				} else {
 					if ($this->id!='') {
 						header("HTTP/1.1 301 Moved Permanently");
-						header('Location: '.url('articulos'));
+						header('Location: '.url($this->action));
 						exit();
 					}
-					$this->metaUrl = url('articulos');
-					$this->titlePage = 'Listado de artículos';
+					$this->metaUrl = url($this->action);
+					$this->titlePage = __('postsList');
 					$this->metaDescription = $this->titlePage;
-					$this->breadCrumbs = array(url('articulos')=>'Artículos');
+					$this->breadCrumbs = array(url($this->action)=>__('posts'));
 					$items = new ListObjects('Post', array('order'=>'publishDate DESC', 'results'=>'12'));
 					$this->header = $items->metaNavigation();
 					$this->content = '<div class="listAllSimple">
@@ -126,6 +132,8 @@ class Navigation_Controller extends Controller{
 			break;
 
 			case 'buscar':
+			case 'rechercher':
+			case 'search':
 				if (isset($_GET['search']) && $_GET['search']!='') {
 					$search = Text::simpleUrl($_GET['search']);
 					header("HTTP/1.1 301 Moved Permanently");
@@ -136,13 +144,13 @@ class Navigation_Controller extends Controller{
 					$this->headersFormAmp();
 					$this->metaUrl = url($this->action.'/'.$this->id);
 					$search = str_replace('-', ' ', Text::simpleUrl($this->id));
-					$this->titlePage = 'Resultados de la busqueda - '.ucwords($search);
+					$this->titlePage = __('searchResults').' - '.ucwords($search);
 					$items = new ListObjects('Recipe', array('where'=>'active="1" AND MATCH (name, nameUrl, description, preparation) AGAINST ("'.$search.'")', 'order'=>'MATCH (name, nameUrl, description, preparation) AGAINST ("'.$search.'") DESC', 'limit'=>'20'));
 					if ($items->isEmpty()) {
 						$items = new ListObjects('Recipe', array('where'=>'active="1" AND CONCAT(name," ",nameUrl," ",description," ",preparation) LIKE ("%'.$search.'%")', 'order'=>'nameUrl', 'limit'=>'20'));
 					}
 					if ($items->isEmpty()) {
-						$this->titlePage = 'Lo sentimos, no encontramos resultados para su búsqueda';
+						$this->titlePage = __('noSearchResults');
 						$itemsOther = new ListObjects('Recipe', array('where'=>'active="1"', 'order'=>'RAND()', 'limit'=>'20'));
 					}
 					$this->content = '<div class="itemsAll">
@@ -195,6 +203,50 @@ class Navigation_Controller extends Controller{
 			case 'fix':
 				$this->mode = 'ajax';
 				$this->checkAuthorization();
+				$exists = Db::returnSingle('SELECT column_name FROM information_schema.columns where table_schema="'.DB_NAME.'" AND TABLE_NAME="rec_Category" AND column_name="title"');
+				if (!$exists) {
+					Db::execute('ALTER TABLE rec_Category ADD title VARCHAR(255) NULL');
+				}
+				$exists = Db::returnSingle('SELECT column_name FROM information_schema.columns where table_schema="'.DB_NAME.'" AND TABLE_NAME="rec_Category" AND column_name="description"');
+				if (!$exists) {
+					Db::execute('ALTER TABLE rec_Category ADD description TEXT NULL');
+				}
+				$exists = Db::returnSingle('SELECT column_name FROM information_schema.columns where table_schema="'.DB_NAME.'" AND TABLE_NAME="rec_LangTrans" AND column_name="translation_en"');
+				if (!$exists) {
+					Db::execute('ALTER TABLE rec_LangTrans ADD translation_en VARCHAR(255) NULL');
+				}
+				$exists = Db::returnSingle('SELECT column_name FROM information_schema.columns where table_schema="'.DB_NAME.'" AND TABLE_NAME="rec_LangTrans" AND column_name="translation_fr"');
+				if (!$exists) {
+					Db::execute('ALTER TABLE rec_LangTrans ADD translation_fr VARCHAR(255) NULL');
+				}
+				$exists = Db::returnSingle('SELECT column_name FROM information_schema.columns where table_schema="'.DB_NAME.'" AND TABLE_NAME="rec_LangTrans" AND column_name="translation_pt"');
+				if (!$exists) {
+					Db::execute('ALTER TABLE rec_LangTrans ADD translation_pt VARCHAR(255) NULL');
+				}
+				$exists = Db::returnSingle('SELECT column_name FROM information_schema.columns where table_schema="'.DB_NAME.'" AND TABLE_NAME="rec_Lang" AND column_name="locale"');
+				if (!$exists) {
+					Db::execute('ALTER TABLE rec_Lang ADD locale VARCHAR(255) NULL');
+				}
+				Db::execute('UPDATE rec_Lang SET locale="es_LA"');
+				Db::execute('DELETE FROM rec_Params WHERE code="email"');
+				Db::execute('DELETE FROM rec_Params WHERE code="email-contact"');
+				Db::execute('DELETE FROM rec_Params WHERE code="linksocial-facebook"');
+				Db::execute('DELETE FROM rec_Params WHERE code="linksocial-twitter"');
+				Db::execute('DELETE FROM rec_Params WHERE code="link-app-store"');
+				Db::execute('DELETE FROM rec_Params WHERE code="link-google-play"');
+				Db::execute('DELETE FROM rec_Params WHERE code LIKE "adsense%"');
+				Db::execute('INSERT INTO rec_Params SET code="logoTop", name="Logo - Top", information="Recetas de"');
+				Db::execute('INSERT INTO rec_Params SET code="logoBottom", name="Logo - Bottom", information="'.Params::param('country').'"');
+				Db::execute('UPDATE rec_Params SET code="metainfo-metaDescription" WHERE code="metainfo-metaDescription-es"');
+				Db::execute('UPDATE rec_Params SET code="metainfo-metaKeywords" WHERE code="metainfo-metaKeywords-es"');
+				Db::execute('UPDATE rec_Params SET code="metainfo-titlePage" WHERE code="metainfo-titlePage-es"');
+				Db::execute('DROP TABLE IF EXISTS rec_Ingredient');
+				
+				$datas = json_decode(file_get_contents(APP_FILE.'data/LangTrans.json'), true);
+				foreach ($datas as $data) {
+					Db::execute('UPDATE rec_LangTrans SET translation_en="'.$data['translation_en'].'", translation_fr="'.$data['translation_fr'].'", translation_pt="'.$data['translation_es'].'" WHERE code="'.$data['code'].'"');
+				}
+
 				// Add the active checkbox
 				// Db::execute('ALTER TABLE `'.Db::prefixTable('Recipe').'` ADD `active` INT NULL;');
 				// Db::execute('UPDATE `'.Db::prefixTable('Recipe').'` SET `active`=1;');

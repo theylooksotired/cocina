@@ -92,15 +92,15 @@ class Recipe_Ui extends Ui{
 						<div class="itemCompleteTopCenter"><p>'.nl2br($this->object->get('description')).'</p></div>
 						<div class="itemCompleteTopRight">
 							<p>
-								<strong>Preparación:</strong> <span>'.$this->object->get('preparationTime').'</span>
+								<strong>'.__('preparation').':</strong> <span>'.$this->object->get('preparationTime').'</span>
 								<i class="icon icon-clock"></i>
 							</p>
 							<p>
-								<strong>Porciones:</strong> <span>'.$this->object->get('numPersons').'</span>
+								<strong>'.__('portions').':</strong> <span>'.$this->object->get('numPersons').'</span>
 								<i class="icon icon-serving"></i>
 							</p>
 							<p>
-								<span><strong>Cocina '.Params::param('titleCountry').'</span></strong>
+								<span><strong>'.Params::param('country').'</strong></span>
 								<i class="icon icon-world"></i>
 							</p>
 						</div>
@@ -111,18 +111,18 @@ class Recipe_Ui extends Ui{
 						</div>
 						<div class="itemCompleteBottomRecipe">
 							<div class="itemCompleteBottomItem itemCompleteBottomIngredients">
-								<h2><i class="icon icon-ingredients"></i><span>Ingredientes</span></h2>
+								<h2><i class="icon icon-ingredients"></i><span>'.__('ingredients').'</span></h2>
 								<div class="ingredientList">'.$ingredients.'</div>
 							</div>
 							<div class="itemCompleteBottomItem itemCompleteBottomPreparation">
-								<h2><i class="icon icon-preparation"></i><span>Preparación</span></h2>
+								<h2><i class="icon icon-preparation"></i><span>'.__('preparation').'</span></h2>
 								<div class="pageComplete">'.$this->object->get('preparation').'</div>
 							</div>
 						</div>
 					</div>
 					'.Adsense::amp().'
 					<div class="itemCompleteShare">
-						<h3>Ayúdanos compartiendo esta receta o dejando tu comentario.</h3>
+						<h3>'.__('shareTitleRecipe').'</h3>
 						'.$this->share(array('facebook'=>true, 'twitter'=>true)).'
 						'.Navigation_Ui::facebookComments($this->object->url()).'
 					</div>
@@ -155,17 +155,17 @@ class Recipe_Ui extends Ui{
 								'.$recipesIntro->showList(array('function'=>'Public')).'
 							</div>
 							<div class="button">
-								<a href="'.url('recetas').'">Ver todas las recetas</a>
+								<a href="'.url('recetas').'">'.__('viewAllRecipes').'</a>
 							</div>
 						</div>
 						<div class="pageComplete introText introTextComplete">'.HtmlSection::show('intro-complete').'</div>
 						<div class="blockIntro">
-							<h2 class="titleBlock"><a href="'.url('noticias').'">'.Params::param('title-news').'</a></h2>
+							<h2 class="titleBlock">'.Params::param('title-news').'</h2>
 							<div class="blockIntroIns">
 								'.$posts->showList().'
 							</div>
 							<div class="button">
-								<a href="'.url('noticias').'">Ver todas las noticias</a>
+								<a href="'.url(['es'=>'articulos', 'en'=>'posts', 'fr'=>'articles', 'pt'=>'artigos']).'">'.__('viewAllRecipes').'</a>
 							</div>
 						</div>
 					</div>
@@ -195,7 +195,7 @@ class Recipe_Ui extends Ui{
 		return $this->recipesBottom().
 				'<div class="relatedWrapper">
 					<div class="relatedRight">
-						<h2 class="titleRelated">Algunas noticias relacionadas con <strong>'.$this->object->getBasicInfo().'</strong></h2>
+						<h2 class="titleRelated">'.__('relatedNews').' <strong>'.$this->object->getBasicInfo().'</strong></h2>
 						'.$items->showList(array('function'=>'Public'), array('amp'=>true)).'
 					</div>
 					<div class="relatedLeft">
@@ -210,7 +210,7 @@ class Recipe_Ui extends Ui{
 		$items = new ListObjects('Recipe', array('where'=>'active="1" AND rating>=3', 'order'=>'RAND()', 'results'=>'3'));
 		if (!$items->isEmpty()) {
 			return '<div class="menuSideWrapper">
-						<div class="menuSideWrapperTitle">Algunas recetas que podrían interesarte</div>
+						<div class="menuSideWrapperTitle">'.__('interestingRecipes').'</div>
 						<div class="menuSideWrapperItems">
 							'.$items->showList(array('function'=>'Public')).'
 						</div>
@@ -225,7 +225,7 @@ class Recipe_Ui extends Ui{
 		}
 		if (!$items->isEmpty()) {
 			return '<div class="menuBottomWrapper">
-						<div class="menuBottomWrapperTitle">También le pueden interesar estas recetas</div>
+						<div class="menuBottomWrapperTitle">'.__('moreRecipes').'</div>
 						<div class="menuBottomWrapperItems">
 							'.$items->showList(array('function'=>'PublicMedium')).'
 						</div>

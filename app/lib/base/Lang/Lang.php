@@ -23,10 +23,11 @@ class Lang extends Db_Object {
                 if ($lang->id()=='') {
                     $lang = Lang::readFirst(array('order'=>'ord'));
                 }
-                Session::set('lang', $lang->id());
             } else {
-                Session::set('lang', $langs[0]);
+                $lang = Lang::readFirst();
             }
+            Session::set('lang', $lang->id());
+            Session::set('locale', $lang->get('locale'));
             $query = 'SELECT code, translation_'.Session::get('lang').' as translation
                             FROM '.Db::prefixTable('LangTrans');
             $items = array();
@@ -77,6 +78,13 @@ class Lang extends Db_Object {
     */
     static public function active() {
         return Session::get('lang');
+    }
+
+    /**
+    * Get the active locale.
+    */
+    static public function locale() {
+        return Session::get('locale');
     }
 
     /**

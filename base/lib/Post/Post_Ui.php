@@ -39,7 +39,7 @@ class Post_Ui extends Ui{
 					'.Adsense::amp().'
 					<div class="postContent pageComplete">'.$this->object->get('description').'</div>
 					<div class="itemCompleteShare">
-						<h3>Ayúdanos compartiendo esta nota o dejando tu comentario.</h3>
+						<h3>'.__('shareTitlePost').'</h3>
 						'.$this->share(array('facebook'=>true, 'twitter'=>true)).'
 						'.Navigation_Ui::facebookComments($this->object->url()).'
 					</div>
@@ -51,7 +51,7 @@ class Post_Ui extends Ui{
 	public function related() {
 		$items = new ListObjects('Post', array('where'=>'idPost!="'.$this->object->id().'"', 'order'=>'RAND()', 'limit'=>'5'));
 		return '<div class="related relatedPost">
-					<h2>Otras noticias que pueden interesarte</h2>
+					<h2>'.__('relatedPostsTitle').'</h2>
 					<div class="relatedIns">'.$items->showList().'</div>
 				</div>';
 	}
@@ -67,7 +67,7 @@ class Post_Ui extends Ui{
 		$items = new ListObjects('Post', array('order'=>'RAND()', 'limit'=>'3'));
 		if (!$items->isEmpty()) {
 			return '<div class="menuSideWrapper">
-						<div class="menuSideWrapperTitle">Algunos artículos que podrían interesarte</div>
+						<div class="menuSideWrapperTitle">'.__('interestingArticles').'</div>
 						<div class="menuSideWrapperItems">
 							'.$items->showList(array('function'=>'Public')).'
 						</div>

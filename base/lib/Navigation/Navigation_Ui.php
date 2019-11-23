@@ -118,7 +118,6 @@ class Navigation_Ui extends Ui {
 	}
 
 	public function header() {
-		$logoTitle = (Params::param('country-code')=='veganas') ? 'Recetas' : 'Recetas de';
 		return '<header>
 					<div class="menuMobile" role="button" on="tap:menu.toggle" tabindex="0">
 						<i class="icon icon-menu"></i>
@@ -128,14 +127,14 @@ class Navigation_Ui extends Ui {
 					        <div class="headerLeft">
 						    	<div class="logo">
 						    		<a href="'.url('').'">
-						    			<span>'.$logoTitle.'</span>
-						    			<em>'.Params::param('country').'</em>
+						    			<span>'.Params::param('logoTop').'</span>
+						    			<em>'.Params::param('logoBottom').'</em>
 						    		</a>
 						    	</div>
 					        </div>
 					        <div class="headerRight">
 								<div class="searchTop">
-									<form accept-charset="UTF-8" class="formSearchSimple" action="'.url('buscar').'" method="GET" target="_top">
+									<form accept-charset="UTF-8" class="formSearchSimple" action="'.url(['es'=>'buscar', 'en'=>'search', 'fr'=>'rechercher', 'pt'=>'buscar']).'" method="GET" target="_top">
 										<fieldset>
 											<div class="text formField ">
 												<input type="text" size="50" name="search" placeholder="'.__('search').'">
@@ -172,7 +171,7 @@ class Navigation_Ui extends Ui {
 		return '<footer>
 					<div class="footer">
 						<div class="footerLinks">
-							<h3>Otros sitios de cocina por países</h3>
+							<h3>'.__('otherSitesCountry').'</h3>
 							<a href="https://www.recetas-argentinas.com" target="_blank" title="Recetas de Argentina">Argentina</a>
 							<a href="https://www.cocina-boliviana.com" target="_blank" title="Recetas de Bolivia">Bolivia</a>
 							<a href="https://www.cocina-brasilena.com" target="_blank" title="Recetas de Brasil">Brasil</a>
@@ -181,9 +180,11 @@ class Navigation_Ui extends Ui {
 							<a href="https://www.recetascostarica.com" target="_blank" title="Recetas de Costa Rica">Costa Rica</a>
 							<a href="https://www.cocina-cubana.com" target="_blank" title="Recetas de Cuba">Cuba</a>
 							<a href="https://www.cocina-ecuatoriana.com" target="_blank" title="Recetas de Ecuador">Ecuador</a>
+							<a href="https://www.recetas-espana.com" target="_blank" title="Recetas de España">España</a>
 							<a href="https://www.recetassalvador.com" target="_blank" title="Recetas del Salvador">El Salvador</a>
 							<a href="https://www.recetas-guatemala.com" target="_blank" title="Recetas de Guatemala">Guatemala</a>
 							<a href="https://www.recetashonduras.com" target="_blank" title="Recetas de Honduras">Honduras</a>
+							<a href="https://www.recetas-italia.com" target="_blank" title="Recetas de Italia">Italia</a>
 							<a href="https://www.la-cocina-mexicana.com" target="_blank" title="Recetas de México">México</a>
 							<a href="https://www.recetas-nicaragua.com" target="_blank" title="Recetas de Nicaragua">Nicaragua</a>
 							<a href="https://www.recetaspanama.com/" target="_blank" title="Recetas de Panamá">Panamá</a>
@@ -191,8 +192,9 @@ class Navigation_Ui extends Ui {
 							<a href="https://www.cocina-uruguaya.com" target="_blank" title="Recetas de Uruguay">Uruguay</a>
 						</div>
 						<div class="footerLinks">
-							<h3>Otros sitios de cocina por tipos</h3>
+							<h3>'.__('otherSitesType').'</h3>
 							<a href="https://www.recetaspizzas.com" target="_blank" title="Recetas de Pizzas">Pizzas</a>
+							<a href="https://www.receta-vegetariana.com" target="_blank" title="Recetas vegetariana">Vegetariana</a>
 							<a href="https://www.recetas-veganas.com" target="_blank" title="Recetas veganas">Veganas</a>
 						</div>
 						<div class="footerIns">
@@ -200,7 +202,7 @@ class Navigation_Ui extends Ui {
 								'.$this->shareIcons().'
 								<div class="pageComplete">
 									<p><strong>© '.Params::param('metainfo-titlePage').'</strong></p>
-									<p>Para mayor información escribenos a <a href="mailto:info@plasticwebs.com">info@plasticwebs.com</a></p>
+									<p>'.__('moreInformationWrite').' <a href="mailto:info@plasticwebs.com">info@plasticwebs.com</a></p>
 									<p>'.Params::param('metainfo-metaDescription').'</p>
 								</div>
 							</div>
@@ -245,11 +247,11 @@ class Navigation_Ui extends Ui {
 		$categories = new ListObjects('Category', array('order'=>'ord', 'limit'=>'6'));
 		return '<ul>
 					<li class="hideMobile '.(($_GET['action']=='intro') ? 'selected' : '').'">
-						<a href="'.url('').'">Inicio</a>
+						<a href="'.url('').'">'.__('home').'</a>
 					</li>
 					'.$categories->showList(array('function'=>'Menu'), array('categorySelected'=>$category)).'
-					<li class="menuArticles '.(($_GET['action']=='articulos') ? 'selected' : '').'">
-						<a href="'.url('articulos').'">Artículos</a>
+					<li class="menuArticles '.(in_array($_GET['action'], ['articulos', 'articles', 'posts', 'artigos']) ? 'selected' : '').'">
+						<a href="'.url(['es'=>'articulos', 'fr'=>'articles', 'en'=>'posts', 'pt'=>'artigos']).'">'.__('posts').'</a>
 					</li>
 				</ul>';
 	}
@@ -299,7 +301,7 @@ class Navigation_Ui extends Ui {
 	}
 
 	static public function facebookComments($url) {
-		return '<amp-facebook-comments layout="responsive" height="300" width="600" data-href="'.$url.'"></amp-facebook-comments>';
+		return '<amp-facebook-comments layout="responsive" height="300" width="600" data-href="'.$url.'" data-locale="'.Lang::locale().'"></amp-facebook-comments>';
 	}
 
 	static public function analytics() {

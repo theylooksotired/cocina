@@ -38,5 +38,10 @@
             <type>text</type>
             <required>notEmpty</required>
         </attribute>
+        <attribute>
+            <name>locale</name>
+            <label>locale</label>
+            <type>text</type>
+        </attribute>
     </attributes>
 </object>
