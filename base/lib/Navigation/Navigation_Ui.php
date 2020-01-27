@@ -175,6 +175,7 @@ class Navigation_Ui extends Ui {
 							<a href="https://www.recetas-argentinas.com" target="_blank" title="Recetas de Argentina">Argentina</a>
 							<a href="https://www.cocina-boliviana.com" target="_blank" title="Recetas de Bolivia">Bolivia</a>
 							<a href="https://www.cocina-brasilena.com" target="_blank" title="Recetas de Brasil">Brasil</a>
+							<a href="https://www.receitas-brasil.com" target="_blank" title="Receitas do Brasil">Brasil [PT]</a>
 							<a href="https://www.cocina-chilena.com" target="_blank" title="Recetas de Chile">Chile</a>
 							<a href="https://www.cocina-colombiana.com" target="_blank" title="Recetas de Colombia">Colombia</a>
 							<a href="https://www.recetascostarica.com" target="_blank" title="Recetas de Costa Rica">Costa Rica</a>
