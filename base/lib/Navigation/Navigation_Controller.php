@@ -201,7 +201,7 @@ class Navigation_Controller extends Controller{
 						return 'ERROR OBJ - '.$infoIns['name'];
 					}
 					$preparationSteps = $preparation->find('li');
-					if (!is_object($preparationSteps) || count($preparationSteps)<=1) {
+					if (count($preparationSteps)<=1) {
 						return 'ERROR STEP - '.$infoIns['name'];
 					}
 					$infoIns['preparation'] = [];
