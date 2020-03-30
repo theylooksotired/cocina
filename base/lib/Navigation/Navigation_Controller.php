@@ -188,7 +188,7 @@ class Navigation_Controller extends Controller{
 					unset($infoIns['ord']);
 					$info['categories'][] = $infoIns;
 				}
-				$items = Recipe::readList(array('order'=>'nameUrl'));
+				$items = Recipe::readList(array('where'=>'active="1"', 'order'=>'nameUrl'));
 				$errorStep = '';
 				foreach($items as $item) {
 					$item->loadMultipleValuesAll();
