@@ -198,11 +198,11 @@ class Navigation_Controller extends Controller{
 					$infoIns['ingredients'] = array_map(function($item) {return $item['label'];}, (array)$infoIns['ingredients']);
 					$preparation = str_get_html($infoIns['description']);
 					if (!is_object($preparation)) {
-						return 'ERROR - '.$infoIns['name'];
+						return 'ERROR OBJ - '.$infoIns['name'];
 					}
 					$preparationSteps = $preparation->find('li');
 					if (!is_object($preparationSteps) || count($preparationSteps)<=1) {
-						return 'ERROR - '.$infoIns['name'];
+						return 'ERROR STEP - '.$infoIns['name'];
 					}
 					$infoIns['preparation'] = [];
 					foreach ($preparationSteps as $preparationStep) {
