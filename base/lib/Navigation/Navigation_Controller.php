@@ -189,6 +189,7 @@ class Navigation_Controller extends Controller{
 					$info['categories'][] = $infoIns;
 				}
 				$items = Recipe::readList(array('order'=>'nameUrl'));
+				$errorStep = '';
 				foreach($items as $item) {
 					$item->loadMultipleValuesAll();
 					$infoIns = (array)$item->values;
@@ -196,19 +197,22 @@ class Navigation_Controller extends Controller{
 					unset($infoIns['modified']);
 					unset($infoIns['ord']);
 					$infoIns['ingredients'] = array_map(function($item) {return $item['label'];}, (array)$infoIns['ingredients']);
-					$preparation = str_get_html($infoIns['description']);
+					$preparation = str_get_html($infoIns['preparation']);
 					if (!is_object($preparation)) {
 						return 'ERROR OBJ - '.$infoIns['name'];
 					}
 					$preparationSteps = $preparation->find('li');
 					if (count($preparationSteps)<=1) {
-						return 'ERROR STEP - '.$infoIns['name'];
+						$errorStep .= $infoIns['name']."\n";
 					}
 					$infoIns['preparation'] = [];
 					foreach ($preparationSteps as $preparationStep) {
-						$infoIns['preparation'] = trim($preparationStep->innertext);
+						$infoIns['preparation'][] = trim($preparationStep->innertext);
 					}
 					$info['recipes'][] = $infoIns;
+				}
+				if ($errorStep!='') {
+					return "ERROR STEP - \n".$errorStep;
 				}
 				$content = json_encode($info, JSON_PRETTY_PRINT);
 				return $content;
