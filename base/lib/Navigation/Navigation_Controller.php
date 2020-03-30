@@ -166,7 +166,7 @@ class Navigation_Controller extends Controller{
 
 			//JSON
 			case 'json-mobile':
-				require(APP_URL.'helpers/simple_html_dom.php');
+				require(APP_FILE.'helpers/simple_html_dom.php');
 				$this->mode = 'ajax';
 				$this->checkAuthorization();
 				$info = array('site'=>array('title'=>Params::param('metainfo-titlePage'),
