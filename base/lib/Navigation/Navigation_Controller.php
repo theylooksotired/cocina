@@ -181,12 +181,14 @@ class Navigation_Controller extends Controller{
 								'categories'=>array(),
 								'recipes'=>array());
 				$items = Category::readList(array('order'=>'ord'));
+				$categories = [];
 				foreach($items as $item) {
 					$infoIns = (array)$item->values;
 					unset($infoIns['created']);
 					unset($infoIns['modified']);
 					unset($infoIns['ord']);
 					$info['categories'][] = $infoIns;
+					$categories[$item->id()] = $item->getBasicInfo();
 				}
 				$items = Recipe::readList(array('where'=>'active="1"', 'order'=>'nameUrl'));
 				$errorStep = '';
@@ -195,6 +197,9 @@ class Navigation_Controller extends Controller{
 					$infoIns = (array)$item->values;
 					unset($infoIns['created']);
 					unset($infoIns['modified']);
+					unset($infoIns['image']);
+					unset($infoIns['nameUrl']);
+					unset($infoIns['active']);
 					unset($infoIns['ord']);
 					$infoIns['ingredients'] = array_map(function($item) {return $item['label'];}, (array)$infoIns['ingredients']);
 					$preparation = str_get_html($infoIns['preparation']);
@@ -207,8 +212,10 @@ class Navigation_Controller extends Controller{
 					}
 					$infoIns['preparation'] = [];
 					foreach ($preparationSteps as $preparationStep) {
-						$infoIns['preparation'][] = trim($preparationStep->innertext);
+						$infoIns['preparation'][] = trim(strip_tags($preparationStep->innertext));
 					}
+					$infoIns['url'] = $item->url();
+					$infoIns['idCategoryName'] = $categories[$item->get('idCategory')];
 					$info['recipes'][] = $infoIns;
 				}
 				if ($errorStep!='') {
@@ -216,6 +223,39 @@ class Navigation_Controller extends Controller{
 				}
 				$content = json_encode($info, JSON_PRETTY_PRINT);
 				return $content;
+
+				"idRecipe": "360",
+            "image": "360-image",
+            "name": "Aguacates rellenos de quinoa",
+            "nameUrl": "aguacates-rellenos-de-quinoa",
+            "idCategory": "5",
+            "rating": "4",
+            "numPersons": "4",
+            "preparationTime": "1 hora",
+            "description": "A parte de las grasas monoinsaturadas que hacen disminuir el colesterol malo y aumentan el bueno, los aguacates son tambi\u00e9n una gran fuente de fibra, \u00e1cido f\u00f3lico, vitamina K, potasio y carotenoides.",
+            "ingredients": [
+                "2 aguacates maduros",
+                "\u00be taza de quinua",
+                "\u00bc taza de granos de ma\u00edz dulce",
+                "\u00bc taza de tomate cortado en cubitos",
+                "3 cucharadas de cebolla picada",
+                "2 cucharadas de aceite oliva virgen extra",
+                "El jugo de un lim\u00f3n",
+                "2 hojas de cilantro o perejil fresco",
+                "1 cucharadita de sal"
+            ],
+            "preparation": [
+                "<span itemprop=\"recipeInstructions\">Pon el agua a hervir en una olla peque\u00f1a, tres partes de agua por una de quinua<\/span>",
+                "<span itemprop=\"recipeInstructions\">Lava la quinua en un colador y agrega a la cacerola.<\/span>",
+                "<span itemprop=\"recipeInstructions\">Cocina a fuego lento durante 15 minutos aproximadamente.<\/span>",
+                "<span itemprop=\"recipeInstructions\">Que repose hasta que est\u00e1 a temperatura ambiente y col\u00f3calo en un taz\u00f3n grande .<\/span>",
+                "<span itemprop=\"recipeInstructions\">Agrega entonces el ma\u00edz, tomate, el jugo del lim\u00f3n, el aceite, el cilantro picadito (deja algo para adornar) y la cebolla. Sazona y mezcla bien. <\/span>",
+                "<span itemprop=\"recipeInstructions\">Corta los aguacates por la mitad y quita los huesos.<\/span>",
+                "<span itemprop=\"recipeInstructions\">Rellena la parte superior con la ensalada de quinua que tienes en el taz\u00f3n.<\/span>"
+            ],
+            "active": "1"
+
+
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
