@@ -235,7 +235,7 @@ class Navigation_Controller extends Controller{
 					return "ERROR STEP - \n".$errorStep;
 				}
 				$content = json_encode($info, JSON_PRETTY_PRINT);
-				//return $content;
+				return $content;
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
