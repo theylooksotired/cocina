@@ -206,9 +206,18 @@ class Navigation_Controller extends Controller{
 					if (!is_object($preparation)) {
 						return 'ERROR OBJ - '.$infoIns['name'];
 					}
-					$preparationParagraphs = $preparation->find('p');
-					if (count($preparationParagraphs)>0) {
-						$errorStep .= 'P: '.$infoIns['name']."\n";
+					$tags = [];
+					foreach ($preparation->find('*') as $htmlElement) {
+					    $tags[$htmlElement->tag] = (!isset($tags[$htmlElement->tag])) ? 1 : $tags[$htmlElement->tag]+1;
+					}
+					if (count($tags)>2 || !isset($tags['ol']) || !isset($tags['li'])) {
+						$errorStep .= 'TAGS: '.$infoIns['name'].' - '.json_encode($tags)."\n";
+						if (isset($_GET['fixtags'])) {
+							$item->modifySimple('preparation', strip_tags($infoIns['preparation'], '<ol><li>'));
+						}
+					}
+					if (strpos($infoIns['preparation'], '&') !== false) {
+					    $errorStep .= '&: '.$infoIns['name']."\n";
 					}
 					$preparationSteps = $preparation->find('li');
 					if (count($preparationSteps)<=1) {
@@ -226,7 +235,7 @@ class Navigation_Controller extends Controller{
 					return "ERROR STEP - \n".$errorStep;
 				}
 				$content = json_encode($info, JSON_PRETTY_PRINT);
-				return $content;
+				//return $content;
 			break;
 			case 'fix':
 				$this->mode = 'ajax';
