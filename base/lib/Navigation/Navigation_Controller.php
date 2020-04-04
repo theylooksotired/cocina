@@ -206,6 +206,10 @@ class Navigation_Controller extends Controller{
 					if (!is_object($preparation)) {
 						return 'ERROR OBJ - '.$infoIns['name'];
 					}
+					$preparationParagraphs = $preparation->find('p');
+					if (count($preparationParagraphs)>0) {
+						$errorStep .= 'P: '.$infoIns['name']."\n";
+					}
 					$preparationSteps = $preparation->find('li');
 					if (count($preparationSteps)<=1) {
 						$errorStep .= $infoIns['name']."\n";
