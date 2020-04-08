@@ -169,6 +169,7 @@ class Navigation_Controller extends Controller{
 				require(APP_FILE.'helpers/simple_html_dom.php');
 				$this->mode = 'ajax';
 				$this->checkAuthorization();
+				$countryCode = Params::param('country-code');
 				$info = array('site'=>array('title'=>Params::param('metainfo-titlePage'),
 											'titleGeneric'=>Params::param('titleGeneric'),
 											'titleCountry'=>Params::param('titleCountry'),
@@ -201,6 +202,7 @@ class Navigation_Controller extends Controller{
 					unset($infoIns['nameUrl']);
 					unset($infoIns['active']);
 					unset($infoIns['ord']);
+					$infoIns['country'] = $countryCode;
 					$infoIns['ingredients'] = array_map(function($item) {return $item['label'];}, (array)$infoIns['ingredients']);
 					$preparation = str_get_html($infoIns['preparation']);
 					if (!is_object($preparation)) {
