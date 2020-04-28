@@ -99,10 +99,6 @@ class Recipe_Ui extends Ui{
 								<strong>'.__('portions').':</strong> <span>'.$this->object->get('numPersons').'</span>
 								<i class="icon icon-serving"></i>
 							</p>
-							<p>
-								<span><strong>'.Params::param('country').'</strong></span>
-								<i class="icon icon-world"></i>
-							</p>
 						</div>
 					</div>
 					<div class="itemCompleteBottom">

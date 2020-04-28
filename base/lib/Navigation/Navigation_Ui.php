@@ -189,11 +189,15 @@ class Navigation_Ui extends Ui {
 							<a href="https://www.la-cocina-mexicana.com" target="_blank" title="Recetas de México">México</a>
 							<a href="https://www.recetas-nicaragua.com" target="_blank" title="Recetas de Nicaragua">Nicaragua</a>
 							<a href="https://www.recetaspanama.com/" target="_blank" title="Recetas de Panamá">Panamá</a>
+							<a href="https://www.recetasparaguay.com/" target="_blank" title="Recetas de Paraguay">Paraguay</a>
 							<a href="https://www.comida-peruana.com" target="_blank" title="Recetas de Peru">Peru</a>
 							<a href="https://www.cocina-uruguaya.com" target="_blank" title="Recetas de Uruguay">Uruguay</a>
+							<a href="https://www.recetas-venezolanas.com" target="_blank" title="Recetas de Venezuela">Venezuela</a>
 						</div>
 						<div class="footerLinks">
 							<h3>'.__('otherSitesType').'</h3>
+							<a href="https://www.recetasdiabetes.com" target="_blank" title="Recetas para diabéticos">Diabetes</a>
+							<a href="https://www.recetas-judias.com" target="_blank" title="Recetas judías">Judías</a>
 							<a href="https://www.recetaspizzas.com" target="_blank" title="Recetas de Pizzas">Pizzas</a>
 							<a href="https://www.receta-vegetariana.com" target="_blank" title="Recetas vegetariana">Vegetariana</a>
 							<a href="https://www.recetas-veganas.com" target="_blank" title="Recetas veganas">Veganas</a>

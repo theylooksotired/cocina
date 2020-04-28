@@ -242,6 +242,8 @@ class Navigation_Controller extends Controller{
 			case 'fix':
 				$this->mode = 'ajax';
 				$this->checkAuthorization();
+				$query = 'INSERT INTO rec_LangTrans SET code="portions", translation_es="Porciones", translation_en="Portions", translation_fr="Portions", translation_pt="Porções"';
+				Db::execute($query);
 				return 'DONE';
 			break;
 
