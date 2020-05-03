@@ -27,7 +27,6 @@
     <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
     <?php echo $header;?>
 
@@ -36,7 +35,6 @@
 
     <?php echo Navigation_Ui::menuAmp();?>
     <?php echo Navigation_Ui::analyticsAmp();?>
-    <?php echo Navigation_Ui::autoadsAmp();?>
     <div id="bodyFrame" class="<?php echo Params::param('country-code');?>">
         <?php echo $content;?>
     </div>

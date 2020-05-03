@@ -309,6 +309,10 @@ class Navigation_Controller extends Controller{
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-espana.com/check-github-now &> /dev/null');
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-italia.com/check-github-now &> /dev/null');
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.receitas-brasil.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetasparaguay.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-venezolanas.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetasdiabetes.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-judias.com/check-github-now &> /dev/null');
                 return 'DONE';
             break;
             case 'fix-all':
@@ -336,6 +340,10 @@ class Navigation_Controller extends Controller{
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-espana.com/fix &> /dev/null');
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-italia.com/fix &> /dev/null');
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.receitas-brasil.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetasparaguay.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-venezolanas.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetasdiabetes.com/fix &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-judias.com/fix &> /dev/null');
                 return 'DONE';
             break;
 
