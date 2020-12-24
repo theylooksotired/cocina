@@ -313,6 +313,9 @@ class Navigation_Controller extends Controller{
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-venezolanas.com/check-github-now &> /dev/null');
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetasdiabetes.com/check-github-now &> /dev/null');
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-judias.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-chinas.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-japonesas.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-arabes.com/check-github-now &> /dev/null');
                 return 'DONE';
             break;
             case 'fix-all':

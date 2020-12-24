@@ -193,6 +193,7 @@ class Navigation_Ui extends Ui {
 							<a href="https://www.recetaspanama.com/" target="_blank" title="Recetas de Panamá">Panamá</a>
 							<a href="https://www.recetasparaguay.com/" target="_blank" title="Recetas de Paraguay">Paraguay</a>
 							<a href="https://www.comida-peruana.com" target="_blank" title="Recetas de Peru">Peru</a>
+							<a href="https://www.recetas-puertorico.com" target="_blank" title="Recetas de Puerto Rico">Puerto Rico</a>
 							<a href="https://www.cocina-uruguaya.com" target="_blank" title="Recetas de Uruguay">Uruguay</a>
 							<a href="https://www.recetas-venezolanas.com" target="_blank" title="Recetas de Venezuela">Venezuela</a>
 						</div>
