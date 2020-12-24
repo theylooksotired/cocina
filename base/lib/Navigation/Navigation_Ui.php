@@ -177,6 +177,7 @@ class Navigation_Ui extends Ui {
 							<a href="https://www.cocina-brasilena.com" target="_blank" title="Recetas de Brasil">Brasil</a>
 							<a href="https://www.receitas-brasil.com" target="_blank" title="Receitas do Brasil">Brasil [PT]</a>
 							<a href="https://www.cocina-chilena.com" target="_blank" title="Recetas de Chile">Chile</a>
+							<a href="https://www.recetas-chinas.com" target="_blank" title="Recetas de China">China</a>
 							<a href="https://www.cocina-colombiana.com" target="_blank" title="Recetas de Colombia">Colombia</a>
 							<a href="https://www.recetascostarica.com" target="_blank" title="Recetas de Costa Rica">Costa Rica</a>
 							<a href="https://www.cocina-cubana.com" target="_blank" title="Recetas de Cuba">Cuba</a>
@@ -186,6 +187,7 @@ class Navigation_Ui extends Ui {
 							<a href="https://www.recetas-guatemala.com" target="_blank" title="Recetas de Guatemala">Guatemala</a>
 							<a href="https://www.recetashonduras.com" target="_blank" title="Recetas de Honduras">Honduras</a>
 							<a href="https://www.recetas-italia.com" target="_blank" title="Recetas de Italia">Italia</a>
+							<a href="https://www.recetas-japonesas.com" target="_blank" title="Recetas de Japón">Japón</a>
 							<a href="https://www.la-cocina-mexicana.com" target="_blank" title="Recetas de México">México</a>
 							<a href="https://www.recetas-nicaragua.com" target="_blank" title="Recetas de Nicaragua">Nicaragua</a>
 							<a href="https://www.recetaspanama.com/" target="_blank" title="Recetas de Panamá">Panamá</a>
@@ -196,6 +198,7 @@ class Navigation_Ui extends Ui {
 						</div>
 						<div class="footerLinks">
 							<h3>'.__('otherSitesType').'</h3>
+							<a href="https://www.recetas-arabes.com" target="_blank" title="Recetas árabes">Árabes</a>
 							<a href="https://www.recetasdiabetes.com" target="_blank" title="Recetas para diabéticos">Diabetes</a>
 							<a href="https://www.recetas-judias.com" target="_blank" title="Recetas judías">Judías</a>
 							<a href="https://www.recetaspizzas.com" target="_blank" title="Recetas de Pizzas">Pizzas</a>
