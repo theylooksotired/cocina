@@ -317,6 +317,7 @@ class Navigation_Controller extends Controller{
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-japonesas.com/check-github-now &> /dev/null');
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-arabes.com/check-github-now &> /dev/null');
 				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-puerto-rico.com/check-github-now &> /dev/null');
+				shell_exec('wget --header="Authorization: plastic" -qO- https://www.recetas-simples.com/check-github-now &> /dev/null');
                 return 'DONE';
             break;
             case 'fix-all':

@@ -203,6 +203,7 @@ class Navigation_Ui extends Ui {
 							<a href="https://www.recetasdiabetes.com" target="_blank" title="Recetas para diabéticos">Diabetes</a>
 							<a href="https://www.recetas-judias.com" target="_blank" title="Recetas judías">Judías</a>
 							<a href="https://www.recetaspizzas.com" target="_blank" title="Recetas de Pizzas">Pizzas</a>
+							<a href="https://www.recetas-simples.com" target="_blank" title="Recetas simples">Simples</a>
 							<a href="https://www.receta-vegetariana.com" target="_blank" title="Recetas vegetariana">Vegetariana</a>
 							<a href="https://www.recetas-veganas.com" target="_blank" title="Recetas veganas">Veganas</a>
 						</div>
