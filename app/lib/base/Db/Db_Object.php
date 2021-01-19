@@ -499,16 +499,21 @@ class Db_Object extends Db_Sql {
         $file = STOCK_FILE.$this->className.'/'.$this->get($attributeName).'/'.$this->get($attributeName).$version.'.jpg';
         if (is_file($file)) {
             $imageFile = $file;
-            $imageFileRotated = str_replace('_'.$version, '_'.$version.'_ppt', $imageFile);
+            $imageFileRotated = str_replace($version.'.jpg', $version.'_ppt.jpg', $imageFile);
             if (!is_file($imageFileRotated)) {
                 try {
                     $newImage = imagecreatefromjpeg($imageFile);
                     imageflip($newImage, IMG_FLIP_HORIZONTAL);
-                    imagefilter($newImage, IMG_FILTER_COLORIZE, 30, 0, 20);
-                    imagefilter($newImage, IMG_FILTER_GAUSSIAN_BLUR, 10);
-                    $newImage = imagerotate($newImage, 3, 0);
+                    imagefilter($newImage, IMG_FILTER_COLORIZE, 20, 0, 30);
+                    imagefilter($newImage, IMG_FILTER_GAUSSIAN_BLUR, 20);
+                    $newImage = imagerotate($newImage, 4, 0);
                     $size = min(imagesx($newImage), imagesy($newImage));
-                    $newImage = imagecrop($newImage, ['x' => $size*0.1, 'y'=>$size*0.1, 'width' => imagesx($newImage)*0.9, 'height' => imagesy($newImage)*0.8]);
+                    $newImage = imagecrop($newImage, [
+                        'x' => imagesx($newImage)*0.1,
+                        'y' => imagesy($newImage)*0.1,
+                        'width' => imagesx($newImage)*0.8,
+                        'height' => imagesy($newImage)*0.8
+                    ]);
                     imagejpeg($newImage, $imageFileRotated, 70);
                 } catch (Exception $e) {}
             }
