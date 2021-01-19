@@ -130,16 +130,16 @@ class Recipe_Ui extends Ui{
 		$posts = new ListObjects('Post', array('order'=>'publishDate DESC', 'results'=>'10'));
 		$categories = new ListObjects('Category', array('order'=>'ord'));
 		$recipesIntro = new ListObjects('Recipe', array('where'=>'active="1" AND rating="5"', 'order'=>'RAND()', 'limit'=>'5'));
+				// <div class="introTop">
+				// 	<div class="introTopItems">
+				// 		'.$categories->showList(array('function'=>'Intro')).'
+				// 	</div>
+				// 	<div class="button">
+				// 		<a href="'.url('recetas').'">Ver todas las recetas</a>
+				// 	</div>
+				// </div>
+				// '.Adsense::amp().'
 		return Adsense::amp().'
-				<div class="introTop">
-					<div class="introTopItems">
-						'.$categories->showList(array('function'=>'Intro')).'
-					</div>
-					<div class="button">
-						<a href="'.url('recetas').'">Ver todas las recetas</a>
-					</div>
-				</div>
-				'.Adsense::amp().'
 				<div class="introBottom">
 					<h1>'.Params::param('titlePage').'</h1>
 					<div class="pageComplete introText">'.HtmlSection::show('intro-text').'</div>
