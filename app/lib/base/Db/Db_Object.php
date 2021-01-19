@@ -441,23 +441,7 @@ class Db_Object extends Db_Sql {
     public function getImage($attributeName, $version='', $alternative='') {
         $imageUrl = $this->getImageUrl($attributeName, $version);
         if ($imageUrl!='') {
-            $imageFile = str_replace(BASE_URL, BASE_FILE, $imageUrl);
-            $imageFileRotated = str_replace('_'.$version, '_'.$version.'_ppt', $imageFile);
-            if (!is_file($imageFileRotated)) {
-                try {
-                    $newImage = imagecreatefromjpeg($imageFile);
-                    imageflip($newImage, IMG_FLIP_HORIZONTAL);
-                    imagefilter($newImage, IMG_FILTER_COLORIZE, 35, 0, 25);
-                    imagefilter($newImage, IMG_FILTER_GAUSSIAN_BLUR, 10);
-                    $newImage = imagerotate($newImage, 3, 0);
-                    $size = min(imagesx($newImage), imagesy($newImage));
-                    $newImage = imagecrop($newImage, ['x' => $size*0.1, 'y'=>$size*0.1, 'width' => imagesx($newImage)*0.9, 'height' => imagesy($newImage)*0.8]);
-                    imagejpeg($newImage, $imageFileRotated, 70);
-                } catch (Exception $e) {}
-            }
-            if (is_file($imageFileRotated)) {
-                return '<img src="'.$imageUrl.'" alt="'.$this->getBasicInfo().'"/>';
-            }
+            return '<img src="'.$imageUrl.'" alt="'.$this->getBasicInfo().'"/>';
         } else {
             return $alternative;
         }
@@ -544,7 +528,23 @@ class Db_Object extends Db_Sql {
         $version = ($version != '') ? '_'.strtolower($version) : '';
         $file = STOCK_FILE.$this->className.'/'.$this->get($attributeName).'/'.$this->get($attributeName).$version.'.jpg';
         if (is_file($file)) {
-            return str_replace(STOCK_FILE, STOCK_URL, $file).(($this->get('modified')!='') ? '?v='.Date::sqlInt($this->get('modified')) : '');
+            $imageFile = $file;
+            $imageFileRotated = str_replace('_'.$version, '_'.$version.'_ppt', $imageFile);
+            if (!is_file($imageFileRotated)) {
+                try {
+                    $newImage = imagecreatefromjpeg($imageFile);
+                    imageflip($newImage, IMG_FLIP_HORIZONTAL);
+                    imagefilter($newImage, IMG_FILTER_COLORIZE, 35, 0, 25);
+                    imagefilter($newImage, IMG_FILTER_GAUSSIAN_BLUR, 10);
+                    $newImage = imagerotate($newImage, 3, 0);
+                    $size = min(imagesx($newImage), imagesy($newImage));
+                    $newImage = imagecrop($newImage, ['x' => $size*0.1, 'y'=>$size*0.1, 'width' => imagesx($newImage)*0.9, 'height' => imagesy($newImage)*0.8]);
+                    imagejpeg($newImage, $imageFileRotated, 70);
+                } catch (Exception $e) {}
+            }
+            if (is_file($imageFileRotated)) {
+                return str_replace(STOCK_FILE, STOCK_URL, $imageFileRotated).(($this->get('modified')!='') ? '?v='.Date::sqlInt($this->get('modified')) : '');
+            }
         }
     }
 
