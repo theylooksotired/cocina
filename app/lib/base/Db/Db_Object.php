@@ -498,27 +498,8 @@ class Db_Object extends Db_Sql {
         $version = ($version != '') ? '_'.strtolower($version) : '';
         $file = STOCK_FILE.$this->className.'/'.$this->get($attributeName).'/'.$this->get($attributeName).$version.'.jpg';
         if (is_file($file)) {
-            $imageFile = $file;
-            $imageFileRotated = str_replace($version.'.jpg', $version.'_ppt.jpg', $imageFile);
-            if (!is_file($imageFileRotated)) {
-                try {
-                    $newImage = imagecreatefromjpeg($imageFile);
-                    imageflip($newImage, IMG_FLIP_HORIZONTAL);
-                    imagefilter($newImage, IMG_FILTER_COLORIZE, 20, 0, 30);
-                    imagefilter($newImage, IMG_FILTER_GAUSSIAN_BLUR, 20);
-                    $newImage = imagerotate($newImage, 4, 0);
-                    $size = min(imagesx($newImage), imagesy($newImage));
-                    $newImage = imagecrop($newImage, [
-                        'x' => imagesx($newImage)*0.1,
-                        'y' => imagesy($newImage)*0.1,
-                        'width' => imagesx($newImage)*0.8,
-                        'height' => imagesy($newImage)*0.8
-                    ]);
-                    imagejpeg($newImage, $imageFileRotated, 70);
-                } catch (Exception $e) {}
-            }
-            if (is_file($imageFileRotated)) {
-                return str_replace(STOCK_FILE, STOCK_URL, $imageFileRotated).(($this->get('modified')!='') ? '?v='.Date::sqlInt($this->get('modified')) : '');
+            if (is_file($file)) {
+                return str_replace(STOCK_FILE, STOCK_URL, $file).(($this->get('modified')!='') ? '?v='.Date::sqlInt($this->get('modified')) : '');
             }
         }
     }
